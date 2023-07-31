@@ -1,33 +1,68 @@
-const getDB = require('../../database/db');
+const getDB = require("../../database/db");
 
+const postTraining = async (req, res) => {
+  try {
+    const connect = await getDB();
 
-const postTraining = async(req, res) => {
-    try {
-        const connect = await getDB();
+    const { name, description, exercises } = req.body;
 
-        const {name, description} = req.body;
-
-        if(!name || !description) return res.status(400).send('Es necesario cubrir todos los campos para subir un nuevo entrenamiento.');
-
-        if(req.userInfo.role !== "admin") return res.status(401).send('Sólo el usuario administrador puede cargar nuevos entrenamientos.');
-
-        const [training] = await connect.query(
-            `
-                INSERT INTO training(training_name, training_description, user_id)
-                VALUES(?,?,?)
-            `,[name,description, req.userInfo.id]
+    if (!name || !description || !exercises)
+      return res
+        .status(400)
+        .send(
+          "Es necesario cubrir todos los campos para subir un nuevo entrenamiento."
         );
 
-        connect.release();
+    if (req.userInfo.role !== "admin")
+      return res
+        .status(401)
+        .send(
+          "Sólo el usuario administrador puede cargar nuevos entrenamientos."
+        );
 
-        res.status(200).send({
-            status: 'OK',
-            message: 'Entrenamiento añadido correctamente',
-            data: training
-        })
-    } catch (error) {
-        console.error(error);
+    const [training] = await connect.query(
+      `
+                INSERT INTO training(training_name, training_description)
+                VALUES(?,?)
+            `,
+      [name, description]
+    );
+    const [idTraining] = await connect.query(
+      `
+        SELECT id 
+        FROM training 
+        WHERE training_name=?
+      `,
+      [name]
+    );
+    for (const exerciseName of exercises) {
+      const [idExercises] = await connect.query(
+        `
+        SELECT id 
+        FROM exercises 
+        WHERE exercise_name=?
+      `,
+        [exerciseName]
+      );
+
+      await connect.query(
+        `
+                INSERT INTO training_exercise(id_training, id_exercise)
+                VALUES(?,?)
+            `,
+        [idTraining[0].id, idExercises[0].id]
+      );
     }
+    connect.release();
+
+    res.status(200).send({
+      status: "OK",
+      message: "Entrenamiento añadido correctamente",
+      data: training,
+    });
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 module.exports = postTraining;
