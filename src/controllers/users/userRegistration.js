@@ -2,7 +2,6 @@ const getDB = require('../../database/db');
 const {v4: uuidv4} = require('uuid');
 const sendMail = require('../../service/sendMail');
 
-
 const userRegistration = async (req, res) => {
     try {
         const connect = await getDB();
