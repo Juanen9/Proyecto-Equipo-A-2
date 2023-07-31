@@ -21,17 +21,17 @@ const createBBDD = async () => {
             `
             CREATE TABLE IF NOT EXISTS users(
                 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                user_name VARCHAR(100) NOT NULL,
-                email VARCHAR(100) UNIQUE NOT NULL,
-                password VARCHAR(200) NOT NULL,
-                role ENUM("admin", "anonimo") DEFAULT "anonimo" NOT NULL,
-                registration_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                active BOOLEAN DEFAULT false,
-                avatar VARCHAR(100),
-                deleted BOOLEAN DEFAULT false,
+                user_name VARCHAR(50) NOT NULL UNIQUE,
+                email VARCHAR(100) NOT NULL UNIQUE,
+                password CHAR(16) NOT NULL,
+                role ENUM('user','admin'),
+                avatar VARCHAR (100),
+                registration_date DATETIME,
+                active TINYINT(1),
                 regCode CHAR(36),
-                recover_Code CHAR(36),
-                last_auth_update DATETIME
+                recoverCODE CHAR (36),
+                last_auth_updated DATETIME,
+                deleted TINYINT (1)
             );
             `
         );
@@ -39,18 +39,16 @@ const createBBDD = async () => {
 
         await connect.query(
             `
-            CREATE TABLE IF NOT EXISTS training(
-                id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                training_name VARCHAR(100) NOT NULL,
-                training_description TEXT NOT NULL,
-                start_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                user_id INT UNSIGNED NOT NULL,
-                FOREIGN KEY(user_id) REFERENCES users(id)
+            CREATE TABLE IF NOT EXISTS exercises (
+            	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                exercise_name VARCHAR(50) NOT NULL,
+                description VARCHAR (500) NOT NULL,
+                foto VARCHAR (100)
             );
             `
         );
 
-        console.log('Tabla "training" creada.');
+        console.log('Tabla "exercises" creada.');
 
         await connect.query(
             `
@@ -73,29 +71,10 @@ const createBBDD = async () => {
 
         await connect.query(
             `
-            CREATE TABLE IF NOT EXISTS address(
-                id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                address VARCHAR(100) NOT NULL,
-                country VARCHAR(100) NOT NULL,
-                city VARCHAR(100) NOT NULL,
-                cp VARCHAR(100) NOT NULL,
-                user_id INT UNSIGNED NOT NULL,
-                FOREIGN KEY (user_id) REFERENCES users(id)
-            );
-            `
-        );
-
-        console.log('Tabla "address" creada.');
-
-        await connect.query(
-            `
-            CREATE TABLE IF NOT EXISTS muscle_group(
-                id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                muscle_name VARCHAR(100) NOT NULL,
-                muscle_description TEXT NOT NULL,
-                photo VARCHAR(100),
-                exercise_id INT UNSIGNED NOT NULL,
-                FOREIGN KEY (exercise_id) REFERENCES exercises(id)
+            CREATE TABLE IF NOT EXISTS muscle_group (
+            	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                mg_name VARCHAR(50) NOT NULL UNIQUE,
+                foto VARCHAR (100)
             );
             `
         );
@@ -104,18 +83,74 @@ const createBBDD = async () => {
 
         await connect.query(
             `
-            CREATE TABLE IF NOT EXISTS client_bank_info(
-                id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                account_number INT UNSIGNED NOT NULL,
-                bank_name VARCHAR(100) NOT NULL,
-                last_payment_date DATETIME NOT NULL,
-                user_id INT UNSIGNED NOT NULL,
-                FOREIGN KEY (user_id) REFERENCES users(id)
+            CREATE TABLE IF NOT EXISTS exer_muscle_group (
+        	    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                id_exercise INT UNSIGNED,
+                id_muscle_group INT UNSIGNED,
+                FOREIGN KEY (id_exercise) REFERENCES exercises(id),
+                FOREIGN KEY (id_muscle_group) REFERENCES muscle_group(id)
             );
             `
         );
 
-        console.log('Tabla "client_bank_info" creada.');
+        console.log('Tabla "exer_muscle_group" creada.');
+
+        await connect.query(
+            `
+            CREATE TABLE IF NOT EXISTS training (
+        	    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                training_name VARCHAR(50) NOT NULL,
+                description VARCHAR (500) NOT NULL,
+    	        level ENUM ('easy','medium','hard')
+            )
+            `
+        );
+
+        console.log('Tabla "training" creada.');
+
+        await connect.query(
+            `
+            CREATE TABLE IF NOT EXISTS training_exercise (
+            	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                id_training INT UNSIGNED,
+                id_exercise INT UNSIGNED,
+                FOREIGN KEY (id_training) REFERENCES training(id),
+                FOREIGN KEY (id_exercise) REFERENCES exercises(id)
+            );
+            `
+        );
+
+        console.log('Tabla "training_exercise" creada.');
+
+        await connect.query(
+            `
+            CREATE TABLE IF NOT EXISTS user_training (
+    	        id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                id_user INT UNSIGNED,
+                id_training INT UNSIGNED,
+                start_date DATETIME,
+                favourite TINYINT(1),
+                FOREIGN KEY (id_user) REFERENCES users(id),
+                FOREIGN KEY (id_training) REFERENCES training(id)
+            );
+            `
+        );
+
+        console.log('Tabla "user_training" creada.');
+
+        await connect.query(
+            `
+            CREATE TABLE IF NOT EXISTS likes (
+            	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+                id_user INT UNSIGNED,
+                id_exercise INT UNSIGNED,
+                FOREIGN KEY (id_user) REFERENCES users(id),
+                FOREIGN KEY (id_exercise) REFERENCES exercises(id)
+            );
+            `
+        );
+
+        console.log('Tabla "likes" creada.');
 
         connect.release();
     } catch (error) {
