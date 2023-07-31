@@ -1,57 +1,45 @@
-const getDB = require('./db');
+const getDB = require("./db");
 
 const createBBDD = async () => {
-    try {
-        const connect = await getDB();
+  try {
+    const connect = await getDB();
 
-        await connect.query(
-            `
+    await connect.query(
+      `
                 CREATE DATABASE IF NOT EXISTS gym;
             `
-        );
-        console.log('Base de datos creada con éxito.');
+    );
+    console.log("Base de datos creada con éxito.");
 
-        await connect.query(
-            `
+    await connect.query(
+      `
                 USE gym;
             `
-        );
+    );
 
-        await connect.query(
-            `
+    await connect.query(
+      `
             CREATE TABLE IF NOT EXISTS users(
                 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
                 user_name VARCHAR(50) NOT NULL UNIQUE,
                 email VARCHAR(100) NOT NULL UNIQUE,
-                password CHAR(16) NOT NULL,
+                password VARCHAR(200) NOT NULL,
                 role ENUM('user','admin'),
                 avatar VARCHAR (100),
                 registration_date DATETIME,
                 active TINYINT(1),
                 regCode CHAR(36),
                 recoverCODE CHAR (36),
-                last_auth_updated DATETIME,
+                last_auth_updated DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 deleted TINYINT (1)
+      
             );
             `
-        );
-        console.log('Tabla "users" creada.');
+    );
+    console.log('Tabla "users" creada.');
 
-        await connect.query(
-            `
-            CREATE TABLE IF NOT EXISTS exercises (
-            	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                exercise_name VARCHAR(50) NOT NULL,
-                description VARCHAR (500) NOT NULL,
-                foto VARCHAR (100)
-            );
-            `
-        );
-
-        console.log('Tabla "exercises" creada.');
-
-        await connect.query(
-            `
+    await connect.query(
+      `
             CREATE TABLE IF NOT EXISTS exercises(
                 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
                 exercise_name VARCHAR(100) NOT NULL,
@@ -60,56 +48,28 @@ const createBBDD = async () => {
                 typology VARCHAR(100) NOT NULL,
                 muscle_group VARCHAR(100) NOT NULL,
                 likes BOOLEAN DEFAULT false,
-                fav BOOLEAN DEFAULT false,
-                training_id INT UNSIGNED NOT NULL,
-                FOREIGN KEY (training_id) REFERENCES training(id)
+                fav BOOLEAN DEFAULT false
             );
             `
-        );
+    );
 
-        console.log('Tabla "exercises" creada.');
+    console.log('Tabla "exercises" creada.');
 
-        await connect.query(
-            `
-            CREATE TABLE IF NOT EXISTS muscle_group (
-            	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                mg_name VARCHAR(50) NOT NULL UNIQUE,
-                foto VARCHAR (100)
-            );
-            `
-        );
-
-        console.log('Tabla "muscle_group" creada.');
-
-        await connect.query(
-            `
-            CREATE TABLE IF NOT EXISTS exer_muscle_group (
-        	    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-                id_exercise INT UNSIGNED,
-                id_muscle_group INT UNSIGNED,
-                FOREIGN KEY (id_exercise) REFERENCES exercises(id),
-                FOREIGN KEY (id_muscle_group) REFERENCES muscle_group(id)
-            );
-            `
-        );
-
-        console.log('Tabla "exer_muscle_group" creada.');
-
-        await connect.query(
-            `
+    await connect.query(
+      `
             CREATE TABLE IF NOT EXISTS training (
         	    id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
                 training_name VARCHAR(50) NOT NULL,
-                description VARCHAR (500) NOT NULL,
+                training_description VARCHAR (500) NOT NULL,
     	        level ENUM ('easy','medium','hard')
             )
             `
-        );
+    );
 
-        console.log('Tabla "training" creada.');
+    console.log('Tabla "training" creada.');
 
-        await connect.query(
-            `
+    await connect.query(
+      `
             CREATE TABLE IF NOT EXISTS training_exercise (
             	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
                 id_training INT UNSIGNED,
@@ -118,12 +78,12 @@ const createBBDD = async () => {
                 FOREIGN KEY (id_exercise) REFERENCES exercises(id)
             );
             `
-        );
+    );
 
-        console.log('Tabla "training_exercise" creada.');
+    console.log('Tabla "training_exercise" creada.');
 
-        await connect.query(
-            `
+    await connect.query(
+      `
             CREATE TABLE IF NOT EXISTS user_training (
     	        id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
                 id_user INT UNSIGNED,
@@ -134,12 +94,12 @@ const createBBDD = async () => {
                 FOREIGN KEY (id_training) REFERENCES training(id)
             );
             `
-        );
+    );
 
-        console.log('Tabla "user_training" creada.');
+    console.log('Tabla "user_training" creada.');
 
-        await connect.query(
-            `
+    await connect.query(
+      `
             CREATE TABLE IF NOT EXISTS likes (
             	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
                 id_user INT UNSIGNED,
@@ -148,14 +108,14 @@ const createBBDD = async () => {
                 FOREIGN KEY (id_exercise) REFERENCES exercises(id)
             );
             `
-        );
+    );
 
-        console.log('Tabla "likes" creada.');
+    console.log('Tabla "likes" creada.');
 
-        connect.release();
-    } catch (error) {
-        console.error(error);
-    }
+    connect.release();
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 module.exports = createBBDD;
