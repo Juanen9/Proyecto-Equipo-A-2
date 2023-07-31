@@ -1,7 +1,7 @@
 CREATE DATABASE theAgym;
 USE theAgym;
-CREATE TABLE users
-(exer_muscle_groupexercises
+CREATE TABLE IF NOT EXISTS users
+(
 	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     user_name VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
@@ -16,7 +16,7 @@ CREATE TABLE users
     deleted TINYINT (1)
 );
 
-CREATE TABLE exercises 
+CREATE TABLE IF NOT EXISTS exercises 
 (
 	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     exercise_name VARCHAR(50) NOT NULL,
@@ -24,14 +24,14 @@ CREATE TABLE exercises
     foto VARCHAR (100)
 );
 
-CREATE TABLE muscle_group 
+CREATE TABLE IF NOT EXISTS muscle_group 
 (
 	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     mg_name VARCHAR(50) NOT NULL UNIQUE,
     foto VARCHAR (100)
 );
 
-CREATE TABLE exer_muscle_group 
+CREATE TABLE IF NOT EXISTS exer_muscle_group 
 (
 	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     id_exercise INT UNSIGNED,
@@ -40,7 +40,7 @@ CREATE TABLE exer_muscle_group
     FOREIGN KEY (id_muscle_group) REFERENCES muscle_group(id)
 );
 
-CREATE TABLE training 
+CREATE TABLE IF NOT EXISTS training 
 (
 	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     training_name VARCHAR(50) NOT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE training
 	level ENUM ('easy','medium','hard')
 );
 
-CREATE TABLE training_exercise 
+CREATE TABLE IF NOT EXISTS training_exercise 
 (
 	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     id_training INT UNSIGNED,
@@ -57,7 +57,7 @@ CREATE TABLE training_exercise
     FOREIGN KEY (id_exercise) REFERENCES exercises(id)
 );
 
-CREATE TABLE user_training 
+CREATE TABLE IF NOT EXISTS user_training 
 (
 	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     id_user INT UNSIGNED,
@@ -68,7 +68,7 @@ CREATE TABLE user_training
     FOREIGN KEY (id_training) REFERENCES training(id)
 );
 
-CREATE TABLE likes 
+CREATE TABLE IF NOT EXISTS likes 
 (
 	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     id_user INT UNSIGNED,
