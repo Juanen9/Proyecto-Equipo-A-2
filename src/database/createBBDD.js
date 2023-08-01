@@ -31,8 +31,8 @@ const createBBDD = async () => {
                 regCode CHAR(36),
                 recoverCODE CHAR (36),
                 last_auth_updated DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                deleted TINYINT (1)
-      
+                deleted TINYINT (1),
+                token TEXT
             );
             `
     );

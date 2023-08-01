@@ -7,6 +7,12 @@ const loginUser = async(req,res) => {
 
         const {email, pwd} = req.body;
 
+        const [database] = await connect.query(
+            `
+              USE gym;
+            `
+          );
+
         if(!email || !pwd) return res.status(400).send('Los campos son necesarios para iniciar sesión.');
 
         //Comprobamos que el usuario exista y la contraseña sea correcta.
@@ -35,6 +41,14 @@ const loginUser = async(req,res) => {
         //Generamos el token.
 
         const token = jwt.sign(info, process.env.SECRET_TOKEN, {expiresIn: '1d'});
+
+        const [insertToken] = await connect.query(
+            `
+                UPDATE users 
+                SET token=?
+                WHERE email=?
+            `,[token ,email]
+        )
 
         connect.release();
 

@@ -8,6 +8,12 @@ const userRegistration = async (req, res) => {
 
     const { name, email, pwd } = req.body;
 
+    await connect.query(
+      `
+        USE gym;
+      `
+    )
+
     if (!name || !email || !pwd)
       return res
         .status(400)

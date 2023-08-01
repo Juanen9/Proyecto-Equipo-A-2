@@ -4,6 +4,11 @@ const loginUser = require('./loginUser');
 const adminRegistration = require('./adminRegistration');
 const postExercise = require('./postExercise');
 const postTraining = require('./postTraining');
+const modifyExercise = require('./modifyExercise');
+const deleteExercise = require('./deleteExercises');
+const getExercises = require('./getExercises');
+const getExercisesExtend = require('./getExercisesExtend');
+const exerciseFilter = require('./exerciseFilter');
 
 module.exports = {
     userRegistration,
@@ -11,5 +16,10 @@ module.exports = {
     loginUser,
     adminRegistration,
     postExercise,
-    postTraining
+    postTraining,
+    modifyExercise,
+    deleteExercise,
+    getExercises,
+    getExercisesExtend,
+    exerciseFilter
 }

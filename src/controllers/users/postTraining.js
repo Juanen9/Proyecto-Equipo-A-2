@@ -3,8 +3,15 @@ const getDB = require("../../database/db");
 const postTraining = async (req, res) => {
   try {
     const connect = await getDB();
+    
+    await connect.query(
+      `
+        USE gym;
+      `
+    )
 
     const { name, description, exercises } = req.body;
+
 
     if (!name || !description || !exercises)
       return res
@@ -21,12 +28,14 @@ const postTraining = async (req, res) => {
         );
 
     const [training] = await connect.query(
-      `
+            `
                 INSERT INTO training(training_name, training_description)
                 VALUES(?,?)
             `,
-      [name, description]
+      [name, description],
+        
     );
+    //Gardamos id da tabla training donde o nombre do entrenamiento e igual o nome que pasamos por body.
     const [idTraining] = await connect.query(
       `
         SELECT id 
@@ -35,6 +44,8 @@ const postTraining = async (req, res) => {
       `,
       [name]
     );
+
+    //Iteramos na tabla exercises
     for (const exerciseName of exercises) {
       const [idExercises] = await connect.query(
         `
@@ -44,7 +55,6 @@ const postTraining = async (req, res) => {
       `,
         [exerciseName]
       );
-
       await connect.query(
         `
                 INSERT INTO training_exercise(id_training, id_exercise)

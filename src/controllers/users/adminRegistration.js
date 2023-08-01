@@ -9,6 +9,12 @@ const adminRegistration = async(req, res) => {
 
         const {name, email, pwd, role} = req.body;
 
+        const [database] = await connect.query(
+            `
+              USE gym;
+            `
+          );
+
         if(!email || !pwd || !role) return res.status(400).send('Hai que cubrir todos los datos para dar de alta un usuario administrador.');
 
         const [userExists] = await connect.query(

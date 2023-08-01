@@ -6,6 +6,12 @@ const postExercise = async (req, res) => {
 
     const { name, description, photo, typology, muscleGroup } = req.body;
 
+    const [database] = await connect.query(
+      `
+        USE gym;
+      `
+    );
+
     if (!name || !description || !photo || !typology || !muscleGroup)
       return res
         .status(400)
