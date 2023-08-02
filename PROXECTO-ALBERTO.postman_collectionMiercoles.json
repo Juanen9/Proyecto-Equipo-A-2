@@ -1,0 +1,400 @@
+{
+	"info": {
+		"_postman_id": "b51fc7c7-be63-4f5d-b344-b6b6a747c60a",
+		"name": "PROXECTO-ALBERTO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28582419"
+	},
+	"item": [
+		{
+			"name": "userRegistration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Sara\",\n    \"email\": \"saracaamano@gmail.com\",\n    \"pwd\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "loginUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"saracaamano@gmail.com\",\n    \"pwd\": \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/user/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "adminRegistration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Alberto\",\n    \"email\": \"bertokintans7@gmail.com\",\n    \"pwd\": \"123456\",\n    \"role\": \"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/user/admin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"user",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postExercise",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjkwOTYyMjg0LCJleHAiOjE2OTEwNDg2ODR9.ykkmw33jXJt6lpJH4U9Y6FOWRAcco3oMlz5a_9XIDYw",
+						"description": "admin",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Sentadilla",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Leg-exercise",
+							"type": "text"
+						},
+						{
+							"key": "typology",
+							"value": "pull",
+							"type": "text"
+						},
+						{
+							"key": "muscleGroup",
+							"value": "Leg",
+							"type": "text"
+						},
+						{
+							"key": "exercisePhoto",
+							"type": "file",
+							"src": "/home/alberto/Repo/Proyecto/Proyecto-Equipo-A/images/rompecabezas.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3001/user/admin/exercise",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"user",
+						"admin",
+						"exercise"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postTraining",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjkwOTEzMzIzLCJleHAiOjE2OTA5OTk3MjN9.GN0Bd6ozVUGYEoTisP3zizqpeJVyYmHq-kFBJeC_1gs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Entrenamiento de espalda\",\n    \"description\": \"Entrenamiento de espalda volumen\",\n    \"exercises\": [\"Dominadas\", \"Remo\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/user/admin/training",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"user",
+						"admin",
+						"training"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "modifyExercise",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjkwOTYyMjg0LCJleHAiOjE2OTEwNDg2ODR9.ykkmw33jXJt6lpJH4U9Y6FOWRAcco3oMlz5a_9XIDYw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "exercise_name",
+							"value": "Sentadillas",
+							"type": "text"
+						},
+						{
+							"key": "exercise_description",
+							"value": "Entreno de pierna",
+							"type": "text"
+						},
+						{
+							"key": "exercisePhoto",
+							"type": "file",
+							"src": "/home/alberto/Descargas/hacer-sentadillas-correctamente.jpg"
+						},
+						{
+							"key": "typology",
+							"value": "push",
+							"type": "text"
+						},
+						{
+							"key": "muscle_group",
+							"value": "Pierna",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3001/user/25",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"user",
+						"25"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteExercises",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjkwOTEzMzIzLCJleHAiOjE2OTA5OTk3MjN9.GN0Bd6ozVUGYEoTisP3zizqpeJVyYmHq-kFBJeC_1gs",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/user/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"user",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getExercises",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjkwOTEzMzIzLCJleHAiOjE2OTA5OTk3MjN9.GN0Bd6ozVUGYEoTisP3zizqpeJVyYmHq-kFBJeC_1gs",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/user/exercises/typology",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"user",
+						"exercises",
+						"typology"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getExercisesExtended",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjkwOTEzMzIzLCJleHAiOjE2OTA5OTk3MjN9.GN0Bd6ozVUGYEoTisP3zizqpeJVyYmHq-kFBJeC_1gs",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/user/exercisesExtended/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"user",
+						"exercisesExtended",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "exerciseFilter",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjkwOTEzMzIzLCJleHAiOjE2OTA5OTk3MjN9.GN0Bd6ozVUGYEoTisP3zizqpeJVyYmHq-kFBJeC_1gs",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/user/exerciseFilter/pull/back",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"user",
+						"exerciseFilter",
+						"pull",
+						"back"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "modifyUser",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "auth",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6bnVsbCwiaWF0IjoxNjkwOTgwNTA1LCJleHAiOjE2OTEwNjY5MDV9.l4E2ZksWVsipjv69V7yeVNgseK8NiBkiIASlJHY7tYY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Jonás",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "jonas@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "avatarUser",
+							"type": "file",
+							"src": "/home/alberto/Repo/Proyecto/Proyecto-Equipo-A/images/rompecabezas.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3001/user/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"user",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

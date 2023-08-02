@@ -50,10 +50,10 @@ const userRegistration = async (req, res) => {
 
     const [user] = await connect.query(
       `
-                INSERT INTO users(user_name, email, password, regCode)
-                VALUES(?,?,SHA2(?,512),?)
+                INSERT INTO users(user_name, email, password, regCode, role)
+                VALUES(?,?,SHA2(?,512),?,?)
             `,
-      [name, email, pwd, regCode]
+      [name, email, pwd, regCode, "user"]
     );
 
     connect.release();

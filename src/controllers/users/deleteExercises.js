@@ -13,7 +13,7 @@ const deleteExercise = async(req, res) => {
             `
           );
 
-        if(req.userInfo.role !== "admin")return res.status(401).send('Los entrenamientos solo pueden ser modificados por el usuario administrador.');
+        if(req.userInfo.role !== "admin")return res.status(401).send('Los entrenamientos solo pueden ser eliminados por el usuario administrador.');
         
         if(!idExercise) return res.status(400).send('Es necesario indicar el id del entrenamiento a eliminar.');
 

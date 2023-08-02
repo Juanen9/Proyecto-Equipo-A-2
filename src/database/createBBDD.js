@@ -25,7 +25,7 @@ const createBBDD = async () => {
                 email VARCHAR(100) NOT NULL UNIQUE,
                 password VARCHAR(200) NOT NULL,
                 role ENUM('user','admin'),
-                avatar VARCHAR (100),
+                avatar VARCHAR (250),
                 registration_date DATETIME,
                 active TINYINT(1),
                 regCode CHAR(36),
@@ -44,11 +44,9 @@ const createBBDD = async () => {
                 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
                 exercise_name VARCHAR(100) NOT NULL,
                 exercise_description TEXT NOT NULL,
-                photo VARCHAR(100),
+                photo VARCHAR(250),
                 typology VARCHAR(100) NOT NULL,
-                muscle_group VARCHAR(100) NOT NULL,
-                likes BOOLEAN DEFAULT false,
-                fav BOOLEAN DEFAULT false
+                muscle_group VARCHAR(100) NOT NULL
             );
             `
     );
@@ -88,7 +86,7 @@ const createBBDD = async () => {
     	        id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
                 id_user INT UNSIGNED,
                 id_training INT UNSIGNED,
-                start_date DATETIME,
+                start_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 favourite TINYINT(1),
                 FOREIGN KEY (id_user) REFERENCES users(id),
                 FOREIGN KEY (id_training) REFERENCES training(id)

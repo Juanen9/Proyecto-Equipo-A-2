@@ -28,7 +28,7 @@ const postExercise = async (req, res) => {
 
     if(req.files && req.files.exercisePhoto){
       const exercisePhoto = await savePhoto(req.files.exercisePhoto,'/exercisePhoto');
-      
+            
       await connect.query(
         `
                 INSERT INTO exercises(exercise_name, exercise_description, photo,typology, muscle_group)
