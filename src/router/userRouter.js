@@ -15,7 +15,8 @@ const {
   deleteExercise,
   getExercises,
   getExercisesExtend,
-  exerciseFilter
+  exerciseFilter,
+  modifyUser
 } = require("../controllers/users");
 
 router.get("/user/validate/:regCode", activateUser);
@@ -27,6 +28,7 @@ router.post("/user/admin", adminRegistration);
 router.post("/user/login", loginUser);
 router.post("/user/admin/training", verifyToken, postTraining);
 router.post("/user/admin/exercise", verifyToken, postExercise);
+router.put("/user/:idUser", verifyToken, modifyUser);
 router.put("/user/:idExercise", verifyToken,modifyExercise);
 router.delete("/user/:idExercise", verifyToken,deleteExercise)
 

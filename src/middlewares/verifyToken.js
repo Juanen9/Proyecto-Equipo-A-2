@@ -19,7 +19,6 @@ const verifyToken = async (req, res, next) => {
       return res.status(401).send("Token no válido.");
     }
 
-
     try {
       const validationToken = await connect.query(
         `
@@ -29,7 +28,7 @@ const verifyToken = async (req, res, next) => {
         `,[tokenInfo.id]
       )
       
-      if(validationToken[0][0].token !== auth) res.status(400).send('Toquen caducado');
+      if(validationToken[0][0].token !== auth) return res.status(400).send('Toquen caducado');
 
     } catch (error) {
       console.error(error);
@@ -48,7 +47,7 @@ const verifyToken = async (req, res, next) => {
     const timeStampCreateToken = new Date(tokenInfo.iat * 1000);
 
     if (timeStampCreateToken < lastAuthUpdate) {
-      res.status(401).send("Token caducado");
+      return res.status(401).send("Token caducado");
     }
     req.userInfo = tokenInfo;
 

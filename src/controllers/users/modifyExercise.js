@@ -1,11 +1,13 @@
 const getDB = require('../../database/db');
+const savePhoto = require("../../service/savePhoto");
+
 
 const modifyExercise = async(req, res) => {
     try {
         const connect = await getDB();
 
         const {idExercise} = req.params;
-        const {exercise_name, exercise_description, photo, typology, muscle_group} = req.body;
+        const {exercise_name, exercise_description, typology, muscle_group} = req.body;
 
 
         await connect.query(
@@ -21,10 +23,22 @@ const modifyExercise = async(req, res) => {
         const [update] = await connect.query(
             `
                 UPDATE exercises
-                SET exercise_name=?, exercise_description=? , photo=? , typology=? , muscle_group=?
+                SET exercise_name=?, exercise_description=? , typology=? , muscle_group=?
                 WHERE id=?
-            `,[exercise_name, exercise_description, photo, typology, muscle_group,idExercise]
-        )
+            `,[exercise_name, exercise_description, typology, muscle_group,idExercise]
+        );
+
+        if(req.files && req.files.exercisePhoto){
+            const exercisePhoto = await savePhoto(req.files.exercisePhoto,'/exercisePhoto');
+
+            await connect.query(
+                `
+                UPDATE exercises
+                SET photo=?
+                WHERE id=?
+                `,[exercisePhoto, idExercise]
+            )
+        }
 
         connect.release();
         res.status(200).send('Ejercicio modificado');

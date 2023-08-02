@@ -1,10 +1,12 @@
 const getDB = require("../../database/db");
+const savePhoto = require("../../service/savePhoto");
+const {v4: uuidv4} = require("uuid");
 
 const postExercise = async (req, res) => {
   try {
     const connect = await getDB();
 
-    const { name, description, photo, typology, muscleGroup } = req.body;
+    const { name, description, typology, muscleGroup } = req.body;
 
     const [database] = await connect.query(
       `
@@ -12,7 +14,7 @@ const postExercise = async (req, res) => {
       `
     );
 
-    if (!name || !description || !photo || !typology || !muscleGroup)
+    if (!name || !description || !typology || !muscleGroup)
       return res
         .status(400)
         .send(
@@ -24,20 +26,24 @@ const postExercise = async (req, res) => {
         .status(401)
         .send("Sólo el usuario administrador puede cargar nuevos ejercicios.");
 
-    const [exercise] = await connect.query(
-      `
-                INSERT INTO exercises(exercise_name, exercise_description, photo, typology, muscle_group)
+    if(req.files && req.files.exercisePhoto){
+      const exercisePhoto = await savePhoto(req.files.exercisePhoto,'/exercisePhoto');
+      
+      await connect.query(
+        `
+                INSERT INTO exercises(exercise_name, exercise_description, photo,typology, muscle_group)
                 VALUES(?,?,?,?,?)
             `,
-      [name, description, photo, typology, muscleGroup]
-    );
+      [name, description, exercisePhoto, typology, muscleGroup]
+      );
+    };
 
     connect.release();
 
     res.status(200).send({
       status: "OK",
       message: "Ejercicio añadido correctamente",
-      data: exercise,
+      
     });
   } catch (error) {
     console.error(error);
