@@ -3,12 +3,15 @@ const getDB = require('../../database/db');
 const addLike= async (req,res) => {
     try {
         const connect = await getDB();
-        const [database] = await connect.query(
+
+        await connect.query(
             `
             USE gym;
             `
-         );
+        );
+
         const idUser = req.userInfo.id;
+
         const {exerciseName} = req.params;
 
     const [idExercise] = await connect.query(
@@ -30,7 +33,7 @@ const addLike= async (req,res) => {
         [idUser, idExercise[0].id]
       );
 
-      connect.release();
+    connect.release();
 
     res.status(200).send({
       status: "OK",
@@ -40,10 +43,7 @@ const addLike= async (req,res) => {
     } catch (error) {
         console.error(error);
     }
-    
-
-
-    
-}
+   
+};
 
 module.exports = addLike;

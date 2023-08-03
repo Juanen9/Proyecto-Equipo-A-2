@@ -1,4 +1,6 @@
 const getDB = require("../../database/db");
+const joi = require('@hapi/joi');
+
 
 const postTraining = async (req, res) => {
   try {
@@ -8,17 +10,27 @@ const postTraining = async (req, res) => {
       `
         USE gym;
       `
-    )
+    );
 
     const { name, description, exercises } = req.body;
 
+    const schema = joi.object().keys({
+      name: joi.string().required(),
+      description: joi.string().required(),
+      exercises: joi.array().items(joi.string()).required()
+      });
 
-    if (!name || !description || !exercises)
-      return res
-        .status(400)
-        .send(
-          "Es necesario cubrir todos los campos para subir un nuevo entrenamiento."
-        );
+    const validation = schema.validate(req.body);
+
+    if(validation.error) return res.status(400).send(validation.error.message);
+    
+
+    // if (!name || !description || !exercises)
+    //   return res
+    //     .status(400)
+    //     .send(
+    //       "Es necesario cubrir todos los campos para subir un nuevo entrenamiento."
+    //     );
 
     if (req.userInfo.role !== "admin")
       return res

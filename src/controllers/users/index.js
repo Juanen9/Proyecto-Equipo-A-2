@@ -12,7 +12,9 @@ const exerciseFilter = require('./exerciseFilter');
 const modifyUser = require("./modifyUser");
 const addLike = require("./addLike");
 const deleteLike = require("./deleteLike");
-const getOrderLikes = require("./getOrderLikes")
+const getOrderLikes = require("./getOrderLikes");
+const recoverPassword = require('./recoverPassword');
+const resetPassword = require('./resetPassword');
 
 module.exports = {
     userRegistration,
@@ -29,5 +31,7 @@ module.exports = {
     modifyUser,
     addLike,
     deleteLike,
-    getOrderLikes
+    getOrderLikes,
+    recoverPassword,
+    resetPassword
 }
