@@ -1,8 +1,9 @@
 const getDB = require("../../database/db");
 const { v4: uuidv4 } = require("uuid");
 const sendMail = require("../../service/sendMail");
-const joi = require('@hapi/joi');
+const joi = require("@hapi/joi");
 
+// Permite la creación de usuarios \\
 
 const userRegistration = async (req, res) => {
   try {
@@ -19,27 +20,28 @@ const userRegistration = async (req, res) => {
     const schema = joi.object().keys({
       name: joi.string().required(),
       email: joi.string().email().required(),
-      pwd: joi.string()
-      .min(8)
-      .pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$'))
-      .required()
-      .messages({
-        'string.base': 'La contraseña debe ser una cadena',
-        'string.empty': 'La contraseña no debe estar vacía',
-        'string.min': 'La contraseña debe tener al menos {#limit} caracteres',
-        'string.pattern.base': 'La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un símbolo',
-        'any.required': 'La contraseña es requerida'})
-      });
-
-    // if (!name || !email || !pwd)
-    //   return res
-    //     .status(400)
-    //     .send("Estos datos son necesarios para registrar un usuario.");
+      pwd: joi
+        .string()
+        .min(8)
+        .pattern(
+          new RegExp(
+            "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"
+          )
+        )
+        .required()
+        .messages({
+          "string.base": "La contraseña debe ser una cadena",
+          "string.empty": "La contraseña no debe estar vacía",
+          "string.min": "La contraseña debe tener al menos {#limit} caracteres",
+          "string.pattern.base":
+            "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un símbolo",
+          "any.required": "La contraseña es requerida",
+        }),
+    });
 
     const validation = schema.validate(req.body);
 
-    if(validation.error) return res.status(400).send(validation.error.message);
-    
+    if (validation.error) return res.status(400).send(validation.error.message);
 
     const [userExists] = await connect.query(
       `
@@ -56,18 +58,15 @@ const userRegistration = async (req, res) => {
         message: "El usuario con ese correo electrónico ya existe.",
       });
 
-    //El código de registro generado por uuid que se asignará al usuario registrado.
     const regCode = uuidv4();
 
-    //Construimos el cuerpo del email.
     const bodyMail = `
         Acabas de registrarte en el Gimnasio del equipo A.
         Pulsa el siguiente enlace para activar tu cuenta: ${process.env.PUBLIC_HOST}${regCode}
         `;
-    //Construimos el asunto del correo.
+
     const subject = `Correo de verificación de cuenta en el Gimnasio del equipo A`;
 
-    //Enviamos el correo.
     sendMail(email, subject, bodyMail);
 
     const [user] = await connect.query(

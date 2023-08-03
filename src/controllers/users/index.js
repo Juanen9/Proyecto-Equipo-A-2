@@ -1,37 +1,17 @@
-const userRegistration = require('./userRegistration');
-const activateUser = require('./activateUser');
-const loginUser = require('./loginUser');
-const adminRegistration = require('./adminRegistration');
-const postExercise = require('./postExercise');
-const postTraining = require('./postTraining');
-const modifyExercise = require('./modifyExercise');
-const deleteExercise = require('./deleteExercises');
-const getExercises = require('./getExercises');
-const getExercisesExtend = require('./getExercisesExtend');
-const exerciseFilter = require('./exerciseFilter');
+const userRegistration = require("./userRegistration");
+const activateUser = require("./activateUser");
+const loginUser = require("./loginUser");
+const adminRegistration = require("./adminRegistration");
 const modifyUser = require("./modifyUser");
-const addLike = require("./addLike");
-const deleteLike = require("./deleteLike");
-const getOrderLikes = require("./getOrderLikes");
-const recoverPassword = require('./recoverPassword');
-const resetPassword = require('./resetPassword');
+const recoverPassword = require("./recoverPassword");
+const resetPassword = require("./resetPassword");
 
 module.exports = {
-    userRegistration,
-    activateUser,
-    loginUser,
-    adminRegistration,
-    postExercise,
-    postTraining,
-    modifyExercise,
-    deleteExercise,
-    getExercises,
-    getExercisesExtend,
-    exerciseFilter,
-    modifyUser,
-    addLike,
-    deleteLike,
-    getOrderLikes,
-    recoverPassword,
-    resetPassword
-}
+  userRegistration,
+  activateUser,
+  loginUser,
+  adminRegistration,
+  modifyUser,
+  recoverPassword,
+  resetPassword,
+};

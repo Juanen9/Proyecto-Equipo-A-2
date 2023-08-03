@@ -1,37 +1,44 @@
-const getDB = require('../../database/db');
+const getDB = require("../../database/db");
 
-const activateUser = async (req,res) => {
-    try {
-        const connect = await getDB();
-        const {regCode} = req.params;
+// Se envia el correo para activar el usuario junto con el código de regristro (regCode), al clickar en el enlace que nos proporciona el correo se valida el usuario \\
 
-        const [user] = await connect.query(
-            `
+const activateUser = async (req, res) => {
+  try {
+    const connect = await getDB();
+    const { regCode } = req.params;
+
+    const [user] = await connect.query(
+      `
                 SELECT id
                 FROM users
                 WHERE regCode=?
-            `,[regCode]
-        );
+            `,
+      [regCode]
+    );
 
-        if(user.length === 0) res.status(401).send('No se encontró a ningún usuario con ese código de registro');
-        
-        await connect.query(
-            `
+    if (user.length === 0)
+      res
+        .status(401)
+        .send("No se encontró a ningún usuario con ese código de registro");
+
+    await connect.query(
+      `
                 UPDATE users
                 SET active=true, regCode=null
                 WHERE regCode=?
-            `,[regCode]
-        );
+            `,
+      [regCode]
+    );
 
-        connect.release();
+    connect.release();
 
-        res.status(200).send({
-            status:'OK',
-            message: 'Usuario validado correctamente'
-        });
-    } catch (error) {
-        console.error(error);
-    }
-}
+    res.status(200).send({
+      status: "OK",
+      message: "Usuario validado correctamente",
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 module.exports = activateUser;

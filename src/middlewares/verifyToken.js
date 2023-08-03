@@ -2,18 +2,18 @@ const { token } = require("morgan");
 const getDB = require("../database/db");
 const jwt = require("jsonwebtoken");
 
+// Comprobamos que el token sea válido y lo usamos para validar el rol de los usuario \\
 const verifyToken = async (req, res, next) => {
   try {
     const connect = await getDB();
 
-    await connect.query( 
+    await connect.query(
       `
       USE gym;
       `
     );
 
     const auth = req.headers["auth"];
-    
 
     if (!auth) return res.status(401).send("Falta cabecera de autorización.");
 
@@ -31,11 +31,12 @@ const verifyToken = async (req, res, next) => {
           SELECT token
           FROM users
           WHERE id=?
-        `,[tokenInfo.id]
-      )
-      
-      if(validationToken[0][0].token !== auth) return res.status(400).send('Toquen caducado');
+        `,
+        [tokenInfo.id]
+      );
 
+      if (validationToken[0][0].token !== auth)
+        return res.status(400).send("Toquen caducado");
     } catch (error) {
       console.error(error);
     }

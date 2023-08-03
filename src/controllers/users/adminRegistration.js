@@ -1,83 +1,94 @@
-const getDB = require('../../database/db');
-const {v4: uuidv4} = require('uuid');
-const sendMail = require('../../service/sendMail');
-const joi = require('@hapi/joi');
+const getDB = require("../../database/db");
+const { v4: uuidv4 } = require("uuid");
+const sendMail = require("../../service/sendMail");
+const joi = require("@hapi/joi");
 
+// Permite que se creen usuarios con el rol administrador \\
 
-const adminRegistration = async(req, res) => {
-    try {
-        const connect = await getDB();
+const adminRegistration = async (req, res) => {
+  try {
+    const connect = await getDB();
 
-        const {name, email, pwd, role} = req.body;
+    const { name, email, pwd, role } = req.body;
 
-        const [database] = await connect.query(
-            `
+    const [database] = await connect.query(
+      `
               USE gym;
             `
-          );
+    );
 
-          const schema = joi.object().keys({
-            name: joi.string().required(),
-            email: joi.string().email().required(),
-            pwd: joi.string()
-            .min(8)
-            .pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$'))
-            .required()
-            .messages({
-              'string.base': 'La contraseña debe ser una cadena',
-              'string.empty': 'La contraseña no debe estar vacía',
-              'string.min': 'La contraseña debe tener al menos {#limit} caracteres',
-              'string.pattern.base': 'La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un símbolo',
-              'any.required': 'La contraseña es requerida'})
-            });
+    const schema = joi.object().keys({
+      name: joi.string().required(),
+      email: joi.string().email().required(),
+      pwd: joi
+        .string()
+        .min(8)
+        .pattern(
+          new RegExp(
+            "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"
+          )
+        )
+        .required()
+        .messages({
+          "string.base": "La contraseña debe ser una cadena",
+          "string.empty": "La contraseña no debe estar vacía",
+          "string.min": "La contraseña debe tener al menos {#limit} caracteres",
+          "string.pattern.base":
+            "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un símbolo",
+          "any.required": "La contraseña es requerida",
+        }),
+    });
 
-        //if(!date || !event) return res.status(400).send('Hay que introducir la información de "date" y "event".');
-        const validation = schema.validate(req.body, { allowUnknown: true });
+    const validation = schema.validate(req.body, { allowUnknown: true });
 
-        if(validation.error){
-            res.status(400).send(validation.error.message);
-        };
+    if (validation.error) {
+      res.status(400).send(validation.error.message);
+    }
 
-        if(role !== 'admin') return res.status(404).send('El role solo puede ser admin');
-        //if(!email || !pwd || !role) return res.status(400).send('Hai que cubrir todos los datos para dar de alta un usuario administrador.');
+    if (role !== "admin")
+      return res.status(404).send("El role solo puede ser admin");
 
-        const [userExists] = await connect.query(
-            `
+    const [userExists] = await connect.query(
+      `
                 SELECT id
                 FROM users
                 WHERE email=?
-            `,[email]
-        );
+            `,
+      [email]
+    );
 
-        if(userExists.length > 0) return res.send(400).send('El usuario con ese correo electrónico ya existe.');
+    if (userExists.length > 0)
+      return res
+        .send(400)
+        .send("El usuario con ese correo electrónico ya existe.");
 
-        const regCode = uuidv4();
+    const regCode = uuidv4();
 
-        const bodyMail = `Te acabas de registrar como usuario administrador en el Gimnasio del equipo A.
-        Pulsa el siguiente enlace para que podamos activar tu cuenta de administrador ${process.env.PUBLIC_HOST}${regCode}.`
+    const bodyMail = `Te acabas de registrar como usuario administrador en el Gimnasio del equipo A.
+        Pulsa el siguiente enlace para que podamos activar tu cuenta de administrador ${process.env.PUBLIC_HOST}${regCode}.`;
 
-        const subject = `Correo de verificación para usuario administrador.`
+    const subject = `Correo de verificación para usuario administrador.`;
 
-        sendMail(email, subject, bodyMail);
+    sendMail(email, subject, bodyMail);
 
-        const [users] = await connect.query(
-            `
+    const [users] = await connect.query(
+      `
                 INSERT INTO users(user_name, email, password, regCode, role)
                 VALUES(?,?,SHA2(?,512),?,?)
-            `,[name, email, pwd, regCode, role]
-        );
+            `,
+      [name, email, pwd, regCode, role]
+    );
 
-        connect.release();
+    connect.release();
 
-        res.status(200).send({
-            status: 'OK',
-            message: 'Usuario administrador registrado correctamente.',
-            data: users
-        });
-
-    } catch (error) {
-        console.error(error);
-    }
-}
+    res.status(200).send({
+      status: "OK",
+      message: "Usuario administrador registrado correctamente.",
+      data: users,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 module.exports = adminRegistration;

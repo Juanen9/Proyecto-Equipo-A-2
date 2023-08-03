@@ -5,17 +5,18 @@ const createStaticDir = require("../src/service/createStaticDir");
 const path = require("path");
 
 const userRouter = require("../src/router/userRouter");
+const exercisesRouter = require("../src/router/exercisesRouter");
 
 //Creamos instancia del servidor.
 const server = express();
 
-server.use(express.urlencoded({extended: false}));
+server.use(express.urlencoded({ extended: false }));
 server.use(express.json());
 server.use(morgan("dev"));
 server.use(fileUpload());
 
 //Ruta completa al directorio uploads, donde subiremos los archivos estáticos.
-const staticDir = path.join(__dirname, 'uploads');
+const staticDir = path.join(__dirname, "uploads");
 
 //Creamos un middleware para trabajar con archivos estáticos.
 server.use(express.static(staticDir));
@@ -29,6 +30,7 @@ server.get("/", (req, res) => {
 });
 
 server.use(userRouter);
+server.use(exercisesRouter);
 
 //Gestionamos los errores del servidor.
 server.use((err, req, res, next) => {
