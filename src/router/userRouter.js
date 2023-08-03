@@ -19,7 +19,9 @@ const {
   modifyUser,
   addLike,
   deleteLike,
-  getOrderLikes
+  getOrderLikes,
+  recoverPassword,
+  resetPassword
 } = require("../controllers/users");
 
 router.get("/user/validate/:regCode", activateUser);
@@ -33,6 +35,8 @@ router.post("/user/login", loginUser);
 router.post("/user/admin/training", verifyToken, postTraining);
 router.post("/user/admin/exercise", verifyToken, postExercise);
 router.post("/user/addlike/:exerciseName", verifyToken, addLike);
+router.post("/user/recover-password", recoverPassword);
+router.post("/user/reset-password", resetPassword);
 router.put("/user/:idUser", verifyToken, modifyUser);
 router.put("/user/exerciseModify/:idExercise", verifyToken,modifyExercise);
 router.delete("/user/:idExercise", verifyToken,deleteExercise);
