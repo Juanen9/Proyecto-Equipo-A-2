@@ -1,5 +1,6 @@
 const getDB = require('../../database/db');
 const jwt = require('jsonwebtoken');
+const joi = require('@hapi/joi');
 
 const loginUser = async(req,res) => {
     try {
@@ -13,7 +14,16 @@ const loginUser = async(req,res) => {
             `
           );
 
-        if(!email || !pwd) return res.status(400).send('Los campos son necesarios para iniciar sesión.');
+          const schema = joi.object().keys({
+            email: joi.string().email().required(),
+            pwd: joi.string().required()
+            });
+      
+          const validation = schema.validate(req.body);
+      
+          if(validation.error) return res.status(400).send(validation.error.message);
+
+        //if(!email || !pwd) return res.status(400).send('Los campos son necesarios para iniciar sesión.');
 
         //Comprobamos que el usuario exista y la contraseña sea correcta.
 

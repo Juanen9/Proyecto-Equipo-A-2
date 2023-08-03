@@ -6,6 +6,12 @@ const verifyToken = async (req, res, next) => {
   try {
     const connect = await getDB();
 
+    await connect.query( 
+      `
+      USE gym;
+      `
+    );
+
     const auth = req.headers["auth"];
     
 

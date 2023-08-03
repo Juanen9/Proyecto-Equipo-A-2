@@ -16,6 +16,17 @@ const modifyUser = async (req, res) => {
 
         if(req.userInfo.id !== parseInt(idUser) && req.userInfo.role !== 'admin') return res.status(401).send('No tienes permisos para realizar esta modificación.');
 
+        //Comprobamos que no se introduzcan emails duplicados, aunque ya no lo permite la base de datos al ser email de tipo UNIQUE.
+        const [mail] = await connect.query(
+            `
+                SELECT email
+                FROM users
+                WHERE email=?
+            `,[email]
+        );
+        
+        if(mail.length > 0) return res.status(404).send('Este email ya está registrado.');
+
         const [user] = await connect.query(
             `
                 UPDATE users
