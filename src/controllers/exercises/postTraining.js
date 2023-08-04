@@ -18,7 +18,7 @@ const postTraining = async (req, res) => {
     const schema = joi.object().keys({
       name: joi.string().required(),
       description: joi.string().required(),
-      exercises: joi.array().items(joi.string()).required(),
+      exercises: joi.array().items(joi.string()).min(1).required(),
     });
 
     const validation = schema.validate(req.body);

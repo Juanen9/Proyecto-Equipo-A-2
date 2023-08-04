@@ -43,6 +43,18 @@ const userRegistration = async (req, res) => {
 
     if (validation.error) return res.status(400).send(validation.error.message);
 
+    const [nameExists] = await connect.query(
+      `
+      SELECT id
+      FROM users
+      WHERE user_name=?
+      `,[name]
+    );
+    if (nameExists.length !== 0)
+      return res
+        .status(400)
+        .send("Ya existe ese nombre de usuario.");
+
     const [userExists] = await connect.query(
       `
                 SELECT id 

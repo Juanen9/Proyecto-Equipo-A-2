@@ -41,12 +41,23 @@ const adminRegistration = async (req, res) => {
 
     const validation = schema.validate(req.body, { allowUnknown: true });
 
-    if (validation.error) {
-      res.status(400).send(validation.error.message);
-    }
+    if (validation.error) return res.status(400).send(validation.error.message);
+    
 
     if (role !== "admin")
       return res.status(404).send("El role solo puede ser admin");
+
+      const [nameExists] = await connect.query(
+        `
+        SELECT id
+        FROM users
+        WHERE user_name=?
+        `,[name]
+      );
+      if (nameExists.length !== 0)
+        return res
+          .status(400)
+          .send("Ya existe ese nombre de usuario.");
 
     const [userExists] = await connect.query(
       `
@@ -56,10 +67,10 @@ const adminRegistration = async (req, res) => {
             `,
       [email]
     );
-
-    if (userExists.length > 0)
+    
+    if (userExists.length !== 0)
       return res
-        .send(400)
+        .status(400)
         .send("El usuario con ese correo electrónico ya existe.");
 
     const regCode = uuidv4();

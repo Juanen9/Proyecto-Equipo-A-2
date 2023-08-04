@@ -17,6 +17,8 @@ const modifyExercise = async (req, res) => {
             `
     );
 
+    if(!exercise_name || !exercise_description || !typology || !muscle_group) return res.status(404).send('Es necesario introducir todos los campos para modificar los ejercicios.');
+
     if (req.userInfo.role !== "admin")
       return res
         .status(401)
@@ -37,6 +39,9 @@ const modifyExercise = async (req, res) => {
             `,
       [exercise_name, exercise_description, typology, muscle_group, idExercise]
     );
+
+    if (!req.files) return res.status(404).send('Es necesario introducir todos los campos para modificar los ejercicios.');
+
     const extensionImage = req.files.exercisePhoto.name.split(`.`)[1];
     if (
       extensionImage !== `png` &&
@@ -46,6 +51,9 @@ const modifyExercise = async (req, res) => {
     ) {
       return res.status(404).send(`Formato de imagen no válido`);
     }
+
+    
+
     if (req.files && req.files.exercisePhoto) {
       const exercisePhoto = await savePhoto(
         req.files.exercisePhoto,
