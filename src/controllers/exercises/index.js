@@ -1,13 +1,15 @@
 const postExercise = require("./postExercise");
 const postTraining = require("./postTraining");
 const modifyExercise = require("./modifyExercise");
-const deleteExercise = require("../exercises/deleteExercises");
-const getExercises = require("../exercises/getExercises");
-const getExercisesExtend = require("../exercises/getExercisesExtend");
-const exerciseFilter = require("../exercises/exerciseFilter");
-const addLike = require("../exercises/addLike");
-const deleteLike = require("../exercises/deleteLike");
+const deleteExercise = require("./deleteExercises");
+const getExercises = require("./getExercises");
+const getExercisesExtend = require("./getExercisesExtend");
+const exerciseFilter = require("./exerciseFilter");
+const addLike = require("./addLike");
+const deleteLike = require("./deleteLike");
 const getOrderLikes = require("./getOrderLikes");
+const addFav = require('./addFav');
+const getFav = require('./getFav');
 
 module.exports = {
   postExercise,
@@ -20,4 +22,6 @@ module.exports = {
   addLike,
   deleteLike,
   getOrderLikes,
+  addFav,
+  getFav
 };

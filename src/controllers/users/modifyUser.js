@@ -27,16 +27,6 @@ const modifyUser = async (req, res) => {
     const validation = schema.validate(req.body, { allowUnknown: true });
     if (validation.error) return res.status(400).send(validation.error.message);
 
-    // const extensionImage = req.files.avatarUser.name.split(`.`)[1];
-    // if (
-    //   extensionImage !== `png` &&
-    //   extensionImage !== `jpg` &&
-    //   extensionImage !== `jpeg` &&
-    //   extensionImage !== `gif`
-    // ) {
-    //   return res.status(404).send(`Formato de imagen no válido`);
-    // }
-
 
     if (req.userInfo.id !== parseInt(idUser) && req.userInfo.role !== "admin")
       return res
