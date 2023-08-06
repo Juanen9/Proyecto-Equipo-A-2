@@ -37,6 +37,7 @@ const adminRegistration = async (req, res) => {
             "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un símbolo",
           "any.required": "La contraseña es requerida",
         }),
+      role: joi.string().required()
     });
 
     const validation = schema.validate(req.body, { allowUnknown: true });
@@ -45,7 +46,7 @@ const adminRegistration = async (req, res) => {
     
 
     if (role !== "admin")
-      return res.status(404).send("El role solo puede ser admin");
+      return res.status(404).send("El role solo puede ser admin.");
 
       const [nameExists] = await connect.query(
         `

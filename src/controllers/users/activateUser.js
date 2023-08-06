@@ -7,6 +7,12 @@ const activateUser = async (req, res) => {
     const connect = await getDB();
     const { regCode } = req.params;
 
+    const [database] = await connect.query(
+      `
+              USE gym;
+            `
+    );
+
     const [user] = await connect.query(
       `
                 SELECT id
