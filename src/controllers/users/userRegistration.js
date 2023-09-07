@@ -6,8 +6,9 @@ const joi = require("@hapi/joi");
 // Permite la creación de usuarios \\
 
 const userRegistration = async (req, res) => {
+  let connect; 
   try {
-    const connect = await getDB();
+    connect = await getDB();
 
     const { name, email, pwd } = req.body;
 
@@ -25,14 +26,14 @@ const userRegistration = async (req, res) => {
         .min(8)
         .pattern(
           new RegExp(
-            "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"
+            "^([a-z0-9A-ZÑ._~!@#$%^&*()-=+]+){8,20}$"
           )
         )
         .required()
         .messages({
           "string.base": "La contraseña debe ser una cadena",
           "string.empty": "La contraseña no debe estar vacía",
-          "string.min": "La contraseña debe tener al menos {#limit} caracteres",
+          "string.min": "La contraseña debe tener al menos 8 caracteres",
           "string.pattern.base":
             "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un símbolo",
           "any.required": "La contraseña es requerida",
@@ -98,6 +99,10 @@ const userRegistration = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
+  }finally{
+    if(connect){
+      connect.release();
+    }
   }
 };
 

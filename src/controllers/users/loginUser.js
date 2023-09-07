@@ -5,8 +5,9 @@ const joi = require("@hapi/joi");
 // Permite al usuario registrado iniciar sesión generando un token \\
 
 const loginUser = async (req, res) => {
+  let connect;
   try {
-    const connect = await getDB();
+    connect = await getDB();
 
     const { email, pwd } = req.body;
 
@@ -68,7 +69,11 @@ const loginUser = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-  }
+  }finally{
+    if(connect){
+        connect.release();
+    }
+}
 };
 
 module.exports = loginUser;

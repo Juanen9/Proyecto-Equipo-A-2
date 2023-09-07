@@ -3,8 +3,9 @@ const getDB = require("../../database/db");
 // Proporciona toda la información sobre un ejercicio en concreto \\
 
 const getExercisesExtend = async (req, res) => {
+  let connect;
   try {
-    const connect = await getDB();
+    connect = await getDB();
 
     await connect.query(
       `
@@ -34,7 +35,11 @@ const getExercisesExtend = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-  }
+  }finally{
+    if(connect){
+        connect.release();
+    }
+}
 };
 
 module.exports = getExercisesExtend;

@@ -6,8 +6,9 @@ const joi = require("@hapi/joi");
 // Envia un código de validación al correo para un cambio de contraseña \\
 
 const recoverPassword = async (req, res) => {
+  let connect;
   try {
-    const connect = await getDB();
+    connect = await getDB();
 
     await connect.query(
       `
@@ -74,7 +75,11 @@ const recoverPassword = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-  }
+  }finally{
+    if(connect){
+        connect.release();
+    }
+}
 };
 
 module.exports = recoverPassword;

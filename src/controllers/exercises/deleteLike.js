@@ -3,26 +3,27 @@ const getDB = require("../../database/db");
 // Permite al usuario eliminar un `like`a un ejercicio \\
 
 const deleteLike = async (req, res) => {
+  let connect;
   try {
-    const connect = await getDB();
+    connect = await getDB();
     const [database] = await connect.query(
       `
             USE gym;
             `
     );
     const idUser = req.userInfo.id;
-    const { exerciseName } = req.params;
+    const { idExercise } = req.params;
 
-    const [idExercise] = await connect.query(
+    const [exerciseName] = await connect.query(
       `
-          SELECT id 
+          SELECT exercise_name 
           FROM exercises 
-          WHERE exercise_name=?
+          WHERE id=?
         `,
-      [exerciseName]
+      [idExercise]
     );
 
-    if (idExercise.length === 0)
+    if (exerciseName.length === 0)
       return res.status(404).send("Ejercicio no encontrado");
 
     const [deletelike] = await connect.query(
@@ -31,8 +32,9 @@ const deleteLike = async (req, res) => {
         FROM likes 
         WHERE id_user=? AND id_exercise=?
     `,
-      [idUser, idExercise[0].id]
+      [idUser, idExercise]
     );
+    
 
     connect.release();
 
@@ -42,7 +44,11 @@ const deleteLike = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-  }
+  }finally{
+    if(connect){
+        connect.release();
+    }
+}
 };
 
 module.exports = deleteLike;

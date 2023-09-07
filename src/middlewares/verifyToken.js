@@ -4,8 +4,9 @@ const jwt = require("jsonwebtoken");
 
 // Comprobamos que el token sea válido y lo usamos para validar el rol de los usuario \\
 const verifyToken = async (req, res, next) => {
+  let connect;
   try {
-    const connect = await getDB();
+    connect = await getDB();
 
     await connect.query(
       `
@@ -52,7 +53,7 @@ const verifyToken = async (req, res, next) => {
 
     const lastAuthUpdate = new Date(user[0].lastAuthUpdate);
     const timeStampCreateToken = new Date(tokenInfo.iat * 1000);
-
+      
     if (timeStampCreateToken < lastAuthUpdate) {
       return res.status(401).send("Token caducado");
     }
@@ -61,7 +62,10 @@ const verifyToken = async (req, res, next) => {
     next();
   } catch (error) {
     console.error(error);
+  }finally{
+    connect.release();
   }
+  
 };
 
 module.exports = verifyToken;

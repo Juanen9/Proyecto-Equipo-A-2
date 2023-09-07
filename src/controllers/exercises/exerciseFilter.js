@@ -5,8 +5,9 @@ const queryString = require("querystring");
 // Permite a los usuarios filtrar los ejercicios por grupo muscular y/o tipología \\
 
 const exerciseFilter = async (req, res) => {
+  let connect;
   try {
-    const connect = await getDB();
+    connect = await getDB();
 
     await connect.query(
       `
@@ -79,7 +80,11 @@ const exerciseFilter = async (req, res) => {
     connect.release();
   } catch (error) {
     console.error(error);
-  }
+  }finally{
+    if(connect){
+        connect.release();
+    }
+}
 };
 
 module.exports = exerciseFilter;

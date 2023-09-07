@@ -4,8 +4,9 @@ const savePhoto = require("../../service/savePhoto");
 // Permite a los usuario con rol "admin" modificar ejercicios \\
 
 const modifyExercise = async (req, res) => {
+  let connect;
   try {
-    const connect = await getDB();
+    connect = await getDB();
 
     const { idExercise } = req.params;
     const { exercise_name, exercise_description, typology, muscle_group } =
@@ -74,7 +75,11 @@ const modifyExercise = async (req, res) => {
     res.status(200).send("Ejercicio modificado");
   } catch (error) {
     console.error(error);
-  }
+  }finally{
+    if(connect){
+        connect.release();
+    }
+}
 };
 
 module.exports = modifyExercise;

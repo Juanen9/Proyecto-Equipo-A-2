@@ -3,8 +3,9 @@ const getDB = require("../../database/db");
 // Se envia el correo para activar el usuario junto con el código de regristro (regCode), al clickar en el enlace que nos proporciona el correo se valida el usuario \\
 
 const activateUser = async (req, res) => {
+  let connect;
   try {
-    const connect = await getDB();
+    connect = await getDB();
     const { regCode } = req.params;
 
     const [database] = await connect.query(
@@ -44,7 +45,11 @@ const activateUser = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-  }
+  }finally{
+    if(connect){
+        connect.release();
+    }
+}
 };
 
 module.exports = activateUser;

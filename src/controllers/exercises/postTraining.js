@@ -4,8 +4,9 @@ const joi = require("@hapi/joi");
 // Permite crear entrenamiento agrupando ejercicios \\
 
 const postTraining = async (req, res) => {
+  let connect;
   try {
-    const connect = await getDB();
+    connect = await getDB();
 
     await connect.query(
       `
@@ -18,7 +19,7 @@ const postTraining = async (req, res) => {
     const schema = joi.object().keys({
       name: joi.string().required(),
       description: joi.string().required(),
-      exercises: joi.array().items(joi.string()).min(1).required(),
+      exercises: joi.array().items(joi.number()).min(1).required(),
     });
 
     const validation = schema.validate(req.body);
@@ -49,14 +50,14 @@ const postTraining = async (req, res) => {
       [name]
     );
 
-    for (const exerciseName of exercises) {
+    for (const exerciseId of exercises) {
       const [idExercises] = await connect.query(
         `
-        SELECT id 
+        SELECT exercise_name
         FROM exercises 
-        WHERE exercise_name=?
+        WHERE id=?
       `,
-        [exerciseName]
+        [exerciseId]
       );
       await connect.query(
         `
@@ -64,9 +65,11 @@ const postTraining = async (req, res) => {
                 VALUES(?,?)
             `,
         [idTraining[0].id, idExercises[0].id]
+        
       );
+      console.log();
     }
-    connect.release();
+    connect.release(idTraining[0].id);
 
     res.status(200).send({
       status: "OK",
@@ -75,7 +78,11 @@ const postTraining = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-  }
+  }finally{
+    if(connect){
+        connect.release();
+    }
+}
 };
 
 module.exports = postTraining;

@@ -3,8 +3,9 @@ const getDB = require('../../database/db');
 //Permite al usuario logueado consultar que ejercicios tiene como favoritos.
 
 const getFav = async(req, res) => {
+    let connect;
     try {
-        const connect = await getDB();
+        connect = await getDB();
 
         await connect.query(
             `
@@ -31,6 +32,10 @@ const getFav = async(req, res) => {
         });
     } catch (error) {
         console.error(error);
+    }finally{
+        if(connect){
+            connect.release();
+        }
     }
 };
 

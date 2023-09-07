@@ -3,8 +3,9 @@ const getDB = require("../../database/db");
 // Lista todos los nombres de los ejercicios que hay dentro de la BD \\
 
 const getExercises = async (req, res) => {
+  let connect;
   try {
-    const connect = await getDB();
+    connect = await getDB();
 
     const [database] = await connect.query(
       `
@@ -14,7 +15,7 @@ const getExercises = async (req, res) => {
 
     const [names] = await connect.query(
       `
-                SELECT exercise_name
+                SELECT *
                 FROM exercises   `
     );
 
@@ -28,7 +29,11 @@ const getExercises = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-  }
+  }finally{
+    if(connect){
+        connect.release();
+    }
+}
 };
 
 module.exports = getExercises;

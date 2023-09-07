@@ -3,39 +3,57 @@ const getDB = require('../../database/db');
 //Permite a un usuario agregar a favoritos ejercicios.
 
 const addFav = async(req,res) => {
+    let connect;
     try {
-        const connect = await getDB();
-
+        connect = await getDB();
         await connect.query(
             `
                   USE gym;
                   `
           );
 
-        const {exerciseName} = req.params;
+        const {idExercise} = req.params;
+        
 
-        const [exerciseId] = await connect.query(
+        const [exerciseName] = await connect.query(
             `
-                SELECT id 
+                SELECT exercise_name 
                 FROM exercises
-                WHERE exercise_name=?
-            `,[exerciseName]
+                WHERE id=?
+            `,[idExercise]
         );
+
+        if(!exerciseName.length) return res.status(200).send('No existe el ejercicio indicado.');
+
+        const [select] = await connect.query(
+            `
+                SELECT *
+                FROM favs
+                WHERE id_user=? AND id_exercise=?
+            `,[req.userInfo.id, idExercise]
+        );
+
+        if(select.length) return res.status(200).send('Este ejercicio ya está en tus favoritos.');
 
         const [fav] = await connect.query(
             `
                 INSERT INTO favs(id_user, id_exercise)
                 VALUES(?, ?)
-            `,[req.userInfo.id, exerciseId[0].id]
+            `,[req.userInfo.id, idExercise]
         );
-
-        connect.release();parseInt(req.userInfo.id)
+        connect.release();
+        parseInt(req.userInfo.id)
         res.status(200).send({
             status: 'OK',
-            message: `Ejercicio ${exerciseName} añadido a favoritos.`
+            message: `Ejercicio ${exerciseName[0]["exercise_name"]} añadido a favoritos.`
         })
+        console.log(fav);
     } catch (error) {
         console.error(error);
+    }finally{
+        if(connect){
+            connect.release();
+        }
     }
 };
 

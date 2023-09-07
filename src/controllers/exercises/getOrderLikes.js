@@ -3,8 +3,9 @@ const getDB = require("../../database/db");
 // Lista los 3 ejercicios con mas likes \\
 
 const getOrderLikes = async (req, res) => {
+  let connect;
   try {
-    const connect = await getDB();
+    connect = await getDB();
 
     const [database] = await connect.query(
       `
@@ -33,7 +34,11 @@ const getOrderLikes = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-  }
+  }finally{
+    if(connect){
+        connect.release();
+    }
+}
 };
 
 module.exports = getOrderLikes;

@@ -80,22 +80,6 @@ const createBBDD = async () => {
 
     console.log('Tabla "training_exercise" creada.');
 
-    // await connect.query(
-    //   `
-    //         CREATE TABLE IF NOT EXISTS user_training (
-    // 	        id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    //             id_user INT UNSIGNED,
-    //             id_training INT UNSIGNED,
-    //             start_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    //             favourite TINYINT(1),
-    //             FOREIGN KEY (id_user) REFERENCES users(id),
-    //             FOREIGN KEY (id_training) REFERENCES training(id)
-    //         );
-    //         `
-    // );
-
-    // console.log('Tabla "user_training" creada.');
-
     await connect.query(
       `
             CREATE TABLE IF NOT EXISTS likes (

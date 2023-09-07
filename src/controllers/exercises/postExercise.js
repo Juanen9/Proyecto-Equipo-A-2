@@ -5,8 +5,9 @@ const { v4: uuidv4 } = require("uuid");
 // Permite a los usuario "admin" crear ejercicios \\
 
 const postExercise = async (req, res) => {
+  let connect;
   try {
-    const connect = await getDB();
+    connect = await getDB();
 
     const { name, description, typology, muscleGroup } = req.body;
 
@@ -61,7 +62,11 @@ const postExercise = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-  }
+  }finally{
+    if(connect){
+        connect.release();
+    }
+}
 };
 
 module.exports = postExercise;

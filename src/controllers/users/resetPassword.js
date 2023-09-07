@@ -4,8 +4,9 @@ const joi = require("@hapi/joi");
 // Con el código enviado en recoverPassword.js, nos permite recuperar la contraseña \\
 
 const resetPassword = async (req, res) => {
+  let connect;
   try {
-    const connect = await getDB();
+    connect = await getDB();
     await connect.query(
       `
               USE gym;
@@ -20,7 +21,7 @@ const resetPassword = async (req, res) => {
         .min(8)
         .pattern(
           new RegExp(
-            "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"
+            "^([a-z0-9A-ZÑ._~!@#$%^&*()-=+]+){8,20}$"
           )
         )
         .required()
@@ -63,7 +64,11 @@ const resetPassword = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-  }
+  }finally{
+    if(connect){
+        connect.release();
+    }
+}
 };
 
 module.exports = resetPassword;

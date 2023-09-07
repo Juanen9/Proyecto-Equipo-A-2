@@ -6,10 +6,11 @@ const joi = require("@hapi/joi");
 // Permite que se creen usuarios con el rol administrador \\
 
 const adminRegistration = async (req, res) => {
+  let connect;
   try {
-    const connect = await getDB();
+    connect = await getDB();
 
-    const { name, email, pwd, role } = req.body;
+    const { name, email, pwd, clue,role } = req.body;
 
     const [database] = await connect.query(
       `
@@ -17,15 +18,17 @@ const adminRegistration = async (req, res) => {
             `
     );
 
+
     const schema = joi.object().keys({
       name: joi.string().required(),
       email: joi.string().email().required(),
+      clue: joi.string().required(),
       pwd: joi
         .string()
         .min(8)
         .pattern(
           new RegExp(
-            "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"
+            "^([a-z0-9A-ZÑ._~!@#$%^&*()-=+]+){8,20}$"
           )
         )
         .required()
@@ -43,7 +46,8 @@ const adminRegistration = async (req, res) => {
     const validation = schema.validate(req.body, { allowUnknown: true });
 
     if (validation.error) return res.status(400).send(validation.error.message);
-    
+
+    if(clue !== process.env.clue) return res.status(404).send('Si desconoces la palabra clave no puedes obtener un usuario con permisos de administrador.');
 
     if (role !== "admin")
       return res.status(404).send("El role solo puede ser admin.");
@@ -100,7 +104,11 @@ const adminRegistration = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-  }
+  }finally{
+    if(connect){
+        connect.release();
+    }
+}
 };
 
 module.exports = adminRegistration;
