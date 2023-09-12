@@ -3,12 +3,14 @@ const morgan = require("morgan");
 const fileUpload = require("express-fileupload");
 const createStaticDir = require("../src/service/createStaticDir");
 const path = require("path");
+const cors = require('cors');
 
 const userRouter = require("../src/router/userRouter");
 const exercisesRouter = require("../src/router/exercisesRouter");
 
 //Creamos instancia del servidor.
 const server = express();
+server.use(cors());
 
 server.use(express.urlencoded({ extended: false }));
 server.use(express.json());

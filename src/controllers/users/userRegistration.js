@@ -10,7 +10,7 @@ const userRegistration = async (req, res) => {
   try {
     connect = await getDB();
 
-    const { name, email, pwd } = req.body;
+    const { name, email, pwd, pwd2 } = req.body;
 
     await connect.query(
       `
@@ -38,11 +38,30 @@ const userRegistration = async (req, res) => {
             "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un símbolo",
           "any.required": "La contraseña es requerida",
         }),
+        pwd2: joi
+        .string()
+        .min(8)
+        .pattern(
+          new RegExp(
+            "^([a-z0-9A-ZÑ._~!@#$%^&*()-=+]+){8,20}$"
+          )
+        )
+        .required()
+        .messages({
+          "string.base": "La contraseña debe ser una cadena",
+          "string.empty": "La contraseña no debe estar vacía",
+          "string.min": "La contraseña debe tener al menos 8 caracteres",
+          "string.pattern.base":
+            "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un símbolo",
+          "any.required": "La contraseña es requerida",
+        })
     });
 
     const validation = schema.validate(req.body);
 
     if (validation.error) return res.status(400).send(validation.error.message);
+
+    if(pwd !== pwd2) return res.status(401).send('Las contraseñas deben ser idénticas');
 
     const [nameExists] = await connect.query(
       `

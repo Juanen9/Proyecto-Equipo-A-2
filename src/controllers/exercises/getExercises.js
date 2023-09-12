@@ -20,7 +20,7 @@ const getExercises = async (req, res) => {
     );
 
     if (!names) return res.status(401).send("No se encontró ningún ejercicio.");
-
+      
     connect.release();
 
     res.status(200).send({
