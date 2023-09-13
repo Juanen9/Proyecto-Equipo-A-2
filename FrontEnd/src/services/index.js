@@ -16,7 +16,7 @@ export const registerUserService = async ({name ,email, pwd, pwd2}) => {
 }
 
 export const registerAdminService = async ({name ,email, pwd, clue, role}) => {
-    const response = await fetch("http://localhost:3001/user", {
+    const response = await fetch("http://localhost:3001/user/admin", {
         method: "POST",
         body: JSON.stringify({ name ,email, pwd, clue, role}),
         headers: {
@@ -43,11 +43,64 @@ export const logInUserService = async ({email, pwd}) => {
     const json = await response.json();
 
     if(!response.ok){
-        throw new Error(error.message);
+        throw new Error(json.message);
     }
 
-    return json.data.token
+    return json.data.token;
     
 };
 
+export const postExerciseService = async ({data, token}) => {
+    const response = await fetch("http://localhost:3001/exercise/add-exercise", {
+        method: "POST",
+        body: data,
+        headers: {
+            auth: token,
+        },
+        mode: "cors"
+    });
 
+    const json = await response.json();
+
+    if(!response.ok) {
+        throw new Error(json.message);
+    }
+
+    return json.data;
+}
+
+export const postTrainingService = async ({name, description, exercises, token}) => {
+    const response = await fetch("http://localhost:3001/exercise/add-training", {
+        method: "POST",
+        body: JSON.stringify({ name, description, exercises }),
+        headers: {
+            auth: token,
+            'Content-Type': 'application/json',
+          },
+        mode: "cors"
+    });
+
+    const json = await response.json();
+
+    if(!response.ok) {
+        throw new Error(json.message);
+    }
+
+    return json.data;
+}
+
+export const getAllExercisesService = async ({token}) => {
+    const response = await fetch("http://localhost:3001/exercise/list", {
+        headers: {
+            auth: token
+        }
+    });
+
+    const json = await response.json();
+
+    if (!response.ok) {
+        throw new Error(json.message);
+      }
+    
+      return json.data;
+}

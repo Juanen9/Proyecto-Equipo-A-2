@@ -29,15 +29,15 @@ const postExercise = async (req, res) => {
         .status(401)
         .send("Sólo el usuario administrador puede cargar nuevos ejercicios.");
 
-    const extensionImage = req.files.exercisePhoto.name.split(`.`)[1];
-    if (
-      extensionImage !== `png` &&
-      extensionImage !== `jpg` &&
-      extensionImage !== `jpeg` &&
-      extensionImage !== `gif`
-    ) {
-      return res.status(404).send(`Formato de imagen no válido`);
-    }
+    // const extensionImage = req.files.exercisePhoto.name.split(`.`)[1];
+    // if (
+    //   extensionImage !== `png` &&
+    //   extensionImage !== `jpg` &&
+    //   extensionImage !== `jpeg` &&
+    //   extensionImage !== `gif`
+    // ) {
+    //   return res.status(404).send(`Formato de imagen no válido`);
+    // }
 
     if (req.files && req.files.exercisePhoto) {
       const exercisePhoto = await savePhoto(

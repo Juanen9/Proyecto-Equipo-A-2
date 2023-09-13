@@ -17,8 +17,12 @@ server.use(express.json());
 server.use(morgan("dev"));
 server.use(fileUpload());
 
+
+
 //Ruta completa al directorio uploads, donde subiremos los archivos estáticos.
 const staticDir = path.join(__dirname, "uploads");
+
+console.log(staticDir);
 
 //Creamos un middleware para trabajar con archivos estáticos.
 server.use(express.static(staticDir));

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { registerUserService } from "../../services";
+import { registerAdminService } from "../../services";
 import { useNavigate } from "react-router-dom";
 
 function AdminRegister () {
@@ -26,7 +26,7 @@ function AdminRegister () {
         }
 
         try{
-            await registerUserService ({name, email, pwd, clue, role});
+            await registerAdminService ({name, email, pwd, clue, role});
             navigate('/login');
         }catch(error){
             setError(error.message);

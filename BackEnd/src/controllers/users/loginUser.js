@@ -36,11 +36,11 @@ const loginUser = async (req, res) => {
     );
 
     if (user.length === 0)
-      return res.status(404).send("Usuario o contraseña incorrectos.");
+      return res.status(404).json({message: "Usuario o contraseña incorrectos."});
     if (user[0].active !== 1)
       return res
         .status(404)
-        .send("El usuario no se encuentra registrado/activado.");
+        .json({message: "El usuario no se encuentra registrado/activado."});
 
     const info = {
       id: user[0].id,

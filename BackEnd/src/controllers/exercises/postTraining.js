@@ -24,12 +24,12 @@ const postTraining = async (req, res) => {
 
     const validation = schema.validate(req.body);
 
-    if (validation.error) return res.status(400).send(validation.error.message);
+    if (validation.error) return res.status(400).json(validation.error.message);
 
     if (req.userInfo.role !== "admin")
       return res
         .status(401)
-        .send(
+        .json(
           "Sólo el usuario administrador puede cargar nuevos entrenamientos."
         );
 
@@ -71,7 +71,7 @@ const postTraining = async (req, res) => {
     }
     connect.release(idTraining[0].id);
 
-    res.status(200).send({
+    res.status(200).json({
       status: "OK",
       message: "Entrenamiento añadido correctamente",
       data: training,

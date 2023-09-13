@@ -47,7 +47,7 @@ const userRegistration = async (req, res) => {
 
     if (validation.error) return res.status(400).json({ message: validation.error.message});
 
-    if(pwd !== pwd2) return res.status(401).send('Las contraseñas deben ser idénticas');
+    if(pwd !== pwd2) return res.status(401).json('Las contraseñas deben ser idénticas');
 
     const [nameExists] = await connect.query(
       `

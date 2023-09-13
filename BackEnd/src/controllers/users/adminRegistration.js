@@ -28,7 +28,7 @@ const adminRegistration = async (req, res) => {
         .min(8)
         .pattern(
           new RegExp(
-            "^([a-z0-9A-ZÑ._~!@#$%^&*()-=+]+){8,20}$"
+            "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[.!@#$%^&*()-+=]).{8,}$"
           )
         )
         .required()
@@ -45,12 +45,12 @@ const adminRegistration = async (req, res) => {
 
     const validation = schema.validate(req.body, { allowUnknown: true });
 
-    if (validation.error) return res.status(400).send(validation.error.message);
+    if (validation.error) return res.status(400).json(validation.error.message);
 
-    if(clue !== process.env.clue) return res.status(404).send('Si desconoces la palabra clave no puedes obtener un usuario con permisos de administrador.');
+    if(clue !== process.env.clue) return res.status(404).json('Si desconoces la palabra clave no puedes obtener un usuario con permisos de administrador.');
 
     if (role !== "admin")
-      return res.status(404).send("El role solo puede ser admin.");
+      return res.status(404).json("El role solo puede ser admin.");
 
       const [nameExists] = await connect.query(
         `
@@ -62,7 +62,7 @@ const adminRegistration = async (req, res) => {
       if (nameExists.length !== 0)
         return res
           .status(400)
-          .send("Ya existe ese nombre de usuario.");
+          .json("Ya existe ese nombre de usuario.");
 
     const [userExists] = await connect.query(
       `
@@ -76,7 +76,7 @@ const adminRegistration = async (req, res) => {
     if (userExists.length !== 0)
       return res
         .status(400)
-        .send("El usuario con ese correo electrónico ya existe.");
+        .json("El usuario con ese correo electrónico ya existe.");
 
     const regCode = uuidv4();
 
