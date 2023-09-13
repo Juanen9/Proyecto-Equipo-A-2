@@ -25,11 +25,13 @@ function PostTraining() {
         exercises: exercisesArray,
         token,
       });
+      e.target.reset();
+      setError(null)
+  
     } catch (error) {
       setError(error.message);
     } finally {
       setLoading(false);
-      e.target.reset();
     }
   };
 

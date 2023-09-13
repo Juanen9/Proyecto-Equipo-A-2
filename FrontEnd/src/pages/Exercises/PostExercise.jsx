@@ -19,6 +19,7 @@ function PostExercise () {
 
             e.target.reset();
             setImage(null);
+            setError(null)
         } catch (error) {
             setError(error.message);
         }finally{
@@ -49,7 +50,7 @@ function PostExercise () {
         </fieldset>
         <fieldset>
           <label htmlFor="exercisePhoto">Image</label>
-          <input
+          <input required
             type="file"
             name="exercisePhoto"
             id="exercisePhoto"
