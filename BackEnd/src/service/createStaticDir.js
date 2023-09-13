@@ -1,14 +1,18 @@
 const fs = require("fs/promises");
+const path = require("path");
 
 // Crea los directorios de las fotos \\
-
 const createStaticDir = async (staticDir) => {
-  try {
-    await fs.access(staticDir);
-  } catch (error) {
-    await fs.mkdir(staticDir);
-    await fs.mkdir(`${staticDir}/avatarUser`);
-    await fs.mkdir(`${staticDir}/exercisePhoto`);
+  const dirsToCreate = ["avatarUser", "exercisePhoto"];
+
+  for (const dirName of dirsToCreate) {
+    const dirPath = path.join(staticDir, dirName);
+
+    try {
+      await fs.access(dirPath);
+    } catch (error) {
+      await fs.mkdir(dirPath, { recursive: true });
+    }
   }
 };
 

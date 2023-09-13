@@ -36,7 +36,7 @@ function GetExercises () {
                         <li>{e.id}</li>
                         <li>{e["exercise_name"]}</li>
                         <li>{e["exercise_description"]}</li>
-                        <li><img src={`http://localhost:3001/uploads/exercisePhoto/${e["photo"]}`} alt={e["description"]}/></li>
+                        <li><img src={`http://localhost:5173/public/exercisePhoto/${e["photo"]}`} alt={e["description"]}/></li>
                     </ul>
                 })}
         </section>
@@ -44,10 +44,3 @@ function GetExercises () {
 }
 
 export default GetExercises;
-
-/*"id": 1,
-            "exercise_name": "Dominadas",
-            "exercise_description": "Entrenamiento de espalda",
-            "photo": "a85f05fe-4205-4240-9017-3ff6406fef2d_avatar.jpg",
-            "typology": "Pull",
-            "muscle_group": "Espalda" */

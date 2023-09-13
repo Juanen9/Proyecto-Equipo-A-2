@@ -7,6 +7,7 @@ const cors = require('cors');
 
 const userRouter = require("../src/router/userRouter");
 const exercisesRouter = require("../src/router/exercisesRouter");
+const { log } = require("console");
 
 //Creamos instancia del servidor.
 const server = express();
@@ -20,10 +21,8 @@ server.use(fileUpload());
 
 
 //Ruta completa al directorio uploads, donde subiremos los archivos estáticos.
-const staticDir = path.join(__dirname, "uploads");
-
-console.log(staticDir);
-
+const parentDir = path.resolve(__dirname, '../..');
+const staticDir = path.join(parentDir, process.env.UPLOADS_DIRECTORY)
 //Creamos un middleware para trabajar con archivos estáticos.
 server.use(express.static(staticDir));
 
