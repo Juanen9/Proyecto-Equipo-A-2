@@ -1,0 +1,624 @@
+{
+	"info": {
+		"_postman_id": "b51fc7c7-be63-4f5d-b344-b6b6a747c60a",
+		"name": "Proyecto-Equipo-A",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28582419"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "userRegistration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"\",\n    \"email\": \"\",\n    \"pwd\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3003/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "loginUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"\",\n    \"pwd\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3003/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modifyUser",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6ImFkbWluIiwiaWF0IjoxNjkxMjU2OTAwLCJleHAiOjE2OTEzNDMzMDB9.UeiHxPdl_qlpFzwz7mGSWjUnYw4tzwSYQztVGTY4oV0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "avatarUser",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "pwd",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "email2",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3003/user/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"user",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resetPassword",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"recoverCode\": \"\",\n    \"newPassword\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/reset-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recoverPassword",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjQsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjkxMDcwNDgzLCJleHAiOjE2OTExNTY4ODN9._YDy5SWpv7wvTnU-VX7r640fHU7zkNLC71zuyw1MgBU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/recover-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"recover-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "adminRegistration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"\",\n    \"email\": \"\",\n    \"pwd\": \"\",\n    \"role\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3003/user/admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"user",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Exercises",
+			"item": [
+				{
+					"name": "postExercise",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjkxMzQxNTczLCJleHAiOjE2OTE0Mjc5NzN9.xI-JXB2kmtnclJluwOu0SRAj1em_aXqxAujtBqFiZyo",
+								"description": "admin",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "typology",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "muscleGroup",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "exercisePhoto",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3003/exercise/add-exercise",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"exercise",
+								"add-exercise"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "postTraining",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjkxMzQxNTczLCJleHAiOjE2OTE0Mjc5NzN9.xI-JXB2kmtnclJluwOu0SRAj1em_aXqxAujtBqFiZyo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"\",\n    \"description\": \"\",\n    \"exercises\": [\"\",\"\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3003/exercise/add-training",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"exercise",
+								"add-training"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getExercises",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6InVzZXIiLCJpYXQiOjE2OTEzNDIzMjEsImV4cCI6MTY5MTQyODcyMX0.r9oyz9rWBf-Z6kg8RMHvXasV5fUhP1-WAGJk3BSHXbc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3003/exercise/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"exercise",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getExercisesExtended",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6InVzZXIiLCJpYXQiOjE2OTEzNDIzMjEsImV4cCI6MTY5MTQyODcyMX0.r9oyz9rWBf-Z6kg8RMHvXasV5fUhP1-WAGJk3BSHXbc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3003/exercise/list-extended/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"exercise",
+								"list-extended",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteExercises",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6InVzZXIiLCJpYXQiOjE2OTEzNDIzMjEsImV4cCI6MTY5MTQyODcyMX0.r9oyz9rWBf-Z6kg8RMHvXasV5fUhP1-WAGJk3BSHXbc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3003/exercise/delete/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"exercise",
+								"delete",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modifyExercise",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6InVzZXIiLCJpYXQiOjE2OTEzNDIzMjEsImV4cCI6MTY5MTQyODcyMX0.r9oyz9rWBf-Z6kg8RMHvXasV5fUhP1-WAGJk3BSHXbc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "exercise_name",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "exercise_description",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "exercisePhoto",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "typology",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "muscle_group",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3003/exercise/modify/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"exercise",
+								"modify",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "exerciseFilter",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6InVzZXIiLCJpYXQiOjE2OTEzNDIzMjEsImV4cCI6MTY5MTQyODcyMX0.r9oyz9rWBf-Z6kg8RMHvXasV5fUhP1-WAGJk3BSHXbc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3003/exercise/filter?typology=pull&muscleGroup=Leg",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"exercise",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "typology",
+									"value": "pull"
+								},
+								{
+									"key": "muscleGroup",
+									"value": "Leg"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFavs",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6InVzZXIiLCJpYXQiOjE2OTEzNDIzMjEsImV4cCI6MTY5MTQyODcyMX0.r9oyz9rWBf-Z6kg8RMHvXasV5fUhP1-WAGJk3BSHXbc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3003/exercise/favs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"exercise",
+								"favs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addFav",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6InVzZXIiLCJpYXQiOjE2OTEzNDIzMjEsImV4cCI6MTY5MTQyODcyMX0.r9oyz9rWBf-Z6kg8RMHvXasV5fUhP1-WAGJk3BSHXbc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3003/exercise/add-fav/RackPull",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"exercise",
+								"add-fav",
+								"RackPull"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addLike",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6InVzZXIiLCJpYXQiOjE2OTEzNDIzMjEsImV4cCI6MTY5MTQyODcyMX0.r9oyz9rWBf-Z6kg8RMHvXasV5fUhP1-WAGJk3BSHXbc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3003/exercise/add-like/DeadLift",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"exercise",
+								"add-like",
+								"DeadLift"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteLike",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6InVzZXIiLCJpYXQiOjE2OTEzNDIzMjEsImV4cCI6MTY5MTQyODcyMX0.r9oyz9rWBf-Z6kg8RMHvXasV5fUhP1-WAGJk3BSHXbc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3003/exercise/delete-like/DeadLift",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"exercise",
+								"delete-like",
+								"DeadLift"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOrderLikes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "auth",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Mywicm9sZSI6InVzZXIiLCJpYXQiOjE2OTEzNDIzMjEsImV4cCI6MTY5MTQyODcyMX0.r9oyz9rWBf-Z6kg8RMHvXasV5fUhP1-WAGJk3BSHXbc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3003/exercise/order-likes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"exercise",
+								"order-likes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
