@@ -17,7 +17,6 @@ const addLike = async (req, res) => {
     const idUser = req.userInfo.id;
 
     const { idExercise } = req.params;
-
     const [exerciseName] = await connect.query(
       `
           SELECT exercise_name 
@@ -28,7 +27,19 @@ const addLike = async (req, res) => {
     );
 
     if (exerciseName.length === 0)
-      return res.status(404).send("Ejercicio no encontrado");
+      return res.status(404).json({message: "Ejercicio no encontrado"});
+
+      const [exerciseLiked] = await connect.query(
+        `
+            SELECT *
+            FROM likes 
+            WHERE id_user=? AND id_exercise=?
+          `, 
+          [idUser, idExercise]
+      );
+      
+      if(!exerciseLiked.length === 0)
+      return res.status(403).json({message: "Ejercicio ya tiene un like"});
 
     const [like] = await connect.query(
       `
@@ -37,15 +48,6 @@ const addLike = async (req, res) => {
         `,
       [idUser, idExercise]
     );
-
-    await connect.query(
-      `
-        UPDATE exercises
-        SET liked=1 
-        WHERE id=?
-      `,[idExercise]
-    )
-
 
     connect.release();
 

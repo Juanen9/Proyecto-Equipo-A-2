@@ -159,3 +159,37 @@ export const modifyUserService = async ({data, token, userId}) => {
 
     return json.data;
 }
+
+export const addLikeService = async ({token, id}) => {
+    const response = await fetch(`http://localhost:3001/exercise/add-like/${id}`, {
+        method: "POST",
+        headers: {
+            auth: token,
+        },
+    });
+
+    const json = await response.json();
+
+    if(!response.ok){
+        throw new Error(json.message)
+    }
+
+    return json.data;
+}
+
+export const deleteLikeService = async ({token, id}) => {
+    const response = await fetch(`http://localhost:3001/exercise/delete-like/${id}`, {
+        method: "DELETE",
+        headers: {
+            auth: token,
+        },
+    });
+
+    const json = await response.json();
+
+    if(!response.ok){
+        throw new Error(json.message)
+    }
+
+    return json.data;
+}
