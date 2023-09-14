@@ -16,6 +16,7 @@ import GetFavs from './pages/Exercises/GetFavs'
 import GetOrderLikes from './pages/Exercises/GetOrderLikes'
 import AdminRegister from './pages/Users/AdminRegister'
 import LogInUser from './pages/Users/LogInUser'
+import ResetPassword from './pages/Users/ResetPassword'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -29,6 +30,7 @@ function App() {
           <Route path='/login' element={<LogInUser/>}/>
           <Route path='/admin-register' element={<AdminRegister/>}/>
           <Route path='/recover-password' element={<RecoverPassword/>}/>
+          <Route path='/reset-password' element={<ResetPassword/>}/>
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/post-exercise' element={<PostExercise/>}/>
           <Route path='/post-training' element={<PostTraining/>}/>

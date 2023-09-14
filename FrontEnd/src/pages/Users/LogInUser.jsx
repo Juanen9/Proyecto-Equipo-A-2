@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { logInUserService } from "../../services";
+import RecoverPassword from "./RecoverPassword";
 
 function LogInUser () {
 
@@ -50,6 +51,7 @@ function LogInUser () {
                     />
                 </fieldset>
                 <button type="submit">Login</button>
+                <Link to={'/recover-password'}>Has olvidado la contraseña?</Link>
                 {error ? <p>{error}</p> : null}
                 </form>
             </section>

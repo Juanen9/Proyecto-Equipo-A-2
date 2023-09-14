@@ -68,10 +68,11 @@ const modifyUser = async (req, res) => {
       `,[pwd]
     );
     
-    if(idUser != pass[0]?.id) return res.status(401).send('La contraseña no es válida.') 
+    if(idUser != pass[0]?.id) return res.status(401).json({message: "La contraseña no es válida."}) 
+
 
     const validation = schema.validate(req.body, { allowUnknown: true });
-    if (validation.error) return res.status(400).send(validation.error.message);
+    if (validation.error) return res.status(400).json({message: validation.error.message});
 
     const [id] = await connect.query(
       `
@@ -80,7 +81,7 @@ const modifyUser = async (req, res) => {
         WHERE id=?
       `,[idUser]
     );
-    if(!id.length) return res.status(400).send('No existe en la base de datos un usuario con ese id.')
+    if(!id.length) return res.status(400).json({message: "No existe en la base de datos un usuario con ese id."})
 
 
     if (req.userInfo.id !== parseInt(idUser) && req.userInfo.role !== "admin")
@@ -97,7 +98,7 @@ const modifyUser = async (req, res) => {
       extensionImage !== `jpeg` &&
       extensionImage !== `gif`
     ) {
-      return res.status(404).send(`Formato de imagen no válido`);
+      return res.status(404).json({message: "Formato de imagen no válido"});
     }
 
       const avatarUser = await savePhoto(req.files.avatarUser, "/avatarUser");
@@ -112,7 +113,7 @@ const modifyUser = async (req, res) => {
     };
 
     if (email !== email2)
-      return res.status(404).send("Los correos no coinciden.");
+      return res.status(404).json({message: "Los correos no coinciden."});
 
     const [mail] = await connect.query(
       `
@@ -124,7 +125,7 @@ const modifyUser = async (req, res) => {
     );
 
     if (mail.length > 0)
-      return res.status(404).send("Este email ya está registrado.");
+      return res.status(404).json({message: "Este email ya está registrado."});
 
     const modifyCode = uuidv4();
 
@@ -150,8 +151,8 @@ const modifyUser = async (req, res) => {
     );
     }
     if(pwd2){
-      if(pwd2 === pwd) return res.status(401).send('La contraseña no puede ser igual a la contraseña antigua.');
-      if(pwd2 != pwd3) return res.status(401).send('No coinciden las contraseñas');
+      if(pwd2 === pwd) return res.status(401).json({message: "La contraseña no puede ser igual a la contraseña antigua."});
+      if(pwd2 != pwd3) return res.status(401).json({message: "No coinciden las contraseñas"});
     const [userPassword] = await connect.query(
       `
                 UPDATE users
@@ -191,7 +192,7 @@ const modifyUser = async (req, res) => {
     }
     connect.release();
 
-    res.status(200).send({
+    res.status(200).json({
       status: "OK",
       message: "Usuario modificado",
       //data: user,

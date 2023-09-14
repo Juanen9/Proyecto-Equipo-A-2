@@ -104,3 +104,58 @@ export const getAllExercisesService = async ({token}) => {
     
       return json.data;
 }
+
+export const recoverPasswordService = async ({email, token}) => {
+    const response = await fetch("http://localhost:3001/user/recover-password", {
+        method: "POST",
+        body: JSON.stringify({ email }),
+        headers: {
+            auth: token,
+            'Content-Type': 'application/json',
+        },
+    });
+
+    const json = await response.json();
+
+    if(!response.ok){
+        throw new Error(json.message)
+    }
+
+    return json.data;
+}
+
+export const resetPasswordService = async ({recoverCode, newPassword, newPassword1}) => {
+    const response = await fetch("http://localhost:3001/user/reset-password", {
+        method: "POST",
+        body: JSON.stringify({ recoverCode, newPassword, newPassword1 }),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+
+    const json = await response.json();
+
+    if(!response.ok){
+        throw new Error(json.message)
+    }
+
+    return json.data;
+};
+
+export const modifyUserService = async ({data, token, userId}) => {
+    const response = await fetch(`http://localhost:3001/user/${userId}`, {
+        method: "PUT",
+        body: data,
+        headers: {
+            auth: token,
+        },
+    });
+
+    const json = await response.json();
+
+    if(!response.ok){
+        throw new Error(json.message)
+    }
+
+    return json.data;
+}
