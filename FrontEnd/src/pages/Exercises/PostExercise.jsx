@@ -19,7 +19,7 @@ function PostExercise () {
 
             e.target.reset();
             setImage(null);
-            setError(null)
+            setError(null);
         } catch (error) {
             setError(error.message);
         }finally{

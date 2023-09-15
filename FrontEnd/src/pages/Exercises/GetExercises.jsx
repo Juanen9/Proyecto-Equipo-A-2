@@ -1,9 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { addLikeService, deleteLikeService, getAllExercisesService } from "../../services";
+import { addLikeService, deleteLikeService, getAllExercisesExtendedService, getAllExercisesService } from "../../services";
+import { useNavigate } from "react-router-dom";
 
 function GetExercises () {
 
+    const navigate = useNavigate();
     const {token} = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
@@ -39,16 +41,29 @@ function GetExercises () {
             setError(error.message);
         }
     }
+
+    const handleImage = async (id) => {
+        try {
+            setLoading(true);
+            navigate(`/get-exercises-extended/${id}`)
+            setExercises(data);
+        } catch (error) {
+            setError(error.message);
+        }finally{
+            setLoading(false);
+        }
+    }
+    
     
 
     return (
         <section>
             <h1>Exercise List</h1>
                 {exercises.map((e) => {
-                    return <ul>
+                    return <ul key={e.id}> 
                         <li>{e["exercise_name"]}</li>
                         <li>{e["exercise_description"]}</li>
-                        <li><img src={`http://localhost:5173/public/exercisePhoto/${e["photo"]}`} alt={e["description"]}/></li>
+                        <li><img onClick={()=>handleImage(e.id)} src={`http://localhost:5173/public/exercisePhoto/${e["photo"]}`} alt={e["description"]}/></li>
                         <button onClick={()=>handleLike(e.id)}>❤</button>
                     </ul>
                 })}

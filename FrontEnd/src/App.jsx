@@ -35,7 +35,7 @@ function App() {
           <Route path='/post-exercise' element={<PostExercise/>}/>
           <Route path='/post-training' element={<PostTraining/>}/>
           <Route path='/get-exercises' element={<GetExercises/>}/>
-          <Route path='/get-exercises-extended' element={<GetExercisesExtended/>}/>
+          <Route path='/get-exercises-extended/:idParam' element={<GetExercisesExtended/>}/>
           <Route path='/modify-exercise' element={<ModifyExercise/>}/>
           <Route path='/favs' element={<GetFavs/>}/>
           <Route path='/order-likes' element={<GetOrderLikes/>}/>

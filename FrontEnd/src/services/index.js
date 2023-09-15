@@ -105,6 +105,22 @@ export const getAllExercisesService = async ({token}) => {
       return json.data;
 }
 
+export const getAllExercisesExtendedService = async ({token, idParam}) => {
+    const response = await fetch(`http://localhost:3001/exercise/list-extended/${idParam}`, {
+        headers: {
+            auth: token
+        }
+    });
+
+    const json = await response.json();
+
+    if (!response.ok) {
+        throw new Error(json.message);
+      }
+    
+      return json.data;
+}
+
 export const recoverPasswordService = async ({email, token}) => {
     const response = await fetch("http://localhost:3001/user/recover-password", {
         method: "POST",
@@ -160,6 +176,24 @@ export const modifyUserService = async ({data, token, userId}) => {
     return json.data;
 }
 
+export const modifyExerciseService = async ({data, token, exerciseId}) => {
+    const response = await fetch(`http://localhost:3001/exercise/modify/${exerciseId}`, {
+        method: "PUT",
+        body: data,
+        headers: {
+            auth: token,
+        },
+    });
+
+    const json = await response.json();
+
+    if(!response.ok){
+        throw new Error(json.message)
+    }
+
+    return json.data;
+}
+
 export const addLikeService = async ({token, id}) => {
     const response = await fetch(`http://localhost:3001/exercise/add-like/${id}`, {
         method: "POST",
@@ -179,6 +213,23 @@ export const addLikeService = async ({token, id}) => {
 
 export const deleteLikeService = async ({token, id}) => {
     const response = await fetch(`http://localhost:3001/exercise/delete-like/${id}`, {
+        method: "DELETE",
+        headers: {
+            auth: token,
+        },
+    });
+
+    const json = await response.json();
+
+    if(!response.ok){
+        throw new Error(json.message)
+    }
+
+    return json.data;
+}
+
+export const deleteExerciseService = async ({token, id}) => {
+    const response = await fetch(`http://localhost:3001/exercise/delete/${id}`, {
         method: "DELETE",
         headers: {
             auth: token,

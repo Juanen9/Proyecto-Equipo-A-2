@@ -11,7 +11,7 @@ function Profile  ()  {
   const [pwd, setPwd] = useState("");
   const [pwd2, setPwd2] = useState("");
   const [pwd3, setPwd3] = useState("");
-  const [image, setImage] = useState(null);
+  const [avatarUser, setAvatarUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -23,10 +23,8 @@ function Profile  ()  {
 
       setLoading(true);
 
-       // Crear un objeto FormData
     const data = new FormData();
 
-    // Agregar campos no vacíos al FormData
     if (userId) data.append("userId", userId);
     if (name) data.append("name", name);
     if (email) data.append("email", email);
@@ -34,12 +32,13 @@ function Profile  ()  {
     if (pwd) data.append("pwd", pwd);
     if (pwd2) data.append("pwd2", pwd2);
     if (pwd3) data.append("pwd3", pwd3);
-    if (image) data.append("image", image);
+    if (avatarUser) data.append("avatarUser", avatarUser);
+
 
       await modifyUserService({ data, token, userId });
 
       e.target.reset();
-      setImage(null);
+      setAvatarUser(null);
     } catch (error) {
       setError(error.message);
     } finally {
@@ -49,7 +48,7 @@ function Profile  ()  {
   return (
     <>
       <h1>Edit Profile</h1>
-      <form onSubmit={handleForm}>
+      <form onSubmit={handleForm} encType="multipart/form-data">
       <fieldset>
           <label htmlFor="userId">User Id</label>
           <input type="number" name="userId" id="userId" required onChange={(e) => setUserId(e.target.value)}/>
@@ -79,18 +78,18 @@ function Profile  ()  {
           <input type="password" name="pwd3" id="pwd3" onChange={(e) => setPwd3(e.target.value)}/>
         </fieldset>
         <fieldset>
-          <label htmlFor="image">Image</label>
+          <label htmlFor="avatarUser">Avatar User</label>
           <input
             type="file"
-            name="image"
-            id="image"
+            name="avatarUser"
+            id="avatarUser"
             accept={"image/*"}
-            onChange={(e) => setImage(e.target.files[0])}
+            onChange={(e) => setAvatarUser(e.target.files[0])}
           />
-          {image ? (
+          {avatarUser ? (
             <figure>
               <img
-                src={URL.createObjectURL(image)}
+                src={URL.createObjectURL(avatarUser)}
                 style={{ width: "100px" }}
                 alt="Preview"
               />
