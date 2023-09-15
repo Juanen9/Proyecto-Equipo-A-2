@@ -17,7 +17,8 @@ const {
   getOrderLikes,
   addFav,
   getFav,
-  deleteFavs
+  deleteFavs,
+  getLikes
 } = require("../controllers/exercises");
 
 router.get("/exercise/list", verifyToken, getExercises);
@@ -29,6 +30,7 @@ router.get(
 router.get("/exercise/filter", verifyToken, exerciseFilter);
 router.get("/exercise/order-likes", verifyToken, getOrderLikes);
 router.get('/exercise/favs', verifyToken, getFav);
+router.get('/exercise/likes', verifyToken, getLikes);
 router.post("/exercise/add-training", verifyToken, postTraining);
 router.post("/exercise/add-exercise", verifyToken, postExercise);
 router.post("/exercise/add-like/:idExercise", verifyToken, addLike);

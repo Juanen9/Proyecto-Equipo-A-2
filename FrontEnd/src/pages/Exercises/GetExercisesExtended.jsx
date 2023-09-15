@@ -1,6 +1,6 @@
     import { useContext, useEffect, useState } from "react";
     import { AuthContext } from "../../context/AuthContext";
-    import { addLikeService, deleteExerciseService, deleteLikeService, getAllExercisesExtendedService } from "../../services";
+    import { addFavService, addLikeService, deleteExerciseService, deleteFavService, deleteLikeService, getAllExercisesExtendedService, getFavsService } from "../../services";
     import { useNavigate, useParams } from "react-router-dom";
 
     function GetExercisesExtended () {
@@ -11,6 +11,7 @@
         const [error, setError] = useState("");
         const [exercises, setExercises] = useState([]);
         const [liked, setLiked] = useState([]);
+        const [fav, setFav] = useState([]);
         const {idParam} = useParams();
         const [deleted, setDeleted] = useState(false);
 
@@ -30,6 +31,25 @@
             fetchData();
         },[])
 
+
+        const fetchFavs = async () => {
+            try {
+                setLoading(true);
+                const data = await getFavsService({token});
+                const idFav = data.map((e) => e.id_exercise)
+                setFav([...idFav])
+            } catch (error) {
+                setError(error.message);
+            }finally{
+                setLoading(false);
+            }
+        }
+    
+        useEffect(() => {
+            fetchFavs();
+        },[])
+
+
         const handleLike = async (id) =>{
             try {
                 if(!liked.includes(id)){
@@ -43,6 +63,20 @@
                 setError(error.message);
             }
         }
+        const handleFav = async (id) =>{
+            try {
+                if(!fav.includes(id)){
+                    await addFavService({token, id});
+                    setFav(prevFav => [...prevFav, id]);
+                } else {
+                    await deleteFavService({token, id});
+                    setFav(prevFav => prevFav.filter(exerciseId => exerciseId !== id));
+                }
+            } catch (error) {
+                setError(error.message);
+            }
+        }
+
 
         const handleDelete = async (id) => {
             try {
@@ -73,6 +107,7 @@
                         <li>{exercises[0]["exercise_description"]}</li>
                         <li><img src={`http://localhost:5173/public/exercisePhoto/${exercises[0]["photo"]}`} alt={exercises["description"]}/></li>
                         <button onClick={()=>handleLike(exercises[0].id)}>❤</button>
+                        <button onClick={()=>handleFav(exercises[0].id)}>⭐</button>
                         <button onClick={handleReturn}>Back to Exercise List</button>
                     </ul>) : deleted ?(
                 <p>Ejercicio eliminado</p>

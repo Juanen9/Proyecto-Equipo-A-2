@@ -244,3 +244,69 @@ export const deleteExerciseService = async ({token, id}) => {
 
     return json.data;
 }
+
+export const addFavService = async ({token, id}) => {
+    const response = await fetch(`http://localhost:3001/exercise/add-fav/${id}`, {
+        method: "POST",
+        headers: {
+            auth: token,
+        },
+    });
+
+    const json = await response.json();
+
+    if(!response.ok){
+        throw new Error(json.message)
+    }
+
+    return json.data;
+}
+
+export const deleteFavService = async ({token, id}) => {
+    const response = await fetch(`http://localhost:3001/exercise/delete-favs/${id}`, {
+        method: "DELETE",
+        headers: {
+            auth: token,
+        },
+    });
+
+    const json = await response.json();
+
+    if(!response.ok){
+        throw new Error(json.message)
+    }
+
+    return json.data;
+}
+
+export const getFavsService = async ({token}) => {
+    const response = await fetch(`http://localhost:3001/exercise/favs`, {
+        headers: {
+            auth: token
+        }
+    });
+
+    const json = await response.json();
+
+    if (!response.ok) {
+        throw new Error(json.message);
+      }
+    
+      return json.data;
+}
+
+export const getLikesService = async ({token}) => {
+    const response = await fetch(`http://localhost:3001/exercise/likes`, {
+        headers: {
+            auth: token
+        }
+    });
+
+    const json = await response.json();
+
+    if (!response.ok) {
+        throw new Error(json.message);
+      }
+    
+      return json.data;
+}

@@ -1,8 +1,8 @@
 const getDB = require('../../database/db');
 
-//Permite al usuario logueado consultar que ejercicios tiene como favoritos.
+//Permite al usuario logueado consultar que ejercicios tiene como likes.
 
-const getFav = async(req, res) => {
+const getLikes = async(req, res) => {
     let connect;
     try {
         connect = await getDB();
@@ -13,22 +13,22 @@ const getFav = async(req, res) => {
                   `
           );
 
-        const [fav] = await connect.query(
+        const [like] = await connect.query(
             `
                 SELECT *
                 FROM exercises e
-                INNER JOIN favs f
-                ON f.id_exercise=e.id
+                INNER JOIN likes l
+                ON l.id_exercise=e.id
             `
         );
 
-        if(fav.length === 0) return res.status(404).json('No se encontraron ejercicios en el apartado favoritos.');
+        if(like.length === 0) return res.status(404).json('No se encontraron ejercicios en el apartado likes.');
 
         connect.release();
 
         res.status(200).send({
             status: 'OK',
-            data: fav
+            data: like
         });
     } catch (error) {
         console.error(error);
@@ -39,4 +39,4 @@ const getFav = async(req, res) => {
     }
 };
 
-module.exports = getFav;
+module.exports = getLikes;

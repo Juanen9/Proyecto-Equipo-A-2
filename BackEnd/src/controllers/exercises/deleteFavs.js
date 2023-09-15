@@ -24,7 +24,7 @@ const deleteFavs = async (req, res) => {
     );
 
     if (exerciseName.length === 0)
-      return res.status(404).send("Ejercicio no encontrado");
+      return res.status(404).json({message: "Ejercicio no encontrado"});
 
     const [deletefav] = await connect.query(
       `

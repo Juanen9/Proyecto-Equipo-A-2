@@ -11,6 +11,7 @@ const getOrderLikes = require("./getOrderLikes");
 const addFav = require('./addFav');
 const getFav = require('./getFav');
 const deleteFavs = require ('./deleteFavs');
+const getLikes = require('./getLikes');
 
 module.exports = {
   postExercise,
@@ -25,5 +26,6 @@ module.exports = {
   getOrderLikes,
   addFav,
   getFav,
-  deleteFavs
+  deleteFavs,
+  getLikes
 };

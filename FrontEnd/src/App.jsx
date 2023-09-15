@@ -39,6 +39,7 @@ function App() {
           <Route path='/modify-exercise' element={<ModifyExercise/>}/>
           <Route path='/favs' element={<GetFavs/>}/>
           <Route path='/order-likes' element={<GetOrderLikes/>}/>
+          <Route path='/*' element={<p>Página no encontrada</p>}/>
         </Routes>
       <Footer/>
     </>
