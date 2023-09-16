@@ -1,6 +1,6 @@
     import { useContext, useEffect, useState } from "react";
     import { AuthContext } from "../../context/AuthContext";
-    import { addFavService, addLikeService, deleteExerciseService, deleteFavService, deleteLikeService, getAllExercisesExtendedService, getFavsService } from "../../services";
+    import { addFavService, addLikeService, deleteExerciseService, deleteFavService, deleteLikeService, getAllExercisesExtendedService, getFavsService, getLikesService } from "../../services";
     import { useNavigate, useParams } from "react-router-dom";
 
     function GetExercisesExtended () {
@@ -29,6 +29,23 @@
 
         useEffect(() => {
             fetchData();
+        },[])
+
+        const fetchLikes = async () => {
+            try {
+                setLoading(true);
+                const data = await getLikesService({token});
+                const idLike = data.map((e) => e.id_exercise)
+                setLiked([...idLike])
+            } catch (error) {
+                setError(error.message);
+            }finally{
+                setLoading(false);
+            }
+        }
+    
+        useEffect(() => {
+            fetchLikes();
         },[])
 
 

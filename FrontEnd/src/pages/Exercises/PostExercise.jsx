@@ -1,6 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { postExerciseService } from "../../services";
+import lottie from "lottie-web"; // Importa lottie-web
+import animationData from "../../assets/animation_lmlvl2he.json";
 
 function PostExercise () {
 
@@ -8,9 +10,34 @@ function PostExercise () {
     const [image, setImage] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
+
+    useEffect(() => {
+      if (loading) {
+        // Configura la animación cuando loading sea true
+        const container = document.getElementById("lottie-container");
+        const animation = lottie.loadAnimation({
+          container,
+          animationData, // Tu archivo de animación JSON importado
+          renderer: "svg", // Puedes elegir "canvas" o "html" según tus necesidades
+          loop: true,
+          autoplay: true,
+        });
+  
+        // Detén la animación cuando ya no sea necesaria (por ejemplo, después de completar la carga)
+        return () => {
+          animation.stop();
+          animation.destroy();
+        };
+      }
+    }, [loading]);
 
     const handleForm = async (e) => {
         e.preventDefault();
+
+        setLoading(true); 
+
+        setTimeout(async () => {
         try {
             setLoading(true);
             const data = new FormData(e.target);
@@ -20,17 +47,29 @@ function PostExercise () {
             e.target.reset();
             setImage(null);
             setError(null);
+            setSuccessMessage("Ejercicio añadido correctamente 👍");
         } catch (error) {
             setError(error.message);
         }finally{
             setLoading(false);
+            setTimeout(() => {
+              setSuccessMessage("");
+            }, 3000);
         }
+      }, 5000);
     }
 
 
     return (
+      <section>
+        {loading ? (
+        <div id="lottie-container" style={{ width: "100px", height: "100px" }}>
+          {/* Este div contendrá la animación mientras carga */}
+        </div>
+        ) : (
         <>
       <h1>Add new Exercise</h1>
+      {successMessage && <p>{successMessage}</p>}
       <form onSubmit={handleForm}>
         <fieldset>
           <label htmlFor="name">Name</label>
@@ -72,7 +111,10 @@ function PostExercise () {
         {loading ? <p>posting exercise...</p> : null}
       </form>
     </>
-    )
+    )}
+    </section>
+    );
 }
+
 
 export default PostExercise;
