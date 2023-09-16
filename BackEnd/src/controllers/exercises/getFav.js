@@ -4,6 +4,7 @@ const getDB = require('../../database/db');
 
 const getFav = async(req, res) => {
     let connect;
+    const idUser = req.userInfo.id
     try {
         connect = await getDB();
 
@@ -18,8 +19,9 @@ const getFav = async(req, res) => {
                 SELECT *
                 FROM exercises e
                 INNER JOIN favs f
-                ON f.id_exercise=e.id
-            `
+                ON f.id_exercise=e.id AND f.id_user=?
+            `,
+            [idUser]
         );
 
         if(fav.length === 0) return res.status(404).json('No se encontraron ejercicios en el apartado favoritos.');

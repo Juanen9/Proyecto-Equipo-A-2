@@ -11,6 +11,9 @@ function GetExercises () {
     const [error, setError] = useState("");
     const [exercises, setExercises] = useState([]);
     const [liked, setLiked] = useState([])
+    const [filter, setFilter] = useState("")
+
+    console.log(liked)
 
     const fetchData = async () => {
         try {
@@ -74,19 +77,34 @@ function GetExercises () {
         }
     }
     
-    
+    const handleFilter = (e) => {
+        const data = e.target.value
+        setFilter(data)
+    }
+
+    const filterExercises = exercises.filter((exercise) => 
+        exercise["exercise_name"].toLowerCase().includes(filter.toLowerCase())||
+        exercise["typology"].toLowerCase().includes(filter.toLowerCase())||
+        exercise["muscle_group"].toLowerCase().includes(filter.toLowerCase())
+    )
 
     return (
         <section>
             <h1>Exercise List</h1>
-                {exercises.map((e) => {
+            <form>
+                <fieldset>    
+                    <label htmlFor="filter">Exercise Filter</label>
+                    <input id="filter" name="filter" type="text" placeholder="Exercise typology..." onChange={handleFilter}></input>
+                </fieldset>
+            </form>
+                {filterExercises.length > 0 ? filterExercises.map((e) => {
                     return <ul key={e.id}> 
                         <li>{e["exercise_name"]}</li>
                         <li>{e["exercise_description"]}</li>
                         <li><img onClick={()=>handleImage(e.id)} src={`http://localhost:5173/public/exercisePhoto/${e["photo"]}`} alt={e["description"]}/></li>
                         <button onClick={()=>handleLike(e.id)}>❤</button>
                     </ul>
-                })}
+                }):<p>Exercises not found</p>}
         </section>
     )
 }

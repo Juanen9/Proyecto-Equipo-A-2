@@ -4,6 +4,7 @@ const getDB = require('../../database/db');
 
 const getLikes = async(req, res) => {
     let connect;
+    const idUser = req.userInfo.id
     try {
         connect = await getDB();
 
@@ -16,10 +17,9 @@ const getLikes = async(req, res) => {
         const [like] = await connect.query(
             `
                 SELECT *
-                FROM exercises e
-                INNER JOIN likes l
-                ON l.id_exercise=e.id
-            `
+                FROM likes WHERE id_user=?
+            `,
+            [idUser]
         );
 
         if(like.length === 0) return res.status(404).json('No se encontraron ejercicios en el apartado likes.');
