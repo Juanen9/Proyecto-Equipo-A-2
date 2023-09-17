@@ -17,6 +17,8 @@ import GetOrderLikes from './pages/Exercises/GetOrderLikes'
 import AdminRegister from './pages/Users/AdminRegister'
 import LogInUser from './pages/Users/LogInUser'
 import ResetPassword from './pages/Users/ResetPassword'
+import EditPassword from './pages/Users/EditPassword'
+import EditMail from './pages/Users/EditEmail'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -31,6 +33,8 @@ function App() {
           <Route path='/admin-register' element={<AdminRegister/>}/>
           <Route path='/recover-password' element={<RecoverPassword/>}/>
           <Route path='/reset-password' element={<ResetPassword/>}/>
+          <Route path='/edit-password' element={<EditPassword/>}/>
+          <Route path='/edit-email' element={<EditMail/>}/>
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/post-exercise' element={<PostExercise/>}/>
           <Route path='/post-training' element={<PostTraining/>}/>
