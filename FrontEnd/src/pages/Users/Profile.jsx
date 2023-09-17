@@ -4,7 +4,6 @@ import { getUserDataService, modifyUserService } from "../../services";
 
 function Profile() {
   const { token } = useContext(AuthContext);
-  const [userId, setUserId] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [email2, setEmail2] = useState("");
@@ -15,7 +14,6 @@ function Profile() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [prevValue, setPrevValue] = useState("");
-
 
   const fetchData = async () => {
     try {
@@ -41,7 +39,6 @@ function Profile() {
 
       const data = new FormData();
 
-      if (userId) data.append("userId", userId);
       if (name) data.append("name", name);
       if (email) data.append("email", email);
       if (email2) data.append("email2", email2);
@@ -50,10 +47,12 @@ function Profile() {
       if (pwd3) data.append("pwd3", pwd3);
       if (avatarUser) data.append("avatarUser", avatarUser);
 
+      const userId = prevValue[0].id
       await modifyUserService({ data, token, userId });
 
       e.target.reset();
       setAvatarUser(null);
+      setError(null);
     } catch (error) {
       setError(error.message);
     } finally {
@@ -65,10 +64,6 @@ function Profile() {
     <>
       <h1>Edit Profile</h1>
       <form onSubmit={handleForm} encType="multipart/form-data">
-        <fieldset>
-          <label htmlFor="userId">User Id</label>
-          <input type="number" name="userId" id="userId" required onChange={(e) => setUserId(e.target.value)} placeholder={prevValue[0] ? prevValue[0].id : ""} />
-        </fieldset>
         <fieldset>
           <label htmlFor="name">Name</label>
           <input type="text" name="name" id="name" onChange={(e) => setName(e.target.value)} placeholder={prevValue[0] ? prevValue[0]["user_name"] : ""} />
