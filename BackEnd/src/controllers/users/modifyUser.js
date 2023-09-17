@@ -87,7 +87,7 @@ const modifyUser = async (req, res) => {
     if (req.userInfo.id !== parseInt(idUser) && req.userInfo.role !== "admin")
       return res
         .status(401)
-        .send("No tienes permisos para realizar esta modificación.");
+        .json({message: "No tienes permisos para realizar esta modificación."});
 
     if (req.files && req.files.avatarUser) {
 

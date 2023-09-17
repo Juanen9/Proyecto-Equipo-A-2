@@ -5,6 +5,7 @@ const adminRegistration = require("./adminRegistration");
 const modifyUser = require("./modifyUser");
 const recoverPassword = require("./recoverPassword");
 const resetPassword = require("./resetPassword");
+const getUserData = require("../users/getUserData");
 
 module.exports = {
   userRegistration,
@@ -14,4 +15,5 @@ module.exports = {
   modifyUser,
   recoverPassword,
   resetPassword,
+  getUserData
 };

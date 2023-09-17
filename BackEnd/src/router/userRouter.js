@@ -12,9 +12,11 @@ const {
   modifyUser,
   recoverPassword,
   resetPassword,
+  getUserData
 } = require("../controllers/users");
 
 router.get("/user/validate/:regCode", activateUser);
+router.get("/get-user", verifyToken, getUserData)
 router.post("/user", userRegistration);
 router.post("/user/admin", adminRegistration);
 router.post("/user/login", loginUser);
