@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { logInUserService } from "../../services";
-import RecoverPassword from "./RecoverPassword";
 import lottie from "lottie-web"; // Importa lottie-web
 import animationData from "../../assets/animation_lmltug6s.json"; // Importa tu archivo de animación JSON
 

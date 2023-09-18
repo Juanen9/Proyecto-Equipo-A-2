@@ -23,6 +23,7 @@ const modifyUser = async (req, res) => {
     const schema = joi.object().keys({
       name: joi.string(),
       email: joi.string().email(),
+      email2: joi.string().email(),
       pwd: joi
         .string()
         .min(8)
@@ -115,19 +116,32 @@ const modifyUser = async (req, res) => {
     if (email !== email2)
       return res.status(404).json({message: "Los correos no coinciden."});
 
-    const [mail] = await connect.query(
+    // const [mail] = await connect.query(
+    //   `
+    //             SELECT email
+    //             FROM users   => esto creo que non se vai usar
+    //             WHERE email=?
+    //         `,
+    //   [email]
+    // );
+
+    // if (mail.length > 0)
+    //   return res.status(404).json({message: "Este email ya está registrado."});
+
+      const [mail2] = await connect.query(
       `
-                SELECT email
+                SELECT email2
                 FROM users
                 WHERE email=?
             `,
-      [email]
+      [email2]
     );
 
-    if (mail.length > 0)
-      return res.status(404).json({message: "Este email ya está registrado."});
+    if (mail2.length > 0)
+      return res.status(404).json({message: "Este email ya está registrado."}); 
 
     const modifyCode = uuidv4();
+    const emailCode = uuidv4(); 
 
     if(name){
     const [userName] = await connect.query(
@@ -140,16 +154,18 @@ const modifyUser = async (req, res) => {
     );
     }
 
-    if(email){
+    if(email2){
      [userEmail] = await connect.query(
       `
                 UPDATE users
-                SET email=?, regCode=?
+                SET email2=?, emailCode=?
                 WHERE id=?
             `,
-      [email, modifyCode, idUser]
+      [email2, emailCode, idUser]
     );
+    
     }
+    
     if(pwd2){
       if(pwd2 === pwd) return res.status(401).json({message: "La contraseña no puede ser igual a la contraseña antigua."});
       if(pwd2 != pwd3) return res.status(401).json({message: "No coinciden las contraseñas"});
@@ -167,20 +183,24 @@ const modifyUser = async (req, res) => {
 
     const [sendEmail] = await connect.query(
       `
-        SELECT email
+        SELECT email, email2
         from users
         WHERE id=?
       `,[idUser]
     )
-
+    
 
     const bodyMail = `Acabas de modificar la password en tu cuenta del Gimnasio del Equipo-A.
     Pulsa el siguiente enlace para activar tu cuenta: ${process.env.PUBLIC_HOST}${modifyCode}`;
 
+    const bodyMail2 = `Acabas de modificar el email en tu cuenta del Gimnasio del Equipo-A.
+    Pulsa el siguiente enlace para activar tu correo: ${process.env.PUBLIC_HOST_MAIL}${emailCode}`; 
+
     const subject = `Correo de verificación de cuenta en el Gimnasio del Equipo-A tras cambio de password.`
 
-    if (email || pwd2) {
-      // Solo si hay un nuevo correo electrónico y al menos una de las siguientes condiciones es verdadera: nombre o contraseña se han actualizado
+    const subject2 = `Correo de verificación de cuenta en el Gimnasio del Equipo-A tras cambio de email.` 
+
+    if (pwd2) {
       const [active] = await connect.query(
         `
           UPDATE users
@@ -188,7 +208,22 @@ const modifyUser = async (req, res) => {
           WHERE id=?
         `,[idUser]
       )
-      sendMail(sendEmail[0].email,  subject, bodyMail);
+      if (sendEmail[0].email) {
+        sendMail(sendEmail[0].email, subject, bodyMail);
+      }
+    }
+
+    if (email2) {
+      const [active] = await connect.query(
+        `
+          UPDATE users
+          SET active = 0
+          WHERE id=?
+    `,[idUser]
+      )
+      if (sendEmail[0].email2) {
+        sendMail(sendEmail[0].email2, subject2, bodyMail2);
+      }
     }
     connect.release();
 

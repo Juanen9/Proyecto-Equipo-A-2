@@ -34,12 +34,11 @@ function PostExercise () {
 
     const handleForm = async (e) => {
         e.preventDefault();
-
-        setLoading(true); 
+        setLoading(true);
 
         setTimeout(async () => {
         try {
-            setLoading(true);
+  
             const data = new FormData(e.target);
             await postExerciseService({data, token});
 
@@ -50,6 +49,9 @@ function PostExercise () {
             setSuccessMessage("Ejercicio añadido correctamente 👍");
         } catch (error) {
             setError(error.message);
+            setTimeout(() => {
+              setError(null);
+            }, 5000);
         }finally{
             setLoading(false);
             setTimeout(() => {
