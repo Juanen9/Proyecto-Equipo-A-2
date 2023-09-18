@@ -59,7 +59,7 @@ const userRegistration = async (req, res) => {
     if (nameExists.length !== 0)
       return res
         .status(400)
-        .send("Ya existe ese nombre de usuario.");
+        .json("Ya existe ese nombre de usuario.");
 
     const [userExists] = await connect.query(
       `
@@ -71,7 +71,7 @@ const userRegistration = async (req, res) => {
     );
 
     if (userExists.length > 0)
-      return res.status(400).send({
+      return res.status(400).json({
         status: "ERROR",
         message: "El usuario con ese correo electrónico ya existe.",
       });
@@ -97,7 +97,7 @@ const userRegistration = async (req, res) => {
 
     connect.release();
 
-    res.status(200).send({
+    res.status(200).json({
       status: "OK",
       message: "Usuario registrado con éxito",
       data: user,

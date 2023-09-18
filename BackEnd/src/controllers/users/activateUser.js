@@ -26,7 +26,7 @@ const activateUser = async (req, res) => {
     if (user.length === 0)
       res
         .status(401)
-        .send("No se encontró a ningún usuario con ese código de registro");
+        .json({message: "No se encontró a ningún usuario con ese código de registro"});
 
     await connect.query(
       `

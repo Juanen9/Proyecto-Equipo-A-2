@@ -326,3 +326,30 @@ export const getUserDataService = async ({token}) => {
     
       return json.data;
 }
+
+
+export const validateUserService = async ({regCode}) => {
+    const response = await fetch(`http://localhost:3001/user/validate/${regCode}`, {
+    });
+
+    const json = await response.json();
+
+    if (!response.ok) {
+        throw new Error(json.message);
+      }
+    
+      return json.data;
+}
+
+export const validateEmailService = async ({emailCode}) => {
+    const response = await fetch(`http://127.0.0.1:3001/user/email-validate/${emailCode}`, {
+    });
+
+    const json = await response.json();
+
+    if (!response.ok) {
+        throw new Error(json.message);
+      }
+    
+      return json.data;
+}
