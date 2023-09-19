@@ -4,6 +4,7 @@ import { getUserDataService, modifyUserService } from "../../services";
 
 function Profile() {
   const { token } = useContext(AuthContext);
+  const [pwd, setPwd] = useState("");
   const [name, setName] = useState("");
   const [avatarUser, setAvatarUser] = useState(null); // Estado para la imagen de perfil
   const [loading, setLoading] = useState(false);
@@ -36,6 +37,7 @@ function Profile() {
 
       if (name) data.append("name", name);
       if (avatarUser) data.append("avatarUser", avatarUser);
+      if (pwd) data.append("pwd", pwd);
       const userId = prevValue[0].id
       await modifyUserService({ data, token, userId });
 
@@ -53,6 +55,10 @@ function Profile() {
     <>
       <h1>Edit Profile</h1>
       <form onSubmit={handleForm} encType="multipart/form-data">
+      <fieldset>
+          <label htmlFor="pwd">Password</label>
+          <input required type="password" name="pwd" id="pwd" onChange={(e) => setPwd(e.target.value)} />
+        </fieldset>
         <fieldset>
           <label htmlFor="name">Name</label>
           <input type="text" name="name" id="name" onChange={(e) => setName(e.target.value)} placeholder={prevValue[0] ? prevValue[0]["user_name"] : ""} />

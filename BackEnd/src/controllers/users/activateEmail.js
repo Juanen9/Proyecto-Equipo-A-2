@@ -37,7 +37,7 @@ const activateEmail = async (req, res) => {
     if (user.length === 0)
       res
         .status(401)
-        .send("No se encontró a ningún usuario con ese código de email");
+        .json({message:"No se encontró a ningún usuario con ese código de email"});
 
 
     await connect.query(
@@ -51,7 +51,7 @@ const activateEmail = async (req, res) => {
 
     connect.release();
 
-    res.status(200).send({
+    res.status(200).json({
       status: "OK",
       message: "Usuario validado correctamente",
     });

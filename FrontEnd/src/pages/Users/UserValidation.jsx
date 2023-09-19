@@ -7,7 +7,7 @@ function UserValidation () {
 
     const [loading, setLoading] = useState("")
     const [error, setError] = useState("")
-    const {regCode} = useParams()
+    const {regCode} = useParams ()
     const [validate, setValidate] =useState()
     let counter = 0;    
 

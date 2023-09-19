@@ -38,7 +38,7 @@ const activateUser = async (req, res) => {
       [regCode]
     );
 
-    res.status(200).send({
+    res.status(200).json({
       status: "OK",
       message: "Usuario validado correctamente"
     });

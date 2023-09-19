@@ -14,6 +14,8 @@ function EditMail() {
   const [prevValue, setPrevValue] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
+  console.log(prevValue)
+
 
   useEffect(() => {
     if (loading) {
@@ -67,7 +69,7 @@ function EditMail() {
 
       e.target.reset();
       setError(null);
-      setSuccessMessage("Email modificado con éxito 👍");
+      setSuccessMessage("Email de confirmación enviado");
     } catch (error) {
       setError(error.message);
       setTimeout(() => {

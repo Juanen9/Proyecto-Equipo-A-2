@@ -20,6 +20,7 @@ import ResetPassword from './pages/Users/ResetPassword'
 import EditPassword from './pages/Users/EditPassword'
 import EditMail from './pages/Users/EditEmail'
 import UserValidation from './pages/Users/UserValidation'
+import EmailValidation from './pages/Users/EmailValidation'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -45,6 +46,7 @@ function App() {
           <Route path='/favs' element={<GetFavs/>}/>
           <Route path='/order-likes' element={<GetOrderLikes/>}/>
           <Route path='/user-validation/:regCode' element={<UserValidation/>}/>
+          <Route path='/email-validation/:emailCode' element={<EmailValidation/>}/>
           <Route path='/*' element={<p>Página no encontrada</p>}/>
         </Routes>
       <Footer/>

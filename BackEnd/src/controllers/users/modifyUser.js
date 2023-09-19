@@ -116,18 +116,6 @@ const modifyUser = async (req, res) => {
     if (email !== email2)
       return res.status(404).json({message: "Los correos no coinciden."});
 
-    // const [mail] = await connect.query(
-    //   `
-    //             SELECT email
-    //             FROM users   => esto creo que non se vai usar
-    //             WHERE email=?
-    //         `,
-    //   [email]
-    // );
-
-    // if (mail.length > 0)
-    //   return res.status(404).json({message: "Este email ya está registrado."});
-
       const [mail2] = await connect.query(
       `
                 SELECT email2

@@ -318,13 +318,13 @@ export const getUserDataService = async ({token}) => {
         }
     });
 
-    const json = await response();
+    const json = await response.json();
 
     if (!response.ok) {
         throw new Error(json.message);
       }
     
-      return json;
+      return json.data;
 }
 
 
