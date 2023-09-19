@@ -8,25 +8,32 @@ function UserValidation () {
     const [loading, setLoading] = useState("")
     const [error, setError] = useState("")
     const {regCode} = useParams()
-    const [validate, setValidate] = useState("")
+    const [validate, setValidate] =useState()
+    let counter = 0;    
 
+    
     const fetchData = async () => {
         try {
+            if (counter != 0) {
             setLoading(true);
             const data = await validateUserService({regCode});
-            setValidate(data)
+            setValidate(data);
+            }
         } catch (error) {
             setError(error.message);
         }finally{
             setLoading(false);
         }}
         useEffect(() =>{
-            fetchData()
+                fetchData();
+            console.log(counter);
+            counter ++;
+            
         }, [])
-        console.log(validate)
+
      return (
         <section>
-            {validate?<p>{validate}</p>:null}
+            {validate?<p>{validate.message}</p>:null}
             {error?<p>{error}</p>:null}
         </section>
     )

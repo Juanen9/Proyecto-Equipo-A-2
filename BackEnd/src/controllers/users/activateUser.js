@@ -23,10 +23,11 @@ const activateUser = async (req, res) => {
       [regCode]
     );
 
-    if (user.length === 0)
-      res
-        .status(401)
-        .json({message: "No se encontró a ningún usuario con ese código de registro"});
+    if (user.length === 0) {
+      res.status(401).json({message: "No se encontró a ningún usuario con ese código de registro"});
+    }
+      
+
 
     await connect.query(
       `
@@ -37,12 +38,11 @@ const activateUser = async (req, res) => {
       [regCode]
     );
 
-    connect.release();
-
     res.status(200).send({
       status: "OK",
-      message: "Usuario validado correctamente",
+      message: "Usuario validado correctamente"
     });
+
   } catch (error) {
     console.error(error);
   }finally{
