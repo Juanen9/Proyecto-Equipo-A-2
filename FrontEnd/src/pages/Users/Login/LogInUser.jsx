@@ -1,9 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
-import { logInUserService } from "../../services";
+import { AuthContext } from "../../../context/AuthContext";
+import { logInUserService } from "../../../services";
 import lottie from "lottie-web"; // Importa lottie-web
-import animationData from "../../assets/animation_lmltug6s.json"; // Importa tu archivo de animación JSON
+import animationData from "../../../assets/animation_lmltug6s.json"; // Importa tu archivo de animación JSON
+import "./LogInUser.css";
 
 function LogInUser() {
   const navigate = useNavigate();
@@ -53,16 +54,16 @@ function LogInUser() {
   };
 
   return (
-    <section>
+    <section className="login-form">
       {loading ? (
         <div id="lottie-container" style={{ width: "100px", height: "100px" }}>
           {/* Este div contendrá la animación mientras carga */}
         </div>
       ) : (
         <>
-          <h1>Login</h1>
+          <h1 className="begin">Let’s Begin</h1>
           <form onSubmit={handleForm}>
-            <fieldset>
+            <fieldset className="email-field">
               <label htmlFor="email">Email</label>
               <input
                 type="email"
@@ -73,7 +74,7 @@ function LogInUser() {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </fieldset>
-            <fieldset>
+            <fieldset className="password-field">
               <label htmlFor="pwd">Password</label>
               <input
                 type="password"
@@ -84,9 +85,17 @@ function LogInUser() {
                 onChange={(e) => setPwd(e.target.value)}
               />
             </fieldset>
-            <button type="submit">Login</button>
-            <Link to={'/recover-password'}>Has olvidado la contraseña?</Link>
-            {error ? <p>{error}</p> : null}
+            <fieldset className="last-field">
+              <div className="div-links">
+                <Link to={'/recover-password'}>Forgot password</Link>
+                <p>or</p>
+                <Link to={'/register'}>Create an account</Link>
+              </div>
+              <div className="div-button-login">
+                <button className="button-login" type="submit">Login</button>
+              </div>  
+              {error ? <p>{error}</p> : null}
+            </fieldset>  
           </form>
         </>
       )}

@@ -1,0 +1,85 @@
+/* Header.css */
+.header-container {
+    background-color: black;
+    color: white;
+    font-size: 1.5em;
+    padding: 1.4em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  
+  .menu-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .menu-button.active {
+    background-color: black;
+  }
+  
+  .menu {
+    background-color: black;
+    position: absolute;
+    top: 100%;
+    right: 0; /* Inicialmente, el menú está en la vista */
+    width: 150px; /* Ancho del menú */
+    display: none;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea el contenido a la izquierda */
+    z-index: 1;
+    transition: transform 0.5s ease-in-out; /* Ralentiza la animación */
+    height: 200px; /* Aumenta la altura del menú */
+    overflow: hidden; /* Oculta contenido fuera de la vista */
+  }
+  
+  .menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 1em;
+  }
+  
+  .menu-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 0.7em; /* Hace que las letras sean más pequeñas */
+    text-align: center;
+  }
+  
+  .menu-item:hover {
+    color: rgba(255, 255, 255, 0.7); /* Cambia el color del texto a un tono más claro */
+  }
+  
+  
+  .menu a {
+    text-decoration: none;
+    color: white;
+  }
+  
+  .menu-button img {
+    width: 20px; /* Ajusta el tamaño de la imagen SVG */
+  }
+  
+  .menu.visible {
+    display: flex;
+    transform: translateX(0); /* Muestra el menú desde la izquierda */
+  }
+
+  .menu-button a button{
+    background-color: white;
+    border: none;
+    width: 7em;
+    height: 3em;
+  }
+
+
+  .menu-button a{ 
+    color: black;
+    font-weight: 500;
+  }
+

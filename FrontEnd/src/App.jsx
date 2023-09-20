@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
-import Header from './components/Header'
-import Footer from './components/Footer'
+import Header from './components/Header/Header'
+import Footer from './components/Footer/Footer'
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './pages/Users/HomePage'
 import Register from './pages/Users/Register'
@@ -15,7 +15,7 @@ import ModifyExercise from './pages/Exercises/ModifyExercise'
 import GetFavs from './pages/Exercises/GetFavs'
 import GetOrderLikes from './pages/Exercises/GetOrderLikes'
 import AdminRegister from './pages/Users/AdminRegister'
-import LogInUser from './pages/Users/LogInUser'
+import LogInUser from './pages/Users/Login/LogInUser'
 import ResetPassword from './pages/Users/ResetPassword'
 import EditPassword from './pages/Users/EditPassword'
 import EditMail from './pages/Users/EditEmail'
@@ -27,7 +27,10 @@ function App() {
 
   return (
     <>
+    <header>
       <Header/>
+      </header> 
+      <main> 
         <Routes>
           <Route path='/' element={<HomePage/>}/>
           <Route path='/register' element={<Register/>}/>
@@ -49,7 +52,10 @@ function App() {
           <Route path='/email-validation/:emailCode' element={<EmailValidation/>}/>
           <Route path='/*' element={<p>Página no encontrada</p>}/>
         </Routes>
-      <Footer/>
+      </main> 
+      <footer> 
+        <Footer/>
+      </footer>  
     </>
   )
 }

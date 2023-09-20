@@ -1,0 +1,54 @@
+a {
+    color: inherit; /* Hereda el color del texto de su contenedor */
+  }
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5em;
+}
+
+.begin{
+    font-size: 2em;
+    margin-bottom: 1.5em;
+}
+
+.email-field{
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.password-field{
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.last-field{
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.div-links{
+    display: flex;
+    gap: 0.2em;
+    margin-bottom: 2em;
+}
+
+.button-login{
+   background-color: black;
+   color: white; 
+   width: 14em;
+   height: 3em;
+}
+
+.div-button-login{
+    text-align: center;
+}
