@@ -63,7 +63,7 @@ function LogInUser() {
         <>
           <h1 className="begin">Let’s Begin</h1>
           <form onSubmit={handleForm}>
-            <fieldset className="email-field">
+            <fieldset className="email-field-login">
               <label htmlFor="email">Email</label>
               <input
                 type="email"
@@ -74,7 +74,7 @@ function LogInUser() {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </fieldset>
-            <fieldset className="password-field">
+            <fieldset className="password-field-login">
               <label htmlFor="pwd">Password</label>
               <input
                 type="password"

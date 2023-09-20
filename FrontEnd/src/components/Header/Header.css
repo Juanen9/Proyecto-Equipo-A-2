@@ -83,3 +83,10 @@
     font-weight: 500;
   }
 
+  .link-custom {
+    outline: none;
+  }
+  
+  .link-custom:focus {
+    outline: none;
+  }

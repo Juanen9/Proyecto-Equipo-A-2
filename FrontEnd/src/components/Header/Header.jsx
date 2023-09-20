@@ -11,7 +11,7 @@ function Header() {
 
   return (
     <div className={`header-container ${menuVisible ? "menu-open" : ""}`}>
-      <p>Team-A GYM</p>
+      <Link to={"/"}><p>Team-A GYM</p></Link>
       <button onClick={toggleMenu} className={`menu-button ${menuVisible ? "active" : ""}`}>
         {menuVisible ? (
           <svg className="menu-icon" height="20px" version="1.1" viewBox="0 0 20 20" width="20px" xmlns="http://www.w3.org/2000/svg">

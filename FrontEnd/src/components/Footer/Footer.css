@@ -2,8 +2,20 @@ footer{
     background-color: black;
     color: white;
     padding: 1em;
+    font-weight: bold;
 }
 
-.button-twitter img{
-    width: 1em;
+.social-media img{
+    width: 1.25em;
+}
+
+.footer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.media-links{
+    display: flex;
+    gap: 0.4em;
+
 }

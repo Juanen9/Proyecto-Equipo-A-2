@@ -15,14 +15,14 @@ a {
     margin-bottom: 1.5em;
 }
 
-.email-field{
+.email-field-login{
     margin-bottom: 2em;
     display: flex;
     flex-direction: column;
     border: none;
 }
 
-.password-field{
+.password-field-login{
     margin-bottom: 2em;
     display: flex;
     flex-direction: column;

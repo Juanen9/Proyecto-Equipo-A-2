@@ -1,43 +1,39 @@
-a {
-    color: inherit; 
-  }
-
 .register-form{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 5em;
+    margin-top: 2em;
 }
 
 .register{
     font-size: 2em;
-    margin-bottom: 1.5em;
+    margin-bottom: 1em;
 }
 
-.username-field{
-    margin-bottom: 2em;
+.username-field-register{
+    margin-bottom: 1em;
     display: flex;
     flex-direction: column;
     border: none;
 }
 
-.email-field{
-    margin-bottom: 2em;
+.email-field-register{
+    margin-bottom: 1em;
     display: flex;
     flex-direction: column;
     border: none;
 }
 
-.password-field{
-    margin-bottom: 2em;
+.password-field-register{
+    margin-bottom: 1em;
     display: flex;
     flex-direction: column;
     border: none;
 }
 
-.repeat-password-field{
-    margin-bottom: 3em;
+.repeat-password-field-register{
+    margin-bottom: 2.5em;
     display: flex;
     flex-direction: column;
     border: none;
@@ -48,5 +44,8 @@ a {
    color: white; 
    width: 14em;
    height: 3em;
+   border: none;
+   border-radius: 0.5em;
+   margin-top: 1em;
 }
 
