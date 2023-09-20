@@ -4,7 +4,7 @@ function Footer () {
     return (
         <>
             <p>&copy;Team-A</p>
-            <a><img src={twitter}></img></a>
+            <a className="button-twitter"><img src={twitter}></img></a>
         </>    
     )
 }
