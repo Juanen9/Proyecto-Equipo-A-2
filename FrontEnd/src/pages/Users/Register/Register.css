@@ -1,0 +1,52 @@
+a {
+    color: inherit; 
+  }
+
+.register-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5em;
+}
+
+.register{
+    font-size: 2em;
+    margin-bottom: 1.5em;
+}
+
+.username-field{
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.email-field{
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.password-field{
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.repeat-password-field{
+    margin-bottom: 3em;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.button-register{
+   background-color: black;
+   color: white; 
+   width: 14em;
+   height: 3em;
+}
+

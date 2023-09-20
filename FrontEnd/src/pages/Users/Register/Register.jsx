@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { registerUserService } from "../../services";
+import { registerUserService } from "../../../services";
 import { useNavigate } from "react-router-dom";
+import "./Register.css"
 
 function Register () {
 
@@ -30,26 +31,26 @@ function Register () {
     }
 
     return( 
-    <section>
-        <h1>Register</h1>
+    <section className="register-form">
+        <h1 className="register">Register</h1>
         <form onSubmit={handleForm}>
-            <fieldset>
+            <fieldset className="username-field">
                 <label htmlFor="username">User Name</label>
                 <input type="text" id="username" name="username" required value={name} onChange={(e) => setName(e.target.value)}/>
             </fieldset>
-            <fieldset>
+            <fieldset className="email-field">
                 <label htmlFor="email">Email</label>
                 <input type="email" id="email" name="email" required value={email} onChange={(e) => setEmail(e.target.value)}/>
             </fieldset>
-            <fieldset>
+            <fieldset className="password-field"> 
                 <label htmlFor="password">Password</label>
                 <input type="password" id="password" name="password" required value={pwd} onChange={(e) => setPwd(e.target.value)}/>
             </fieldset>
-            <fieldset>
+            <fieldset className="repeat-password-field">
                 <label htmlFor="password2">Repeat Password</label>
                 <input type="password" id="password2" name="password2" required value={pwd2} onChange={(e) => setPwd2(e.target.value)}/>
             </fieldset>
-            <button>Register</button>
+            <button className="button-register">Register</button>
             {error ? <p>{error}</p> : null}
         </form>
     </section>
