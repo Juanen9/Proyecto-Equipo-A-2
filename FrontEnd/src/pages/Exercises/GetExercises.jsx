@@ -13,7 +13,6 @@ function GetExercises () {
     const [liked, setLiked] = useState([])
     const [filter, setFilter] = useState("")
 
-    console.log(liked)
 
     const fetchData = async () => {
         try {

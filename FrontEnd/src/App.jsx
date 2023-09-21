@@ -7,20 +7,21 @@ import HomePage from './pages/Users/HomePage/HomePage'
 import Register from './pages/Users/Register/Register'
 import RecoverPassword from './pages/Users/RecoverPassword'
 import Profile from './pages/Users/Profile'
-import PostExercise from './pages/Exercises/PostExercise'
-import PostTraining from './pages/Exercises/PostTraining'
+import PostExercise from './pages/Exercises/PostExercise/PostExercise'
+import PostTraining from './pages/Exercises//PostTraining/PostTraining'
 import GetExercises from './pages/Exercises/GetExercises'
 import GetExercisesExtended from './pages/Exercises/GetExercisesExtended'
 import ModifyExercise from './pages/Exercises/ModifyExercise'
 import GetFavs from './pages/Exercises/GetFavs'
 import GetOrderLikes from './pages/Exercises/GetOrderLikes'
-import AdminRegister from './pages/Users/AdminRegister'
+import AdminRegister from './pages/Users/AdminRegister/AdminRegister'
 import LogInUser from './pages/Users/Login/LogInUser'
 import ResetPassword from './pages/Users/ResetPassword'
 import EditPassword from './pages/Users/EditPassword'
 import EditMail from './pages/Users/EditEmail'
 import UserValidation from './pages/Users/UserValidation'
 import EmailValidation from './pages/Users/EmailValidation'
+import LogedPage from './pages/Users/LogedPage/LogedPage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -33,6 +34,7 @@ function App() {
       <main> 
         <Routes>
           <Route path='/' element={<HomePage/>}/>
+          <Route path='/loged' element={<LogedPage/>}/>
           <Route path='/register' element={<Register/>}/>
           <Route path='/login' element={<LogInUser/>}/>
           <Route path='/admin-register' element={<AdminRegister/>}/>

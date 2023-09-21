@@ -1,0 +1,93 @@
+.login-form-post-exercise{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+}
+
+.add-new-exercise{
+    font-size: 2em;
+    margin-bottom: 1.5em;
+}
+
+.email-field-post-exercise{
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.description-field-post-exercise{
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.typology-field-post-exercise{
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.muscleGroup-field-post-exercise{
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.image-field-post-exercise{
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.image-field-post-exercise label{
+    margin-bottom: 1em;
+}
+
+.image-field-post-exercise input{
+    border-style: none;
+}
+
+/* Estilo personalizado para el contenedor del input de archivo */
+.file-input-container {
+    position: relative;
+    text-align: center;
+  }
+  
+  /* Ocultar el input de archivo */
+  .file-input-container input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /* Estilo personalizado para el botón de selección de archivo */
+  .custom-file-upload {
+    border: 0.5em solid gray;
+    padding: 0.3em;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border-radius: 0.5em;
+    font-weight: bold;
+  }
+
+  .button-post-exercise{
+    background-color: black;
+    color: white; 
+    width: 14em;
+    height: 3em;
+    margin-bottom: 2em;
+    font-weight: bold;
+
+  }
+  
+
+  

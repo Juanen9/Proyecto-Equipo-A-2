@@ -44,7 +44,7 @@ function LogInUser() {
       try {
         const token = await logInUserService({ email, pwd });
         login(token);
-        navigate("/");
+        navigate("/loged");
       } catch (error) {
         setError(error.message);
       } finally {

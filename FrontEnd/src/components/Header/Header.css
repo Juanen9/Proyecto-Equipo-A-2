@@ -33,7 +33,7 @@
     align-items: flex-start; /* Alinea el contenido a la izquierda */
     z-index: 1;
     transition: transform 0.5s ease-in-out; /* Ralentiza la animación */
-    height: 200px; /* Aumenta la altura del menú */
+    height: 300px; /* Aumenta la altura del menú */
     overflow: hidden; /* Oculta contenido fuera de la vista */
   }
   
@@ -68,6 +68,7 @@
   .menu.visible {
     display: flex;
     transform: translateX(0); /* Muestra el menú desde la izquierda */
+    height: 300px; /* Aumenta la altura del menú */
   }
 
   .menu-button a button{

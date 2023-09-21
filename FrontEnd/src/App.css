@@ -14,7 +14,7 @@ main{
     flex-grow: 1;
 }
 
-input {
+input, textarea {
     border-style: none none solid none;
     border-width: 0 0 0.1em 0;
     outline: none;

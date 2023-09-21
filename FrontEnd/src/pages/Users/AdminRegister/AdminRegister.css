@@ -1,0 +1,58 @@
+.admin-register-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
+}
+
+.admin-register{
+    font-size: 2em;
+    margin-bottom: 2em;
+}
+
+.admin-name-field-register{
+    margin-bottom: 1em;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.admin-email-field-register{
+    margin-bottom: 1em;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.admin-password-field-register{
+    margin-bottom: 1em;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.admin-clue-field-register{
+    margin-bottom: 2.5em;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.admin-role-field-register{
+    margin-bottom: 2.5em;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.admin-button-register{
+   background-color: black;
+   color: white; 
+   width: 14em;
+   height: 3em;
+   border: none;
+   border-radius: 0.5em;
+   margin-top: 2em;
+}
+
