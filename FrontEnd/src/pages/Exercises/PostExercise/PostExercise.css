@@ -8,14 +8,15 @@
 
 .add-new-exercise{
     font-size: 2em;
-    margin-bottom: 1.5em;
+    margin-bottom: 1em;
 }
 
-.email-field-post-exercise{
+.name-field-post-exercise{
     margin-bottom: 2em;
     display: flex;
     flex-direction: column;
     border: none;
+
 }
 
 .description-field-post-exercise{
@@ -42,8 +43,10 @@
 .image-field-post-exercise{
     margin-bottom: 2em;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     border: none;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .image-field-post-exercise label{
@@ -71,12 +74,14 @@
   
   /* Estilo personalizado para el botón de selección de archivo */
   .custom-file-upload {
-    border: 0.5em solid gray;
-    padding: 0.3em;
+    border: 0.3em solid gray;
+    padding: 0.5em;
     cursor: pointer;
     background-color: #f0f0f0;
     border-radius: 0.5em;
     font-weight: bold;
+    display: flex;
+    flex-direction: column;
   }
 
   .button-post-exercise{
@@ -86,7 +91,8 @@
     height: 3em;
     margin-bottom: 2em;
     font-weight: bold;
-
+    border: none;
+    border-radius: 0.5em;
   }
   
 

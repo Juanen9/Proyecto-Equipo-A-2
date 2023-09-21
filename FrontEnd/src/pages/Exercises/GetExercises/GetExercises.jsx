@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
-import { addLikeService, deleteLikeService, getAllExercisesService, getLikesService } from "../../services";
+import { AuthContext } from "../../../context/AuthContext";
+import { addLikeService, deleteLikeService, getAllExercisesService, getLikesService } from "../../../services";
 import { useNavigate } from "react-router-dom";
+import "./GetExercises.css";
 
 function GetExercises () {
 
@@ -88,20 +89,20 @@ function GetExercises () {
     )
 
     return (
-        <section>
-            <h1>Exercise List</h1>
-            <form>
+        <section className="get-exercise-section">
+            <h1 className="exercise-list-title">Exercise List</h1>
+            <form className="exercise-list-form">
                 <fieldset>    
-                    <label htmlFor="filter">Exercise Filter</label>
-                    <input id="filter" name="filter" type="text" placeholder="Exercise typology..." onChange={handleFilter}></input>
+                    <input id="filter" name="filter" type="text" placeholder="Search exercise..." onChange={handleFilter}></input>
                 </fieldset>
             </form>
                 {filterExercises.length > 0 ? filterExercises.map((e) => {
-                    return <ul key={e.id}> 
-                        <li>{e["exercise_name"]}</li>
-                        <li>{e["exercise_description"]}</li>
+                    return <ul key={e.id} className="exercise-card"> 
                         <li><img onClick={()=>handleImage(e.id)} src={`http://localhost:5173/public/exercisePhoto/${e["photo"]}`} alt={e["description"]}/></li>
+                        <div className="exercise-card-container">
+                        <li>{e["exercise_name"]}</li>
                         <button onClick={()=>handleLike(e.id)}>❤</button>
+                        </div>
                     </ul>
                 }):<p>Exercises not found</p>}
         </section>

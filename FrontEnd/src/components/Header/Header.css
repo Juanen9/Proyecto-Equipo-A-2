@@ -68,7 +68,7 @@
   .menu.visible {
     display: flex;
     transform: translateX(0); /* Muestra el menú desde la izquierda */
-    height: 300px; /* Aumenta la altura del menú */
+    height: 100vh; /* Aumenta la altura del menú */
   }
 
   .menu-button a button{

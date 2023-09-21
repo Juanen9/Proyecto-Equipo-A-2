@@ -10,15 +10,34 @@
     flex-direction: column;
 } 
 
-main{
-    flex-grow: 1;
+header{
+    position: fixed;
+    width: 100%;
+    
 }
 
-input, textarea {
+footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+main{
+    flex-grow: 1;
+    margin-bottom: 3.5em;
+    margin-top: 6em;
+}
+
+input{
     border-style: none none solid none;
     border-width: 0 0 0.1em 0;
     outline: none;
   }
+
+textarea{
+    border-style: none none solid none;
+    border-width: 0 0 0.1em 0;  
+}
 
 a {
     color: inherit;

@@ -74,7 +74,7 @@ function PostExercise () {
       <h1 className="add-new-exercise">Add new Exercise</h1>
       {successMessage && <p>{successMessage}</p>}
       <form onSubmit={handleForm}>
-        <fieldset className="email-field-post-exercise">
+        <fieldset className="name-field-post-exercise">
           <label htmlFor="name">Name</label>
           <input type="text" name="name" id="name" required />
         </fieldset>
@@ -91,7 +91,7 @@ function PostExercise () {
           <input type="text" name="muscleGroup" id="muscleGroup" required />
         </fieldset>
         <fieldset className="image-field-post-exercise file-input-container">
-          <label htmlFor="exercisePhoto" className="custom-file-upload">Select Image</label>
+          <label htmlFor="exercisePhoto" className="custom-file-upload"><span>Select</span><span>Image</span></label>
           <input required
             type="file"
             name="exercisePhoto"

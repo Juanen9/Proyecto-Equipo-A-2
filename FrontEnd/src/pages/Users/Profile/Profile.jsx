@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
-import { getUserDataService, modifyUserService } from "../../services";
+import { AuthContext } from "../../../context/AuthContext";
+import { getUserDataService, modifyUserService } from "../../../services";
 
 function Profile() {
   const { token } = useContext(AuthContext);

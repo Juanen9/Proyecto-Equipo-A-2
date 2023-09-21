@@ -1,0 +1,58 @@
+.get-exercise-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+}
+
+.exercise-list-title{
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+
+.exercise-list-form{
+    margin-bottom: 2em;
+}
+
+.exercise-list-form input{
+    padding: 0.5em;
+    border: none;
+    box-shadow: black 2px 2px 4px;
+}
+
+.exercise-card{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    text-align: center;
+    border: solid black 1px;
+    margin-bottom: 2em;
+    border-radius: 0.4em;
+}
+
+.exercise-card-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: -1.39em;
+    font-weight: bold;
+}
+
+.exercise-card-container li:first-child{
+    color: white;
+    background-color: black;
+    border-radius: 0 0.4em 0 0.3em;
+    width: 6em;
+}
+
+.exercise-card img{
+    width: 18em;
+    border-radius: 0.3em;
+}
+
+.exercise-card button{
+    width: 2em;
+    border: none;
+    background: none;
+}
