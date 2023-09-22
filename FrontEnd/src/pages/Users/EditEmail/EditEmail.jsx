@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
-import { getUserDataService, modifyUserService } from "../../services";
+import { AuthContext } from "../../../context/AuthContext";
+import { getUserDataService, modifyUserService } from "../../../services";
 import lottie from "lottie-web"; // Importa lottie-web
-import animationData from "../../assets/animation_lmltug6s.json";
+import animationData from "../../../assets/animation_lmltug6s.json";
+import "./EditEmail.css";
 
 function EditMail() {
   const { token } = useContext(AuthContext);
@@ -13,9 +14,6 @@ function EditMail() {
   const [error, setError] = useState("");
   const [prevValue, setPrevValue] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-
-  console.log(prevValue)
-
 
   useEffect(() => {
     if (loading) {
@@ -85,29 +83,29 @@ function EditMail() {
   };
 
   return (
-    <section>
+    <section className="edit-email-form">
         {loading ? (
         <div id="lottie-container" style={{ width: "100px", height: "100px" }}>
           {/* Este div contendrá la animación mientras carga */}
         </div>
         ) : (
     <>
-      <h1>Edit Email</h1>
+      <h1 className="edit-email">Edit Email</h1>
       {successMessage && <p>{successMessage}</p>}
       <form onSubmit={handleForm} encType="multipart/form-data">
-      <fieldset>
+      <fieldset className="field-edit-password">
           <label htmlFor="pwd">Password</label>
           <input required type="password" name="pwd" id="pwd" onChange={(e) => setPwd(e.target.value)} />
         </fieldset>
-        <fieldset>
+        <fieldset className="field-edit-email">
           <label htmlFor="email">New Email</label>
           <input required type="email" name="email" id="email" onChange={(e) => setEmail(e.target.value)} />
         </fieldset>
-        <fieldset>
+        <fieldset className="field-edit-repeat-email">
           <label htmlFor="email2">Repeat New Email</label>
           <input required type="email" name="email2" id="email2" onChange={(e) => setEmail2(e.target.value)} />
         </fieldset>
-        <button>Modify</button>
+        <button className="button-edit-email">Modify</button>
         {error ? <p>{error}</p> : null}
         {loading ? <p>Modify Email...</p> : null}
       </form>

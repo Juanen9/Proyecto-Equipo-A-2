@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
-import { getUserDataService, modifyUserService } from "../../services";
+import { AuthContext } from "../../../context/AuthContext";
+import { getUserDataService, modifyUserService } from "../../../services";
 import lottie from "lottie-web"; // Importa lottie-web
-import animationData from "../../assets/animation_lmltug6s.json"; // Importa tu archivo de animación JSON
-
+import animationData from "../../../assets/animation_lmltug6s.json"; // Importa tu archivo de animación JSON
+import "./EditPassword.css";
 
 function EditPassword() {
   const { token } = useContext(AuthContext);
@@ -89,29 +89,29 @@ function EditPassword() {
   };
 
   return (
-    <section>
+    <section className="edit-password-form">
       {loading ? (
         <div id="lottie-container" style={{ width: "100px", height: "100px" }}>
           {/* Este div contendrá la animación mientras carga */}
         </div>
       ) : (
     <>
-      <h1>Edit Password</h1>
+      <h1 className="edit-password">Edit Password</h1>
       {successMessage && <p>{successMessage}</p>}
       <form onSubmit={handleForm} encType="multipart/form-data">
-        <fieldset>
+        <fieldset className="field-edit-password-old">
           <label htmlFor="pwd">Password</label>
           <input required type="password" name="pwd" id="pwd" onChange={(e) => setPwd(e.target.value)} />
         </fieldset>
-        <fieldset>
+        <fieldset className="field-edit-new-password">
           <label htmlFor="pwd2">New Password</label>
           <input required type="password" name="pwd2" id="pwd2" onChange={(e) => setPwd2(e.target.value)} />
         </fieldset>
-        <fieldset>
+        <fieldset className="field-edit-repeat-new-password">
           <label htmlFor="pwd3">Repeat New Password</label>
           <input required type="password" name="pwd3" id="pwd3" onChange={(e) => setPwd3(e.target.value)} />
         </fieldset>
-        <button>Modify</button>
+        <button className="button-edit-password">Modify</button>
         {error ? <p>{error}</p> : null}
         {loading ? <p>Modify Password...</p> : null}
       </form>
