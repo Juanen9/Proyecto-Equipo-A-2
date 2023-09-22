@@ -1,0 +1,97 @@
+.exercise-extended-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+}
+
+.exercise-extended-section-back-button{
+    display: flex;
+    width: 100%;  
+}
+
+
+.exercise-extended-card{
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    text-align: center;
+    margin-bottom: 2em;
+    border-radius: 0.4em;
+    margin-top: 1em
+}
+
+.exercise-extended-card-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: -2.15em;
+    font-weight: bold;
+    align-items: center;
+}
+
+.exercise-extended-card-container li:first-child{
+    color: white;
+    background-color: black;
+    border-radius: 0 0.4em 0 0.3em;
+    width: 6em;
+}
+
+.exercise-extended-card-container button img{
+    width: 2em;
+}
+
+.exercise-extended-card img{
+    width: 18em;
+    border-radius: 0.3em;
+}
+
+.exercise-extended-card button{
+    width: 2em;
+    border: none;
+    background: none;
+}
+
+.fav-extended-button{
+    display: flex;
+    justify-content: end;
+}
+
+.fav-extended-button img{
+    width: 2em;
+}
+
+.back-arrow-button{
+    border: none;
+    background-color: transparent;
+    margin-left: 1.5em;
+    margin-top: 0.5em;
+}
+
+.back-arrow-button img{
+    width: 2.5em;
+}
+
+.exercise-extended-description{
+    margin-top: 1em;
+}
+
+.exercise-extended-delete{
+    background-color: black;
+    color: white; 
+    width: 10em;
+    height: 3em;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.5em;
+  }
+
+  .typology-muscle{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 1em;
+    gap: 0.5em;
+  }
+

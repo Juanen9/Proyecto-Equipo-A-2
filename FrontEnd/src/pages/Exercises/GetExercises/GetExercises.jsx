@@ -3,6 +3,8 @@ import { AuthContext } from "../../../context/AuthContext";
 import { addLikeService, deleteLikeService, getAllExercisesService, getLikesService } from "../../../services";
 import { useNavigate } from "react-router-dom";
 import "./GetExercises.css";
+import likeIconWhite from "../../../assets/like-icon-white.svg"
+import likeIconRed from "../../../assets/like-icon-red.svg"
 
 function GetExercises () {
 
@@ -101,7 +103,7 @@ function GetExercises () {
                         <li><img onClick={()=>handleImage(e.id)} src={`http://localhost:5173/public/exercisePhoto/${e["photo"]}`} alt={e["description"]}/></li>
                         <div className="exercise-card-container">
                         <li>{e["exercise_name"]}</li>
-                        <button onClick={()=>handleLike(e.id)}>❤</button>
+                        <button onClick={()=>handleLike(e.id)}><img src={liked.includes(e.id)? likeIconRed:likeIconWhite} alt="like icon"/></button>
                         </div>
                     </ul>
                 }):<p>Exercises not found</p>}

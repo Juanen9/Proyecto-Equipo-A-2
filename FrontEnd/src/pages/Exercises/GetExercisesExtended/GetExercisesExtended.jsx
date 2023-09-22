@@ -1,7 +1,13 @@
     import { useContext, useEffect, useState } from "react";
-    import { AuthContext } from "../../context/AuthContext";
-    import { addFavService, addLikeService, deleteExerciseService, deleteFavService, deleteLikeService, getAllExercisesExtendedService, getFavsService, getLikesService } from "../../services";
+    import { AuthContext } from "../../../context/AuthContext";
+    import { addFavService, addLikeService, deleteExerciseService, deleteFavService, deleteLikeService, getAllExercisesExtendedService, getFavsService, getLikesService } from "../../../services";
     import { useNavigate, useParams } from "react-router-dom";
+    import "./GetExercisesExtended.css"
+    import backArrow from "../../../assets/back-arrow.svg"
+    import favIconWhite from "../../../assets/fav-icon-white.svg"
+    import favIconYellow from "../../../assets/fav-icon-yellow.svg"
+    import likeIconWhite from "../../../assets/like-icon-white.svg"
+    import likeIconRed from "../../../assets/like-icon-red.svg"
 
     function GetExercisesExtended () {
 
@@ -82,6 +88,7 @@
                 setError(error.message);
             }
         }
+        
         const handleFav = async (id) =>{
             try {
                 if(!fav.includes(id)){
@@ -119,21 +126,34 @@
         
 
         return (
-            <section>
-                <h1>Exercise</h1>
-                    {exercises.length > 0 && !deleted ? (<ul>
-                        <li>{exercises[0]["exercise_name"]}</li>
-                        <li>{exercises[0]["exercise_description"]}</li>
-                        <li><img src={`http://localhost:5173/public/exercisePhoto/${exercises[0]["photo"]}`} alt={exercises["description"]}/></li>
-                        <button onClick={()=>handleLike(exercises[0].id)}>❤</button>
-                        <button onClick={()=>handleFav(exercises[0].id)}>⭐</button>
-                        <button onClick={handleReturn}>Back to Exercise List</button>
+            <section className="exercise-extended-section">
+                <div className="exercise-extended-section-back-button">
+                    <button onClick={handleReturn} className="back-arrow-button"><img src={backArrow} alt="back arrow"/></button>
+                </div>
+                    {exercises.length > 0 && !deleted ? 
+                    (<ul className="exercise-extended-card">
+                        <div className="fav-extended-button">
+                            <button onClick={()=>handleFav(exercises[0].id)}><img src={fav.includes(exercises[0].id)? favIconYellow:favIconWhite} alt="favorite icon" /></button>
+                        </div>
+                            
+                            <li><img src={`http://localhost:5173/public/exercisePhoto/${exercises[0]["photo"]}`} alt={exercises["description"]}/></li>
+                        <div className="exercise-extended-card-container">
+                            <li>{exercises[0]["exercise_name"]}</li>
+                            <button onClick={()=>handleLike(exercises[0].id)}><img src={liked.includes(exercises[0].id)? likeIconRed:likeIconWhite} alt="like icon"/></button>
+                        </div>
+                        <div className="typology-muscle">
+                            <li>Typology: {exercises[0]["typology"]}</li>
+                            <li>Muscle Group: {exercises[0]["muscle_group"]}</li>
+                        </div>
+
+                            <li className="exercise-extended-description">{exercises[0]["exercise_description"]}</li>
+                            
                     </ul>) : deleted ?(
                 <p>Ejercicio eliminado</p>
             ): (
                 <p>Loading...</p>
             )}
-            {exercises.length > 0 && !deleted ?<button onClick={()=>handleDelete(exercises[0].id)}>Delete</button>:null}
+            {exercises.length > 0 && !deleted ?<button onClick={()=>handleDelete(exercises[0].id)} className="exercise-extended-delete">Delete</button>:null}
             </section>
         )
     }
