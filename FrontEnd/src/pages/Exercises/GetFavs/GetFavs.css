@@ -1,0 +1,27 @@
+.favs-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.favs{
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+
+.favs-card-container{
+    border: solid 1px  black;
+    box-shadow: black 2px 2px 4px;
+    margin-bottom: 2em;
+    list-style: none;
+}
+
+.exercise-name-favs{
+    margin-bottom: 1em;
+}
+
+.exercise-description-favs{
+    margin-top: 1em;
+}

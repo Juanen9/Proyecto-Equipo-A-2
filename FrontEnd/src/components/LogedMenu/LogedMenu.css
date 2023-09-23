@@ -38,11 +38,7 @@
     font-size: 0.7em; /* Hace que las letras sean más pequeñas */
     text-align: center;
   }
-  
-  .menu-item:hover {
-    color: rgba(255, 255, 255, 0.7); /* Cambia el color del texto a un tono más claro */
-  }
-  
+
   
   .menu a {
     text-decoration: none;
@@ -78,4 +74,13 @@
   
   .link-custom:focus {
     outline: none;
+  }
+
+  .div-submenu{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-left: 3em;
+    text-decoration: underline;
+    font-size: 1.1em;
   }

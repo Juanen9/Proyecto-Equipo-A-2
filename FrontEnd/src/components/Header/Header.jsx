@@ -21,7 +21,7 @@ function Header() {
   };
 
   const handleLogOut = () => {
-    localStorage.removeItem("token"); //va por props al componente LogOut
+    localStorage.removeItem("token");
     setLog("")
     navigate("/");
 }

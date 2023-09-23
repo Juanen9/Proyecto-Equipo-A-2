@@ -1,4 +1,4 @@
-.login-form-post-exercise{
+.login-form-modify-exercise{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -6,41 +6,47 @@
     margin-top: 1em;
 }
 
-.add-new-exercise{
+.modify-exercise{
     font-size: 2em;
     margin-bottom: 1em;
 }
 
-.name-field-post-exercise{
-    margin-bottom: 2em;
-    display: flex;
-    flex-direction: column;
-    border: none;
-
-}
-
-.description-field-post-exercise{
+.field-exercise-id{
     margin-bottom: 2em;
     display: flex;
     flex-direction: column;
     border: none;
 }
 
-.typology-field-post-exercise{
+.field-exercise-name-modify{
     margin-bottom: 2em;
     display: flex;
     flex-direction: column;
     border: none;
 }
 
-.muscleGroup-field-post-exercise{
+.field-description-modify{
     margin-bottom: 2em;
     display: flex;
     flex-direction: column;
     border: none;
 }
 
-.image-field-post-exercise{
+.field-typology-modify{
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.field-muscle-group-modify{
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.image-field-modify-exercise{
     margin-bottom: 2em;
     display: flex;
     flex-direction: row;
@@ -49,11 +55,11 @@
     align-items: center;
 }
 
-.image-field-post-exercise label{
+.image-field-modify-exercise label{
     margin-bottom: 1em;
 }
 
-.image-field-post-exercise input{
+.image-field-modify-exercise input{
     border-style: none;
 }
 
@@ -82,10 +88,9 @@
     font-weight: bold;
     display: flex;
     flex-direction: column;
-    z-index: -1;
   }
 
-  .button-post-exercise{
+  .button-modify-exercise{
     background-color: black;
     color: white; 
     width: 14em;
@@ -96,14 +101,5 @@
     border-radius: 0.5em;
   }
   
-  .lottie-container{
-    width: "100px";
-    height: "100px";
-    z-index: -1;
-  }
 
-  .object-url-image{
-    width: 80px;
-    z-index: -1;
-    position: relative;
-  }
+  

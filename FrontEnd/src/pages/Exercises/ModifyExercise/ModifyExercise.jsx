@@ -1,6 +1,7 @@
 import {  useContext, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
-import { modifyExerciseService, modifyUserService } from "../../services";
+import { AuthContext } from "../../../context/AuthContext";
+import { modifyExerciseService, modifyUserService } from "../../../services";
+import "./ModifyExercise.css";
 
 function ModifyExercise  ()  {
   const { token } = useContext(AuthContext);
@@ -40,31 +41,31 @@ function ModifyExercise  ()  {
     }
   };
   return (
-    <>
-      <h1>Modify Exercise</h1>
+    <section className="login-form-modify-exercise">
+      <h1 className="modify-exercise">Modify Exercise</h1>
       <form onSubmit={handleForm}>
-      <fieldset>
+      <fieldset className="field-exercise-id">
           <label htmlFor="exerciseId">Exercise Id</label>
           <input type="number" name="exerciseId" id="exerciseId" required onChange={(e) => setExerciseId(e.target.value)}/>
         </fieldset>
-        <fieldset>
+        <fieldset className="field-exercise-name-modify">
           <label htmlFor="exerciseName">Exercise Name</label>
           <input type="text" name="exerciseName" id="exerciseName"onChange={(e) => setExerciseName(e.target.value)}/>
         </fieldset>
-        <fieldset>
+        <fieldset className="field-description-modify">
           <label htmlFor="exerciseDescription">Exercise Description</label>
           <textarea type="text" name="exerciseDescription" id="exerciseDescription" onChange={(e) => setExerciseDescription(e.target.value)}/>
         </fieldset>
-        <fieldset>
+        <fieldset className="field-typology-modify">
           <label htmlFor="typology">Typology</label>
           <input type="text" name="typology" id="typology" onChange={(e) => setTypology(e.target.value)}/>
         </fieldset>
-        <fieldset>
+        <fieldset className="field-muscle-group-modify">
           <label htmlFor="muscleGroup">Muscle Group</label>
           <input type="text" name="muscleGroup" id="muscleGroup" onChange={(e) => setMuscleGroup(e.target.value)}/>
         </fieldset>
-        <fieldset>
-          <label htmlFor="exercisePhoto">Exercise Photo</label>
+        <fieldset className="image-field-modify-exercise file-input-container">
+          <label htmlFor="exercisePhoto" className="custom-file-upload"><span>Exercise</span><span>Photo</span></label>
           <input
             type="file"
             name="exercisePhoto"
@@ -82,11 +83,11 @@ function ModifyExercise  ()  {
             </figure>
           ) : null}
         </fieldset>
-        <button>Modify</button>
+        <button className="button-modify-exercise">Modify</button>
         {error ? <p>{error}</p> : null}
         {loading ? <p>Modify Exercise...</p> : null}
       </form>
-    </>
+    </section>
   );
 };
 

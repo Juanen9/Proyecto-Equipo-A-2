@@ -15,7 +15,7 @@ const getOrderLikes = async (req, res) => {
 
     const [likes] = await connect.query(
       `
-            SELECT count(id_exercise) AS likes, exercise_name
+            SELECT count(id_exercise) AS likes, exercise_name, photo
             FROM likes, exercises
             WHERE id_exercise = exercises.id
             GROUP BY id_exercise

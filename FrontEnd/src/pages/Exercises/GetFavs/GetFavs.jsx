@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
-import { getFavsService } from "../../services";
+import { AuthContext } from "../../../context/AuthContext";
+import { getFavsService } from "../../../services";
 import { useNavigate } from "react-router-dom";
+import "./GetFavs.css";
 
 function GetFavs () {
 
@@ -28,15 +29,13 @@ function GetFavs () {
     },[])
 
     return (
-        <section>
-            <h1>Favs List</h1>
+        <section className="favs-section">
+            <h1 className="favs">Favs List</h1>
                 {favs.map((e) => {
-                    return <ul key={e.id}> 
-                        <li>{e["exercise_name"]}</li>
-                        <li>{e["exercise_description"]}</li>
-                        <li>{e["typology"]}</li>
-                        <li>{e["muscle_group"]}</li>
+                    return <ul className="favs-card-container" key={e.id}> 
+                        <li className="exercise-name-favs">{e["exercise_name"]}</li>
                         <li><img src={`http://localhost:5173/public/exercisePhoto/${e["photo"]}`} alt={e["exercise_description"]}/></li>
+                        <li className="exercise-description-favs">{e["exercise_description"]}</li>
                     </ul>
                 })}
         </section>

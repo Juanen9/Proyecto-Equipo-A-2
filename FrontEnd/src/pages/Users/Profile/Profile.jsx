@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { getUserDataService, modifyUserService } from "../../../services";
+import "./Profile.css";
 
 function Profile() {
   const { token } = useContext(AuthContext);
@@ -52,29 +53,13 @@ function Profile() {
   };
 
   return (
-    <>
-      <h1>Edit Profile</h1>
+    <section className="edit-profile-form">
+      <h1 className="profile">Edit Profile</h1>
       <form onSubmit={handleForm} encType="multipart/form-data">
-      <fieldset>
-          <label htmlFor="pwd">Password</label>
-          <input required type="password" name="pwd" id="pwd" onChange={(e) => setPwd(e.target.value)} />
-        </fieldset>
-        <fieldset>
-          <label htmlFor="name">Name</label>
-          <input type="text" name="name" id="name" onChange={(e) => setName(e.target.value)} placeholder={prevValue[0] ? prevValue[0]["user_name"] : ""} />
-        </fieldset>
-        <fieldset>
-          <label htmlFor="avatarUser">Avatar User</label>
-          <input
-            type="file"
-            name="avatarUser"
-            id="avatarUser"
-            accept="image/*"
-            onChange={(e) => setAvatarUser(e.target.files[0])} // Actualizar el estado cuando se selecciona una imagen
-          />
+      <fieldset className="image-field-edit-profile file-input-container-profile">
           {avatarUser ? ( // Mostrar la nueva imagen seleccionada (si existe)
             <figure>
-              <img
+              <img className="object-url-image"
                 src={URL.createObjectURL(avatarUser)}
                 style={{ width: "100px" }}
                 alt="Preview"
@@ -89,12 +74,28 @@ function Profile() {
               />
             </figure>
           ) : null}
+          <label className="custom-file-upload-profile" htmlFor="avatarUser"><span>Avatar</span><span>User</span></label>
+          <input className="input-image"
+            type="file"
+            name="avatarUser"
+            id="avatarUser"
+            accept="image/*"
+            onChange={(e) => setAvatarUser(e.target.files[0])} // Actualizar el estado cuando se selecciona una imagen
+          />
         </fieldset>
-        <button>Modify</button>
+      <fieldset className="field-profile-password">
+          <label htmlFor="pwd">Password</label>
+          <input required type="password" name="pwd" id="pwd" onChange={(e) => setPwd(e.target.value)} />
+        </fieldset>
+        <fieldset className="field-profile-name">
+          <label htmlFor="name">Name</label>
+          <input type="text" name="name" id="name" onChange={(e) => setName(e.target.value)} placeholder={prevValue[0] ? prevValue[0]["user_name"] : ""} />
+        </fieldset>
+        <button className="button-edit-profile">Modify</button>
         {error ? <p>{error}</p> : null}
         {loading ? <p>Modify Profile...</p> : null}
       </form>
-    </>
+    </section>
   );
 }
 

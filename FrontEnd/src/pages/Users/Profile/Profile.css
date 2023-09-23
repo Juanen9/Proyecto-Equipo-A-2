@@ -1,0 +1,83 @@
+.edit-profile-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
+}
+
+.profile{
+    font-size: 2em;
+    margin-bottom: 1.5em;
+}
+
+.field-profile-password{
+    margin-bottom: 3em;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.field-profile-name{
+    margin-bottom: 3em;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.image-field-edit-profile{
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: row;
+    border: none;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2em;
+    justify-content: end;
+}
+
+.file-input-container-profile input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+.file-input-container-profile {
+    position: relative;
+    text-align: center;
+  }
+
+  .custom-file-upload-profile {
+    border: 0.3em solid gray;
+    padding: 0.5em;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border-radius: 0.5em;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    z-index: -1;
+  }
+
+.button-edit-profile{
+   background-color: black;
+   color: white; 
+   width: 14em;
+   height: 3em;
+   border: none;
+   border-radius: 0.5em;
+   margin-top: 1em;
+}
+
+.input-image{
+    display: flex;
+    flex-direction: column;
+}
+
+.object-url-image{
+    width: 80px;
+    z-index: -1;
+    position: relative;
+  }

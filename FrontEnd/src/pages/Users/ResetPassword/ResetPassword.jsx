@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { resetPasswordService } from "../../services";
+import { resetPasswordService } from "../../../services";
 import { useNavigate } from "react-router-dom";
+import "./ResetPassword.css";
 
 function ResetPassword () {
 
@@ -27,25 +28,25 @@ function ResetPassword () {
 
 
     return (
-        <>
-            <h1>Reset Password</h1>
+        <section className="reset-password-form">
+            <h1 className="reset-password">Reset Password</h1>
             <form onSubmit={handleForm}>
-                <fieldset>
+                <fieldset className="field-reset-code">
                     <label htmlFor="recover Code">Recover Code</label>
                     <input type="text" name="recoverCode" id="recoverCode" required onChange={(e) => setRecoverCode(e.target.value)}/>
                 </fieldset>
-                <fieldset>
+                <fieldset className="field-new-password-reset">
                     <label htmlFor="newpassword">New Password</label>
                     <input type="password" name="newpassword" id="newpassword" required onChange={(e) => setNewpassword(e.target.value)}/>
                 </fieldset>
-                <fieldset>
+                <fieldset className="field-repeat-password-reset">
                     <label htmlFor="newpassword1">Repeat New Password</label>
                     <input type="password" name="newpassword1" id="newpassword1" required onChange={(e) => setNewpassword1(e.target.value)}/>
                 </fieldset>
-                <button>Send</button>
+                <button className="button-reset-password">Send</button>
                 {error ? <p>{error}</p> : null}
             </form>
-        </>
+        </section>
     )
 }
 

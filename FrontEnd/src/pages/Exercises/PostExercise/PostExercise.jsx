@@ -66,7 +66,7 @@ function PostExercise () {
     return (
       <section className="login-form-post-exercise">
         {loading ? (
-        <div id="lottie-container" style={{ width: "100px", height: "100px" }}>
+        <div id="lottie-container" className="lottie-container">
           {/* Este div contendrá la animación mientras carga */}
         </div>
         ) : (
@@ -101,9 +101,8 @@ function PostExercise () {
           />
           {image ? (
             <figure>
-              <img
+              <img className="object-url-image"
                 src={URL.createObjectURL(image)}
-                style={{ width: "80px"}}
                 alt="Preview"
               />
             </figure>

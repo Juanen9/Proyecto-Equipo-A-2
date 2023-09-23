@@ -1,0 +1,39 @@
+.validate-message{
+    text-align: center;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    font-size: 1.7em;
+}
+
+.error-message{
+    text-align: center;
+    margin-top: 2em;
+    font-size: 1.7em;
+    padding: 1em;
+}
+
+.section-validate{
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.animation-container{
+    z-index: -1;
+}
+
+.animation-container-error{
+    z-index: -1;
+    width: 10em;
+    margin-left: 5em;
+}
+
+
+.lottie-animation{
+    z-index: -1;
+}
+
+.lottie-animation-error{
+    z-index: -1;
+}
