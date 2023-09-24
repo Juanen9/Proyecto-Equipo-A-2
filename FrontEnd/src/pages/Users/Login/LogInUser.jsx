@@ -56,7 +56,7 @@ function LogInUser() {
   return (
     <section className="login-form">
       {loading ? (
-        <div id="lottie-container" style={{ width: "100px", height: "100px" }}>
+        <div id="lottie-container">
           {/* Este div contendrá la animación mientras carga */}
         </div>
       ) : (

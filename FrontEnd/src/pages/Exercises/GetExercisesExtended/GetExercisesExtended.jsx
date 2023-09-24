@@ -21,8 +21,6 @@
         const {idParam} = useParams();
         const [deleted, setDeleted] = useState(false);
 
-        console.log(fav)
-
         const fetchData = async () => {
             try {
                 setLoading(true);

@@ -11,8 +11,6 @@ function LogedMenu ({handleLogOut, toggleMenu}) {
   const [active, setActive] = useState(false);
   const [tokenValidation, setTokenValidation] = useState("");
   const [role, setRole] = useState("");
-
-  //console.log(token);
   
 
   const fetchData = async () => {
