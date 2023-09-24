@@ -20,6 +20,7 @@
   
   .menu-button.active {
     background-color: black;
+    z-index: 100;
   }
   
   .menu {
@@ -31,7 +32,7 @@
     display: none;
     flex-direction: column;
     align-items: flex-start; /* Alinea el contenido a la izquierda */
-    z-index: 999;
+    z-index: 10;
     transition: transform 0.5s ease-in-out; /* Ralentiza la animación */
     height: 300px; /* Aumenta la altura del menú */
     overflow: hidden; /* Oculta contenido fuera de la vista */
@@ -69,7 +70,7 @@
     display: flex;
     transform: translateX(0); /* Muestra el menú desde la izquierda */
     height: 100vh; /* Aumenta la altura del menú */
-    z-index: 1000;
+    z-index: 100;
   }
 
   .menu-button a button{

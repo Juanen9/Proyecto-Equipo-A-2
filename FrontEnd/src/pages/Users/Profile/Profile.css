@@ -3,12 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 2em;
-}
-
-.profile{
-    font-size: 2em;
-    margin-bottom: 1.5em;
+    margin-top: 1em;
 }
 
 .field-profile-password{
@@ -34,6 +29,13 @@
     align-items: center;
     gap: 2em;
     justify-content: end;
+    position: relative;
+    text-align: center;
+}
+
+.file-input-container-profile{
+    justify-content: center;
+    
 }
 
 .file-input-container-profile input[type="file"] {
@@ -44,21 +46,17 @@
     cursor: pointer;
   }
 
-.file-input-container-profile {
-    position: relative;
-    text-align: center;
-  }
 
-  .custom-file-upload-profile {
-    border: 0.3em solid gray;
+
+.custom-file-upload-profile {
     padding: 0.5em;
     cursor: pointer;
-    background-color: #f0f0f0;
-    border-radius: 0.5em;
+    align-items: center;
     font-weight: bold;
     display: flex;
     flex-direction: column;
     z-index: -1;
+    border-radius: 100%;
   }
 
 .button-edit-profile{
@@ -69,15 +67,38 @@
    border: none;
    border-radius: 0.5em;
    margin-top: 1em;
+   margin-bottom: 2em;
+   align-items: center;
 }
 
-.input-image{
-    display: flex;
-    flex-direction: column;
-}
+.input-image {
+    border: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
 
-.object-url-image{
-    width: 80px;
+  }
+
+.profile-object-url-image{
+    width: 8em;
+    height: 8em;
     z-index: -1;
     position: relative;
+    border-radius: 100%;
   }
+
+.div-button{
+    display: flex;
+    justify-content: center;
+}
+
+.profile-edit-icon{
+    position: absolute;
+    width: 2em;
+    height: 2em;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+
+}

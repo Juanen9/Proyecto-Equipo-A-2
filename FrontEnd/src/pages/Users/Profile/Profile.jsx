@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { getUserDataService, modifyUserService } from "../../../services";
 import "./Profile.css";
+import editIcon from "../../../assets/edit-icon.svg"
 
 function Profile() {
   const { token } = useContext(AuthContext);
@@ -54,27 +55,21 @@ function Profile() {
 
   return (
     <section className="edit-profile-form">
-      <h1 className="profile">Edit Profile</h1>
       <form onSubmit={handleForm} encType="multipart/form-data">
       <fieldset className="image-field-edit-profile file-input-container-profile">
-          {avatarUser ? ( // Mostrar la nueva imagen seleccionada (si existe)
-            <figure>
-              <img className="object-url-image"
+          <label className="custom-file-upload-profile" htmlFor="avatarUser">{avatarUser ? ( // Mostrar la nueva imagen seleccionada (si existe)
+              <img className="profile-object-url-image"
                 src={URL.createObjectURL(avatarUser)}
-                style={{ width: "100px" }}
                 alt="Preview"
               />
-            </figure>
           ) : prevValue[0] && prevValue[0].avatar ? ( // Mostrar la imagen de perfil existente solo si existe
-            <figure>
-              <img
+              <img className="profile-object-url-image"
                 src={`http://localhost:5173/public/avatarUser/${prevValue[0].avatar}`}
-                style={{ width: "100px" }}
                 alt="Preview"
               />
-            </figure>
           ) : null}
-          <label className="custom-file-upload-profile" htmlFor="avatarUser"><span>Avatar</span><span>User</span></label>
+          </label>
+
           <input className="input-image"
             type="file"
             name="avatarUser"
@@ -82,6 +77,7 @@ function Profile() {
             accept="image/*"
             onChange={(e) => setAvatarUser(e.target.files[0])} // Actualizar el estado cuando se selecciona una imagen
           />
+          <img src={editIcon} alt="edit picture icon" className="profile-edit-icon" />
         </fieldset>
       <fieldset className="field-profile-password">
           <label htmlFor="pwd">Password</label>
@@ -91,7 +87,9 @@ function Profile() {
           <label htmlFor="name">Name</label>
           <input type="text" name="name" id="name" onChange={(e) => setName(e.target.value)} placeholder={prevValue[0] ? prevValue[0]["user_name"] : ""} />
         </fieldset>
-        <button className="button-edit-profile">Modify</button>
+        <div className="div-button">
+          <button className="button-edit-profile">Modify</button>
+        </div>
         {error ? <p>{error}</p> : null}
         {loading ? <p>Modify Profile...</p> : null}
       </form>

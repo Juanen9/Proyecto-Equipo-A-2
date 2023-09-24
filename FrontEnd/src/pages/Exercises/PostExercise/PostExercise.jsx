@@ -101,7 +101,7 @@ function PostExercise () {
           />
           {image ? (
             <figure>
-              <img className="object-url-image"
+              <img className="post-exercise-object-url-image"
                 src={URL.createObjectURL(image)}
                 alt="Preview"
               />

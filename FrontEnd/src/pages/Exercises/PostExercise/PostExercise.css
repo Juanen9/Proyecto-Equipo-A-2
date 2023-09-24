@@ -102,8 +102,8 @@
     z-index: -1;
   }
 
-  .object-url-image{
-    width: 80px;
+  .post-exercise-object-url-image{
+    width: 15em;
     z-index: -1;
     position: relative;
   }
