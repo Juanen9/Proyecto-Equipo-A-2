@@ -31,6 +31,7 @@ function GetFavs () {
     return (
         <section className="favs-section">
             <h1 className="favs">Favs List</h1>
+            {favs.length === 0 ? <p>You have no favs exercises</p>: null}
                 {favs.map((e) => {
                     return <ul className="favs-card-container" key={e.id}> 
                         <li className="exercise-name-favs">{e["exercise_name"]}</li>

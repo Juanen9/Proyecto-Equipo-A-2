@@ -176,8 +176,8 @@ export const modifyUserService = async ({data, token, userId}) => {
     return json.data;
 }
 
-export const modifyExerciseService = async ({data, token, exerciseId}) => {
-    const response = await fetch(`http://localhost:3001/exercise/modify/${exerciseId}`, {
+export const modifyExerciseService = async ({data, token, idParam}) => {
+    const response = await fetch(`http://localhost:3001/exercise/modify/${idParam}`, {
         method: "PUT",
         body: data,
         headers: {

@@ -100,6 +100,20 @@
     border: none;
     border-radius: 0.5em;
   }
-  
 
+  .object-url-image-modify-exercise{
+    width: 10em;
+    height: 8em;
+    z-index: -1;
+    position: relative;
+  }
+  
+.edit-icon-modify{
+    position: absolute;
+    width: 2em;
+    height: 2em;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+}
   

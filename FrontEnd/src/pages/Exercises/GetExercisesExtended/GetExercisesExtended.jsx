@@ -1,6 +1,6 @@
     import { useContext, useEffect, useState } from "react";
     import { AuthContext } from "../../../context/AuthContext";
-    import { addFavService, addLikeService, deleteExerciseService, deleteFavService, deleteLikeService, getAllExercisesExtendedService, getFavsService, getLikesService } from "../../../services";
+    import { addFavService, addLikeService, deleteExerciseService, deleteFavService, deleteLikeService, getAllExercisesExtendedService, getFavsService, getLikesService, getUserDataService } from "../../../services";
     import { useNavigate, useParams } from "react-router-dom";
     import "./GetExercisesExtended.css"
     import backArrow from "../../../assets/back-arrow.svg"
@@ -20,6 +20,20 @@
         const [fav, setFav] = useState([]);
         const {idParam} = useParams();
         const [deleted, setDeleted] = useState(false);
+        const [tokenValidation, setTokenValidation] = useState("");
+        const [role, setRole] = useState("");
+
+        const fetchDataToken = async () => {
+            const data = await getUserDataService({token});
+            const tokenAdmin = data[0].token;
+            const role = data[0].role;
+            setTokenValidation(tokenAdmin);
+            setRole(role)
+          };
+
+          useEffect(() => {
+            fetchDataToken();
+          },[])
 
         const fetchData = async () => {
             try {
@@ -121,6 +135,16 @@
         const handleReturn = () => {
             navigate("/get-exercises");
         }
+
+        const handleModifyExerciseButton = async (idParam1) => {
+            try {
+                navigate(`/modify-exercise/${idParam1}`);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        }
         
 
         return (
@@ -151,7 +175,10 @@
             ): (
                 <p>Loading...</p>
             )}
-            {exercises.length > 0 && !deleted ?<button onClick={()=>handleDelete(exercises[0].id)} className="exercise-extended-delete">Delete</button>:null}
+            {tokenValidation == token && role == "admin" && (exercises.length > 0 && !deleted)  ? <div>
+                <button onClick={()=>handleDelete(exercises[0].id)} className="exercise-extended-delete">Delete</button>
+                <button onClick={() => handleModifyExerciseButton(exercises[0].id)}>Modify Exercise</button>
+                </div>:null}
             </section>
         )
     }

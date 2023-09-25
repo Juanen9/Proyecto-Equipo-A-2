@@ -18,7 +18,6 @@ function LogedMenu ({handleLogOut, toggleMenu}) {
     const tokenAdmin = data[0].token;
     const role = data[0].role;
     setTokenValidation(tokenAdmin);
-    console.log(data.token);
     setRole(role)
   }
 
