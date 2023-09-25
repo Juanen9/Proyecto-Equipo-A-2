@@ -20,14 +20,14 @@ const postExercise = async (req, res) => {
     if (!name || !description || !typology || !muscleGroup)
       return res
         .status(400)
-        .send(
-          "Es necesario cubrir todos los campos para subir un nuevo ejercicio."
+        .json(
+          {message: "Es necesario cubrir todos los campos para subir un nuevo ejercicio."}
         );
 
     if (req.userInfo.role !== "admin")
       return res
         .status(401)
-        .send("Sólo el usuario administrador puede cargar nuevos ejercicios.");
+        .json({message :"Sólo el usuario administrador puede cargar nuevos ejercicios."});
 
     const extensionImage = req.files.exercisePhoto.name.split(`.`)[1];
     if (
@@ -56,7 +56,7 @@ const postExercise = async (req, res) => {
 
     connect.release();
 
-    res.status(200).send({
+    res.status(200).json({
       status: "OK",
       message: "Ejercicio añadido correctamente",
     });

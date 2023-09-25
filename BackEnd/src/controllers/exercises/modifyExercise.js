@@ -18,19 +18,19 @@ const modifyExercise = async (req, res) => {
             `
     );
 
-    if(!exercise_name || !exercise_description || !typology || !muscle_group) return res.status(404).send('Es necesario introducir todos los campos para modificar los ejercicios.');
+    if(!exercise_name || !exercise_description || !typology || !muscle_group) return res.status(404).json({message: 'Es necesario introducir todos los campos para modificar los ejercicios.'});
 
     if (req.userInfo.role !== "admin")
       return res
         .status(401)
-        .send(
-          "Los entrenamientos solo pueden ser modificados por el usuario administrador."
+        .json(
+          {message: "Los entrenamientos solo pueden ser modificados por el usuario administrador."}
         );
 
     if (!idExercise)
       return res
         .status(400)
-        .send("Es necesario indicar el id del entrenamiento a modificar.");
+        .json({message: "Es necesario indicar el id del entrenamiento a modificar."});
 
     const [update] = await connect.query(
       `
@@ -41,7 +41,7 @@ const modifyExercise = async (req, res) => {
       [exercise_name, exercise_description, typology, muscle_group, idExercise]
     );
 
-    if (!req.files) return res.status(404).send('Es necesario introducir todos los campos para modificar los ejercicios.');
+    if (!req.files) return res.status(404).json({message: 'Es necesario introducir todos los campos para modificar los ejercicios.'});
 
     const extensionImage = req.files.exercisePhoto.name.split(`.`)[1];
     if (
@@ -50,7 +50,7 @@ const modifyExercise = async (req, res) => {
       extensionImage !== `jpeg` &&
       extensionImage !== `gif`
     ) {
-      return res.status(404).send(`Formato de imagen no válido`);
+      return res.status(404).json({message: `Formato de imagen no válido`});
     }
 
     
@@ -72,7 +72,7 @@ const modifyExercise = async (req, res) => {
     }
 
     connect.release();
-    res.status(200).send("Ejercicio modificado");
+    res.status(200).json({message: "Ejercicio modificado"});
   } catch (error) {
     console.error(error);
   }finally{
