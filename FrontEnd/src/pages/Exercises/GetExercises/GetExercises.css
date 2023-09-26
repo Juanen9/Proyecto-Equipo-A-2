@@ -1,3 +1,18 @@
+@keyframes getliked {
+    0% {
+      transform: scale(1);
+      fill: linear-gradient(to bottom, #FFFFFF);
+    }
+    50% {
+      transform: scale(1.2);
+      fill: linear-gradient(to bottom, #FF5733, #FFFFFF);
+    }
+    100% {
+      transform: scale(1);
+      fill: linear-gradient(to bottom, #FF5733);
+    }
+  }
+
 .get-exercise-section{
     display: flex;
     flex-direction: column;
@@ -40,9 +55,6 @@
     align-items: center;
 }
 
-.exercise-card-container button img{
-    width: 2em;
-}
 
 .exercise-card-container li:first-child{
     color: white;
@@ -57,8 +69,12 @@
     border-radius: 0.3em;
 }
 
-.exercise-card button{
-    width: 2em;
-    border: none;
-    background: none;
+.liked svg {
+    fill: red;
+}
+
+.disliked svg {
+    fill: transparent;
+    stroke: black;
+    stroke-width: 0.1em;
 }

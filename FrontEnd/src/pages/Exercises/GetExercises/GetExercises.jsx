@@ -3,8 +3,8 @@ import { AuthContext } from "../../../context/AuthContext";
 import { addLikeService, deleteLikeService, getAllExercisesService, getLikesService } from "../../../services";
 import { useNavigate } from "react-router-dom";
 import "./GetExercises.css";
-import likeIconWhite from "../../../assets/like-icon-white.svg"
-import likeIconRed from "../../../assets/like-icon-red.svg"
+import LikeIcon from '@mui/icons-material/FavoriteSharp';
+import IconButton from '@mui/material/IconButton';
 import lottie from "lottie-web"; // Importa lottie-web
 import animationData from "../../../assets/animation_lmltug6s.json"; // Importa tu archivo de animación JSON
 
@@ -73,7 +73,6 @@ function GetExercises() {
     }, [])
 
     const handleLike = async (id) => {
-        setTimeout(async () => {
         try {
             if (!liked.includes(id)) {
                 await addLikeService({ token, id });
@@ -85,7 +84,6 @@ function GetExercises() {
         } catch (error) {
             setError(error.message);
         }
-    }, 5000);
     }
 
     const handleImage = async (id) => {
@@ -127,9 +125,9 @@ function GetExercises() {
                         <li><img onClick={() => handleImage(e.id)} src={`http://localhost:5173/public/exercisePhoto/${e["photo"]}`} alt={e["description"]} /></li>
                         <div className="exercise-card-container">
                             <li>{e["exercise_name"]}</li>
-                            <button onClick={() => handleLike(e.id)}>
-                                <img src={liked.includes(e.id) ? likeIconRed : likeIconWhite} alt="like icon" />
-                            </button>
+                            <IconButton onClick={() => handleLike(e.id)} className={liked.includes(e.id) ? 'liked' : 'disliked'}>
+                                <LikeIcon/>
+                            </IconButton>
                         </div>
                     </ul>
                 )) : <p>Exercises not found</p>
