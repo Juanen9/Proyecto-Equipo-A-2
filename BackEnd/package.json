@@ -12,7 +12,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@hapi/joi": "^17.1.1",
+    "@mui/icons-material": "^5.14.11",
+    "@mui/material": "^5.14.11",
     "@sendgrid/mail": "^7.7.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",

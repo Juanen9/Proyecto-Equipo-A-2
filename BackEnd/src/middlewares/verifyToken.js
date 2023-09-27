@@ -23,7 +23,7 @@ const verifyToken = async (req, res, next) => {
     try {
       tokenInfo = jwt.verify(auth, process.env.SECRET_TOKEN);
     } catch (error) {
-      return res.status(401).send("Token no válido.");
+      return res.status(401).json({message:"Token no válido."});
     }
 
     try {
@@ -37,25 +37,16 @@ const verifyToken = async (req, res, next) => {
       );
 
       if (validationToken[0][0].token !== auth)
-        return res.status(400).send("Toquen caducado");
+        return res.status(400).send("Token caducado");
     } catch (error) {
       console.error(error);
     }
 
-    const [user] = await connect.query(
-      `
-                SELECT last_auth_updated
-                FROM users
-                WHERE id=?
-            `,
-      [tokenInfo.id]
-    );
+    const expirationTimeToken = tokenInfo.exp;
+    const creationTimeToken = tokenInfo.iat;
 
-    const lastAuthUpdate = new Date(user[0].lastAuthUpdate);
-    const timeStampCreateToken = new Date(tokenInfo.iat * 1000);
-      
-    if (timeStampCreateToken < lastAuthUpdate) {
-      return res.status(401).send("Token caducado");
+    if ((creationTimeToken - expirationTimeToken) * 3600 >= 24) {
+      return res.status(401).json({message:"Token expirado"});
     }
     req.userInfo = tokenInfo;
 

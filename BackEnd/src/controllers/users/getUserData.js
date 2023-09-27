@@ -22,7 +22,12 @@ const getUserData = async (req, res) => {
     );
 
     if (!data) return res.status(401).json({message: "No se encontró información del usuario."});
-      
+
+/*     res.send(data[0]["last_auth_updated"])
+
+    if (data[0]["last_auth_updated"]) return res.send */
+    
+    
     connect.release();
 
     res.status(200).json({
