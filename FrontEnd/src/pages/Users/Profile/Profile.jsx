@@ -70,7 +70,7 @@ function Profile() {
           ) : null}
           </label>
 
-          <input className="input-image"
+          <input className="input-image-profile"
             type="file"
             name="avatarUser"
             id="avatarUser"

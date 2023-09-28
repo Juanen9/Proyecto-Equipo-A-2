@@ -3,11 +3,11 @@
     import { addFavService, addLikeService, deleteExerciseService, deleteFavService, deleteLikeService, getAllExercisesExtendedService, getFavsService, getLikesService, getUserDataService } from "../../../services";
     import { useNavigate, useParams } from "react-router-dom";
     import "./GetExercisesExtended.css"
-    import backArrow from "../../../assets/back-arrow.svg"
-    import favIconWhite from "../../../assets/fav-icon-white.svg"
-    import favIconYellow from "../../../assets/fav-icon-yellow.svg"
-    import likeIconWhite from "../../../assets/like-icon-white.svg"
-    import likeIconRed from "../../../assets/like-icon-red.svg"
+    import BackArrow from '@mui/icons-material/KeyboardBackspaceSharp';
+    import LikeIcon from '@mui/icons-material/FavoriteSharp';
+    import IconButton from '@mui/material/IconButton';
+    import FavIcon from '@mui/icons-material/StarPurple500Sharp';
+import { Icon } from "@mui/material";
 
     function GetExercisesExtended () {
 
@@ -149,19 +149,26 @@
 
         return (
             <section className="exercise-extended-section">
-                <div className="exercise-extended-section-back-button">
-                    <button onClick={handleReturn} className="back-arrow-button"><img src={backArrow} alt="back arrow"/></button>
+                <div className="exercise-extended-container-back-button">
+                    <IconButton onClick={handleReturn} className="exercise-extended-back-button">
+                        <BackArrow/>
+                    </IconButton>
                 </div>
                     {exercises.length > 0 && !deleted ? 
                     (<ul className="exercise-extended-card">
                         <div className="fav-extended-button">
-                            <button onClick={()=>handleFav(exercises[0].id)}><img src={fav.includes(exercises[0].id)? favIconYellow:favIconWhite} alt="favorite icon" /></button>
+                            <IconButton onClick={() => handleFav(exercises[0].id)} className={fav.includes(exercises[0].id) ? 'fav' : 'unfav'}>
+                                <FavIcon/>
+                            </IconButton>
                         </div>
                             
                             <li><img src={`http://localhost:5173/public/exercisePhoto/${exercises[0]["photo"]}`} alt={exercises["description"]}/></li>
                         <div className="exercise-extended-card-container">
                             <li>{exercises[0]["exercise_name"]}</li>
-                            <button onClick={()=>handleLike(exercises[0].id)}><img src={liked.includes(exercises[0].id)? likeIconRed:likeIconWhite} alt="like icon"/></button>
+                            <IconButton onClick={() => handleLike(exercises[0].id)} className={liked.includes(exercises[0].id) ? 'liked' : 'disliked'}>
+                                <LikeIcon/>
+                            </IconButton>
+
                         </div>
                         <div className="typology-muscle">
                             <li>Typology: {exercises[0]["typology"]}</li>
@@ -175,10 +182,11 @@
             ): (
                 <p>Loading...</p>
             )}
-            {tokenValidation == token && role == "admin" && (exercises.length > 0 && !deleted)  ? <div>
+            {tokenValidation == token && role == "admin" && (exercises.length > 0 && !deleted)  ? 
+            <div className="exercise-extended-button-container">
                 <button onClick={()=>handleDelete(exercises[0].id)} className="exercise-extended-delete">Delete</button>
-                <button onClick={() => handleModifyExerciseButton(exercises[0].id)}>Modify Exercise</button>
-                </div>:null}
+                <button onClick={() => handleModifyExerciseButton(exercises[0].id)} className="exercise-extended-modify">Modify Exercise</button>
+            </div>:null}
             </section>
         )
     }

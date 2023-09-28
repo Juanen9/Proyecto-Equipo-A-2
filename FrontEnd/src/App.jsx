@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import './App.css'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 import HomePage from './pages/Users/HomePage/HomePage'
 import Register from './pages/Users/Register/Register'
 import RecoverPassword from './pages/Users/RecoverPassword/RecoverPassword'
@@ -22,9 +22,31 @@ import EditMail from './pages/Users/EditEmail/EditEmail'
 import UserValidation from './pages/Users/UserValidation/UserValidation'
 import EmailValidation from './pages/Users/EmailValidation/EmailValidation'
 import LogedPage from './pages/Users/LogedPage/LogedPage'
+import { AuthContext } from './context/AuthContext'
+import { getUserDataService } from './services'
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [info, setInfo] = useState("");
+  const {token} = useContext(AuthContext)
+  const navigate = useNavigate()
+  const fetchData = async () => {
+    try {
+      const data = await getUserDataService({ token });
+      setInfo(data)
+      if(typeof(info) === `string`){
+        localStorage.removeItem("token")
+        navigate("/")
+      }
+    } catch (error) {
+
+    }
+  }
+
+    useEffect(()=>{
+     fetchData()
+      },[])
+
 
   return (
     <>

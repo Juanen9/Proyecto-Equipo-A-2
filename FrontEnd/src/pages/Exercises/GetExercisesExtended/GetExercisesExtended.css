@@ -26,7 +26,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: -2.15em;
+    margin-top: -2.5em;
     font-weight: bold;
     align-items: center;
 }
@@ -62,21 +62,34 @@
     width: 2em;
 }
 
-.back-arrow-button{
-    border: none;
-    background-color: transparent;
-    margin-left: 1.5em;
+.exercise-extended-container-back-button{
+    display: flex;
+    width: 100%;
+    align-items: start;
+    margin-left: 4em;
     margin-top: 0.5em;
 }
 
-.back-arrow-button img{
-    width: 2.5em;
+.exercise-extended-back-button svg{
+    fill: black;
+    width: 1.5em;
+    height: 1.5em;
+
 }
+
 
 .exercise-extended-description{
     margin-top: 1em;
     width: 15em;
     margin-left: 1.4em;
+}
+
+.exercise-extended-button-container{
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    width: 100%;
+    margin-bottom: 2em;
 }
 
 .exercise-extended-delete{
@@ -88,6 +101,18 @@
     border: none;
     border-radius: 0.5em;
   }
+  
+  .exercise-extended-modify{
+    background-color: black;
+    color: white; 
+    width: 10em;
+    height: 3em;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.5em;
+  }
+
+
 
   .typology-muscle{
     display: flex;

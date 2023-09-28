@@ -18,6 +18,7 @@
 header{
     position: fixed;
     width: 100%;
+    z-index: 10;
     
 }
 
@@ -53,4 +54,28 @@ a {
 a:focus {
     outline: none !important;
 }
-  
+
+.liked svg {
+    fill: red;
+    stroke: red;
+    stroke-width: 0.1em;
+}
+
+.disliked svg {
+    fill: transparent;
+    stroke: black;
+    stroke-width: 0.1em;
+}
+
+.fav svg {
+    fill: yellow;
+    stroke: yellow;
+    stroke-width: 0.1em;
+}
+
+.unfav svg {
+    fill: transparent;
+    stroke: black;
+    stroke-width: 0.1em;
+}
+

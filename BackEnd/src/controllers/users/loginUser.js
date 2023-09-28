@@ -42,13 +42,22 @@ const loginUser = async (req, res) => {
         .status(404)
         .json({message: "El usuario no se encuentra registrado/activado."});
 
+
+    const currentTimestamp = Math.floor(Date.now() / 1000);
+    const expirationTimestamp = currentTimestamp + 1 * 30; 
+
+    
     const info = {
       id: user[0].id,
       role: user[0].role,
+      iat: currentTimestamp,
+      exp: expirationTimestamp,
     };
 
-    const token = jwt.sign(info, process.env.SECRET_TOKEN, { expiresIn: "1d" });
+  
+    const token = jwt.sign(info, process.env.SECRET_TOKEN);
 
+    
     const [insertToken] = await connect.query(
       `
                 UPDATE users 

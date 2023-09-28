@@ -23,7 +23,7 @@ const verifyToken = async (req, res, next) => {
     try {
       tokenInfo = jwt.verify(auth, process.env.SECRET_TOKEN);
     } catch (error) {
-      return res.status(401).json({message:"Token no válido."});
+      return res.status(401).send("Token no válido.");
     }
 
     try {
@@ -42,12 +42,6 @@ const verifyToken = async (req, res, next) => {
       console.error(error);
     }
 
-    const expirationTimeToken = tokenInfo.exp;
-    const creationTimeToken = tokenInfo.iat;
-
-    if ((creationTimeToken - expirationTimeToken) * 3600 >= 24) {
-      return res.status(401).json({message:"Token expirado"});
-    }
     req.userInfo = tokenInfo;
 
     next();

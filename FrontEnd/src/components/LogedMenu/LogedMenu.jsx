@@ -13,12 +13,18 @@ function LogedMenu ({handleLogOut, toggleMenu}) {
   const [role, setRole] = useState("");
   
 
+
   const fetchData = async () => {
-    const data = await getUserDataService({token});
-    const tokenAdmin = data[0].token;
-    const role = data[0].role;
-    setTokenValidation(tokenAdmin);
-    setRole(role)
+    try {
+      const data = await getUserDataService({token});
+      const tokenAdmin = data[0].token;
+      const role = data[0].role;
+      setTokenValidation(tokenAdmin);
+      setRole(role)
+    } catch (error) {
+      
+    }
+
   }
 
   useEffect(() => {

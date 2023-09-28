@@ -50,9 +50,10 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: -2.5em;
+    margin-top: -2.9em;
     font-weight: bold;
     align-items: center;
+    
 }
 
 
@@ -61,20 +62,11 @@
     background-color: black;
     border-radius: 0 0.4em 0 0.3em;
     width: 6em;
-    padding: 0.3em;
+    padding: 0.35em;
+    margin-top: 0.3em;
 }
 
 .exercise-card img{
     width: 18em;
     border-radius: 0.3em;
-}
-
-.liked svg {
-    fill: red;
-}
-
-.disliked svg {
-    fill: transparent;
-    stroke: black;
-    stroke-width: 0.1em;
 }
