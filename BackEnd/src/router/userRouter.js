@@ -13,9 +13,11 @@ const {
   recoverPassword,
   resetPassword,
   getUserData,
-  activateEmail
+  activateEmail,
+  checkTokenValidity
 } = require("../controllers/users");
 
+router.get("/user/check-token", checkTokenValidity);
 router.get("/user/email-validate/:emailCode", activateEmail);
 router.get("/user/validate/:regCode", activateUser);
 router.get("/get-user", verifyToken, getUserData)

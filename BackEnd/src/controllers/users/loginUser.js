@@ -43,8 +43,8 @@ const loginUser = async (req, res) => {
         .json({message: "El usuario no se encuentra registrado/activado."});
 
 
-    const currentTimestamp = Math.floor(Date.now() / 1000);
-    const expirationTimestamp = currentTimestamp + 1 * 30; 
+    const currentTimestamp = Date.now();
+    const expirationTimestamp = currentTimestamp + 18 * 3600 * 1000; 
 
     
     const info = {
@@ -54,7 +54,6 @@ const loginUser = async (req, res) => {
       exp: expirationTimestamp,
     };
 
-  
     const token = jwt.sign(info, process.env.SECRET_TOKEN);
 
     

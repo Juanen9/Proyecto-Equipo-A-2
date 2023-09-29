@@ -368,3 +368,15 @@ export const getOrderLikesService = async ({token}) => {
     
       return json.data;
 }
+
+export const checkTokenValidity = async ({token}) => {
+    const response = await fetch(`http://localhost:3001/user/check-token`, {
+        headers: {
+            auth: token
+        }
+    });
+
+    const json = await response.json();
+    
+      return json.data;
+}

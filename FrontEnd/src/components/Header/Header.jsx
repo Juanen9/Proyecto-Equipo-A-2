@@ -4,6 +4,7 @@ import "./Header.css";
 import LogedMenu from "../LogedMenu/LogedMenu";
 import { AuthContext } from "../../context/AuthContext";
 import Menu from "./Menu/Menu";
+import { checkTokenValidity } from "../../services";
 
 function Header() {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -16,7 +17,15 @@ function Header() {
     setLog(token)
   },[token])
 
-  const toggleMenu = () => {
+  const toggleMenu = async () => {
+    if (token) {
+      const isValid = await checkTokenValidity({token});
+      if (!isValid) {
+        localStorage.removeItem("token");
+        setLog("");
+        navigate("/login");
+      }
+    }
     setMenuVisible(!menuVisible);
   };
 

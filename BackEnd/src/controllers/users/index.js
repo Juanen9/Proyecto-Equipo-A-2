@@ -7,6 +7,7 @@ const recoverPassword = require("./recoverPassword");
 const resetPassword = require("./resetPassword");
 const getUserData = require("../users/getUserData");
 const activateEmail = require("../../controllers/users/activateEmail");
+const checkTokenValidity = require("../users/checkTokenValidity");
 
 
 module.exports = {
@@ -18,5 +19,6 @@ module.exports = {
   recoverPassword,
   resetPassword,
   getUserData,
-  activateEmail
+  activateEmail,
+  checkTokenValidity
 };
