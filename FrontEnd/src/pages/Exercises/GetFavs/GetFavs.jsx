@@ -35,7 +35,7 @@ function GetFavs () {
                 {favs.map((e) => {
                     return <ul className="favs-card-container" key={e.id}> 
                         <li className="exercise-name-favs">{e["exercise_name"]}</li>
-                        <li><img src={`http://localhost:5173/public/exercisePhoto/${e["photo"]}`} alt={e["exercise_description"]}/></li>
+                        <li className="exercise-fav-photo"><img src={`http://localhost:5173/public/exercisePhoto/${e["photo"]}`} alt={e["exercise_description"]}/></li>
                         <li className="exercise-description-favs">{e["exercise_description"]}</li>
                     </ul>
                 })}

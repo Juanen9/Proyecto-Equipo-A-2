@@ -61,15 +61,16 @@
 .file-input-container {
     position: relative;
     text-align: center;
+    gap:1.5em;
   }
   
   /* Ocultar el input de archivo */
   .file-input-container input[type="file"] {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    cursor: pointer;
+    border: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
   }
   
   /* Estilo personalizado para el botón de selección de archivo */
@@ -103,7 +104,8 @@
   }
 
   .post-exercise-object-url-image{
-    width: 15em;
+    width: 8em;
+    height: 8em;
     z-index: -1;
     position: relative;
   }

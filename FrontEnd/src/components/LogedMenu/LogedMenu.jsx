@@ -49,7 +49,6 @@ function LogedMenu ({handleLogOut, toggleMenu}) {
             <>
               <li className="menu-item"><Link to={"/post-training"} onClick={toggleMenu}>Post Training</Link></li>
               <li className="menu-item"><Link to={"/post-exercise"} onClick={toggleMenu}>Post Exercise</Link></li>
-              <li className="menu-item"><Link to={"/modify-exercise"} onClick={toggleMenu}>Modify Exercise</Link></li>
             </>
           : null}
           <li className="menu-item menu-button"><LogOut handleLogOut={handleLogOut} onClick={toggleMenu}/></li>

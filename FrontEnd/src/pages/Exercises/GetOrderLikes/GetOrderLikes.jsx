@@ -33,7 +33,7 @@ function GetOrderLikes () {
                 {order.map((e, index) => {
                     return <ul className="favs-card-container" key={index}> 
                         <li className="exercise-name-favs">{e.likes} ❤️</li>
-                        <li><img src={`http://localhost:5173/public/exercisePhoto/${e.photo}`} alt={e["exercise_name"]}/></li>
+                        <li className="exercise-fav-photo"><img src={`http://localhost:5173/public/exercisePhoto/${e.photo}`} alt={e["exercise_name"]}/></li>
                         <li className="exercise-description-favs">{e["exercise_name"]}</li>
                     </ul>
                 })}

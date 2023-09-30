@@ -44,7 +44,7 @@ const loginUser = async (req, res) => {
 
 
     const currentTimestamp = Date.now();
-    const expirationTimestamp = currentTimestamp + 18 * 3600 * 1000; 
+    const expirationTimestamp = currentTimestamp + (18 * 3600 * 1000); 
 
     
     const info = {

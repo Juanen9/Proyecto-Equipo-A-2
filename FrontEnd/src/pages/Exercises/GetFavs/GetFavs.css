@@ -26,3 +26,7 @@
 .exercise-description-favs{
     margin-top: 1em;
 }
+
+.exercise-fav-photo img {
+    max-width: 18em;
+}

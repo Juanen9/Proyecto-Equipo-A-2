@@ -1,15 +1,31 @@
-import React, { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
-import { postTrainingService } from "../../../services";
+import { getAllExercisesService, postTrainingService } from "../../../services";
 import "./PostTraining.css";
 
 function PostTraining() {
   const { token } = useContext(AuthContext);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [exerciseIds, setExerciseIds] = useState("");
+  const [exerciseIds, setExerciseIds] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [exercises, setExercises] = useState([]);
+
+  const fetchData = async () => {
+    try {
+        const data = await getAllExercisesService({ token });
+        setExercises(data);
+        console.log(data);
+    } catch (error) {
+        setError(error.message);
+    }
+}
+
+useEffect(() => {
+  fetchData();
+}, [])
+
 
   const handleForm = async (e) => {
     e.preventDefault();
@@ -17,9 +33,8 @@ function PostTraining() {
       setLoading(true);
 
       const exercisesArray = exerciseIds
-        .split(",") 
-        .map((id) => parseInt(id.trim()))
-
+        .map((id) => parseInt(id))
+      console.log(exercisesArray);
       await postTrainingService({
         name,
         description,
@@ -61,18 +76,22 @@ function PostTraining() {
           />
         </fieldset>
         <fieldset className="ids-field-post-training">
-          <label htmlFor="exerciseIds">Exercise IDs (comma-separated)</label>
-          <input
-            type="text"
-            name="exerciseIds"
-            id="exerciseIds"
-            required
-            onChange={(e) => setExerciseIds(e.target.value)}
-          />
+          <label htmlFor="exerciseIds">Choose your exercises</label>
+          <select
+            multiple
+            value={exerciseIds}
+            onChange={(e) => setExerciseIds(Array.from(e.target.selectedOptions, (option) => option.value))}
+          >
+            {exercises.map((exercise) => (
+              <option key={exercise["id"]} value={exercise["id"]}>
+                {exercise["exercise_name"]}
+              </option>
+            ))}
+          </select>
         </fieldset>
         <button className="button-post-training">Post Training</button>
         {error ? <p>{error}</p> : null}
-        {loading ? <p>Posting exercise...</p> : null}
+        {loading ? <p>Posting training...</p> : null}
       </form>
     </section>
   );

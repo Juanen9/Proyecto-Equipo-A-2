@@ -121,30 +121,27 @@ function ModifyExercise() {
           />
         </fieldset>
         <fieldset className="image-field-edit-profile file-input-container-profile">
-          <label className="custom-file-upload-profile" htmlFor="exercisePhoto">
-            {previewImage ? (
-              <img
-                className="object-url-image-modify-exercise"
-                src={previewImage}
+          <label className="custom-file-upload-profile" htmlFor="exercisePhoto">{exercisePhoto ? ( // Mostrar la nueva imagen seleccionada (si existe)
+              <img className="profile-object-url-image"
+                src={URL.createObjectURL(exercisePhoto)}
                 alt="Preview"
               />
-            ) : exercises[0] && exercises[0].photo ? (
-              <img
-                className="object-url-image-modify-exercise"
+          ) : exercises[0] && exercises[0].photo ? ( 
+              <img className="profile-object-url-image"
                 src={`http://localhost:5173/public/exercisePhoto/${exercises[0].photo}`}
                 alt="Preview"
               />
-            ) : null}
+          ) : null}
           </label>
-          <input
-            className="input-image"
+
+          <input className="input-image-profile"
             type="file"
             name="exercisePhoto"
             id="exercisePhoto"
             accept="image/*"
-            onChange={handleImagePreview}
+            onChange={(e) => setExercisePhoto(e.target.files[0])} // Actualizar el estado cuando se selecciona una imagen
           />
-          <img src={editIcon} alt="edit picture icon" className="edit-icon-modify" />
+          <img src={editIcon} alt="edit picture icon" className="profile-edit-icon" />
         </fieldset>
         <button className="button-modify-exercise">Modify</button>
         {error ? <p>{error}</p> : null}

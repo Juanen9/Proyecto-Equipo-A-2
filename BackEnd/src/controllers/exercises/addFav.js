@@ -47,7 +47,6 @@ const addFav = async(req,res) => {
             status: 'OK',
             message: `Ejercicio ${exerciseName[0]["exercise_name"]} añadido a favoritos.`
         })
-        console.log(fav);
     } catch (error) {
         console.error(error);
     }finally{

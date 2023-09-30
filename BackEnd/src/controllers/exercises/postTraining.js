@@ -51,25 +51,18 @@ const postTraining = async (req, res) => {
     );
 
     for (const exerciseId of exercises) {
-      const [idExercises] = await connect.query(
-        `
-        SELECT exercise_name
-        FROM exercises 
-        WHERE id=?
-      `,
-        [exerciseId]
-      );
+      const [idExercises] = 
       await connect.query(
         `
                 INSERT INTO training_exercise(id_training, id_exercise)
                 VALUES(?,?)
             `,
-        [idTraining[0].id, idExercises[0].id]
+        [idTraining[0].id, exerciseId]
         
       );
-      console.log();
+
     }
-    connect.release(idTraining[0].id);
+    connect.release();
 
     res.status(200).json({
       status: "OK",

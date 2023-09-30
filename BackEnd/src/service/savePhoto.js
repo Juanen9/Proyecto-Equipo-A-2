@@ -11,7 +11,6 @@ const savePhoto = async (dataPhoto, dir) => {
   const photNameUnique = `${uuid.v4()}_${dataPhoto.name}`;
 
   const parentDir = path.resolve(__dirname, '../../..');
-  console.log(parentDir);
   
   await img.toFile(
     path.join(parentDir, process.env.UPLOADS_DIRECTORY + dir, photNameUnique)
