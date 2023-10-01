@@ -1,7 +1,8 @@
 .button-logout{
     background-color: white;
+    border: none;
     color: black; 
     width: 7em;
     height: 3em;
-    border-radius: 0.5em;
+    border-radius: 0.4em;
  }

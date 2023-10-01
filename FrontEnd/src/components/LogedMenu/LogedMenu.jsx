@@ -51,7 +51,7 @@ function LogedMenu ({handleLogOut, toggleMenu}) {
               <li className="menu-item"><Link to={"/post-exercise"} onClick={toggleMenu}>Post Exercise</Link></li>
             </>
           : null}
-          <li className="menu-item menu-button"><LogOut handleLogOut={handleLogOut} onClick={toggleMenu}/></li>
+          <li className="menu-logout"><LogOut handleLogOut={handleLogOut} onClick={toggleMenu}/></li>
         </ul>
     )
 }

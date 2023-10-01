@@ -2,6 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { getAllExercisesService, postTrainingService } from "../../../services";
 import "./PostTraining.css";
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 
 function PostTraining() {
   const { token } = useContext(AuthContext);
@@ -32,8 +35,7 @@ useEffect(() => {
     try {
       setLoading(true);
 
-      const exercisesArray = exerciseIds
-        .map((id) => parseInt(id))
+      const exercisesArray = exerciseIds.map((id) => parseInt(id));
       console.log(exercisesArray);
       await postTrainingService({
         name,
@@ -41,14 +43,27 @@ useEffect(() => {
         exercises: exercisesArray,
         token,
       });
-      e.target.reset();
-      setError(null)
+      setName("");
+      setDescription("");
+      setExerciseIds([]);
+      setError(null);
   
     } catch (error) {
       setError(error.message);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleCheckboxChange = (e) => {
+    const selectedValue = e.target.value;
+    setExerciseIds(prevState => {
+      if (prevState.includes(selectedValue)) {
+        return prevState.filter(id => id !== selectedValue);
+      } else {
+        return [...prevState, selectedValue];
+      }
+    });
   };
 
   return (
@@ -62,6 +77,7 @@ useEffect(() => {
             name="name"
             id="name"
             required
+            value={name} 
             onChange={(e) => setName(e.target.value)}
           />
         </fieldset>
@@ -72,24 +88,29 @@ useEffect(() => {
             name="description"
             id="description"
             required
+            value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
         </fieldset>
         <fieldset className="ids-field-post-training">
           <label htmlFor="exerciseIds">Choose your exercises</label>
-          <select
-            multiple
-            value={exerciseIds}
-            onChange={(e) => setExerciseIds(Array.from(e.target.selectedOptions, (option) => option.value))}
-          >
+          <FormGroup>
             {exercises.map((exercise) => (
-              <option key={exercise["id"]} value={exercise["id"]}>
-                {exercise["exercise_name"]}
-              </option>
+              <FormControlLabel
+                key={exercise.id}
+                control={
+                  <Checkbox
+                    checked={exerciseIds.includes(exercise.id.toString())}
+                    onChange={handleCheckboxChange}
+                    value={exercise.id}
+                  />
+                }
+                label={exercise.exercise_name}
+              />
             ))}
-          </select>
+          </FormGroup>
         </fieldset>
-        <button className="button-post-training">Post Training</button>
+        <button className="button-post-training" type="submit">Post Training</button>
         {error ? <p>{error}</p> : null}
         {loading ? <p>Posting training...</p> : null}
       </form>

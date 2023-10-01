@@ -56,12 +56,6 @@
     color: rgba(255, 255, 255, 0.7); /* Cambia el color del texto a un tono más claro */
   }
   
-  
-  .menu a {
-    text-decoration: none;
-    color: white;
-  }
-  
   .menu-button img {
     width: 20px; /* Ajusta el tamaño de la imagen SVG */
   }
@@ -70,6 +64,7 @@
     display: flex;
     transform: translateX(0); /* Muestra el menú desde la izquierda */
     height: 100vh; /* Aumenta la altura del menú */
+    width: 12em;
     z-index: 100;
   }
 
@@ -92,4 +87,39 @@
   
   .link-custom:focus {
     outline: none;
+  }
+
+  @media (min-width: 1024px) {
+    .menu-button {
+      display: none;
+      z-index: -10;
+    }
+    .menu{
+      display: flex !important;
+      flex-direction: row;
+      align-items: center;
+      z-index: 1;
+      position: relative;
+      width: auto;
+      height: 2.5em;
+    }
+    .menu ul{
+      display: flex;
+      flex-direction: row;
+      gap: 1em;
+    }
+
+    .menu.visible{
+      display: flex !important;
+      flex-direction: row;
+      z-index: 1;
+      position: relative;
+      width: auto;
+      height: 2em;
+    }
+    .menu-button.active {
+      display: none;
+      background-color: black;
+      z-index: -10;
+    }
   }

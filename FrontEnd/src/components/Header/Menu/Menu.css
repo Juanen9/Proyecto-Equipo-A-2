@@ -1,5 +1,7 @@
 .menu-button-started{
     background-color: white;
+    border: none;
+    border-radius: 0.4em;
 }
 
 .menu-button-started-link{
