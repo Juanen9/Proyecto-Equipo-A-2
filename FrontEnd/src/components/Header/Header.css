@@ -89,6 +89,13 @@
     outline: none;
   }
 
+  #basic-button{
+    font-size: 1em;
+    font-family: 'Kanit', sans-serif;
+    color: white;
+    text-transform: none;
+  }
+
   @media (min-width: 1024px) {
     .menu-button {
       display: none;
@@ -101,12 +108,18 @@
       z-index: 1;
       position: relative;
       width: auto;
-      height: 2.5em;
+      height: 2em;
     }
     .menu ul{
       display: flex;
       flex-direction: row;
       gap: 1em;
+    }
+
+    .menu-item{
+      display: flex;
+      align-items: center;
+      padding: 8px;
     }
 
     .menu.visible{
@@ -122,4 +135,11 @@
       background-color: black;
       z-index: -10;
     }
+    .menu-logout{
+      display: flex;
+      align-items: center;
+      margin-left: -0.2em;
+      padding: -2em;
+    }
+
   }

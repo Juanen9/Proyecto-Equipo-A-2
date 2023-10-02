@@ -7,7 +7,7 @@
     import LikeIcon from '@mui/icons-material/FavoriteSharp';
     import IconButton from '@mui/material/IconButton';
     import FavIcon from '@mui/icons-material/StarPurple500Sharp';
-import { Icon } from "@mui/material";
+    import { Icon } from "@mui/material";
 
     function GetExercisesExtended () {
 
@@ -133,7 +133,7 @@ import { Icon } from "@mui/material";
         }
 
         const handleReturn = () => {
-            navigate("/get-exercises");
+           window.history.back();
         }
 
         const handleModifyExerciseButton = async (idParam1) => {

@@ -4,6 +4,7 @@ import { postExerciseService } from "../../../services";
 import lottie from "lottie-web"; // Importa lottie-web
 import animationData from "../../../assets/animation_lmlvl2he.json";
 import "./PostExercise.css";
+import fotoEstandar from "../../../../public/exercisePhoto/fotoEstandar.png"
 
 function PostExercise () {
 
@@ -74,43 +75,54 @@ function PostExercise () {
       <h1 className="add-new-exercise">Add new Exercise</h1>
       {successMessage && <p>{successMessage}</p>}
       <form onSubmit={handleForm}>
-        <fieldset className="name-field-post-exercise">
-          <label htmlFor="name">Name</label>
-          <input type="text" name="name" id="name" required />
-        </fieldset>
-        <fieldset className="description-field-post-exercise">
-          <label htmlFor="description">Description</label>
-          <textarea type="text" name="description" id="description" required />
-        </fieldset>
-        <fieldset className="typology-field-post-exercise">
-          <label htmlFor="typology">Typology</label>
-          <input type="text" name="typology" id="typology" required />
-        </fieldset>
-        <fieldset className="muscleGroup-field-post-exercise">
-          <label htmlFor="muscleGroup">Muscle Group</label>
-          <input type="text" name="muscleGroup" id="muscleGroup" required />
-        </fieldset>
-        <fieldset className="image-field-post-exercise file-input-container">
-          <label htmlFor="exercisePhoto" className="custom-file-upload"><span>Select</span><span>Image</span></label>
-          <input required
-            type="file"
-            name="exercisePhoto"
-            id="exercisePhoto"
-            accept={"image/*"}
-            onChange={(e) => setImage(e.target.files[0])}
-          />
-          {image ? (
-            <figure>
-              <img className="post-exercise-object-url-image"
-                src={URL.createObjectURL(image)}
-                alt="Preview"
+        <div className="post-exercise-column">
+          <div className="post-exercise-column-container">
+            <fieldset className="image-field-post-exercise file-input-container">
+              <label htmlFor="exercisePhoto" className="custom-file-upload">
+              {image ? (
+                <figure>
+                  <img className="post-exercise-object-url-image"
+                    src={URL.createObjectURL(image)}
+                    alt="Preview"
+                  />
+                </figure>
+              ) : <>
+                <img src={fotoEstandar} alt="Foto de subida de imágenes" className="post-exercise-upload-image"/>
+                </>}
+                </label>
+              <input required
+                type="file"
+                name="exercisePhoto"
+                id="exercisePhoto"
+                accept={"image/*"}
+                onChange={(e) => setImage(e.target.files[0])}
               />
-            </figure>
-          ) : null}
-        </fieldset>
-        <button className="button-post-exercise">Post Exercise</button>
-        {error ? <p>{error}</p> : null}
-        {loading ? <p>posting exercise...</p> : null}
+            </fieldset>
+          </div>
+          <div className="post-exercise-column-container">
+            <fieldset className="name-field-post-exercise">
+              <label htmlFor="name">Name</label>
+              <input type="text" name="name" id="name" required />
+            </fieldset>
+            <fieldset className="description-field-post-exercise">
+              <label htmlFor="description">Description</label>
+              <textarea type="text" name="description" id="description" required />
+            </fieldset>
+            <fieldset className="typology-field-post-exercise">
+              <label htmlFor="typology">Typology</label>
+              <input type="text" name="typology" id="typology" required />
+            </fieldset>
+            <fieldset className="muscleGroup-field-post-exercise">
+              <label htmlFor="muscleGroup">Muscle Group</label>
+              <input type="text" name="muscleGroup" id="muscleGroup" required />
+            </fieldset>
+            <div className="post-exercise-column-button">
+            <button className="button-post-exercise">Post Exercise</button>
+            {error ? <p>{error}</p> : null}
+            {loading ? <p>posting exercise...</p> : null}
+            </div>
+          </div>
+        </div> 
       </form>
     </>
     )}

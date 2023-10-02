@@ -45,12 +45,8 @@
     display: flex;
     flex-direction: row;
     border: none;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-}
-
-.image-field-post-exercise label{
-    margin-bottom: 1em;
 }
 
 .image-field-post-exercise input{
@@ -75,10 +71,9 @@
   
   /* Estilo personalizado para el botón de selección de archivo */
   .custom-file-upload {
-    border: 0.3em solid gray;
-    padding: 0.5em;
+    border: none;
     cursor: pointer;
-    background-color: #f0f0f0;
+    background-color: none;
     border-radius: 0.5em;
     font-weight: bold;
     display: flex;
@@ -109,3 +104,40 @@
     z-index: -1;
     position: relative;
   }
+
+  .post-exercise-upload-image{
+    width: auto;
+    height: auto;
+    max-width: 8em;
+    z-index: -1;
+    position: relative;
+  }
+
+
+  @media (min-width: 1024px){
+    .post-exercise-column{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10em;
+      padding: 6em;
+      margin-top: -3em;
+    }
+
+    .post-exercise-column-container{
+      flex: 1;
+      min-width: 0;
+      align-items: center;
+    }
+
+    .post-exercise-object-url-image{
+      width: 100%;
+      height: 100%;
+      max-width: 50em;
+      max-height: 50em;
+    }
+    
+    .post-exercise-column-button{
+      text-align: end;
+      margin-top: 5em;
+    }
+}
