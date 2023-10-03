@@ -19,7 +19,6 @@ function PostTraining() {
     try {
         const data = await getAllExercisesService({ token });
         setExercises(data);
-        console.log(data);
     } catch (error) {
         setError(error.message);
     }

@@ -1,23 +1,33 @@
+import * as React from 'react';
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
-import { getUserDataService, modifyUserService } from "../../../services";
+import { getFavsService, getUserDataService} from "../../../services";
 import "./Profile.css";
-import editIcon from "../../../assets/edit-icon.svg"
+import Box from '@mui/material/Box';
+import { useTheme } from '@mui/material/styles';
+import MobileStepper from '@mui/material/MobileStepper';
+import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 
-function Profile() {
+
+function Profile(){
   const { token } = useContext(AuthContext);
-  const [pwd, setPwd] = useState("");
-  const [name, setName] = useState("");
-  const [avatarUser, setAvatarUser] = useState(null); // Estado para la imagen de perfil
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [prevValue, setPrevValue] = useState("");
+  const [value, setValue] = useState("");
+  const [favs, SetFavs] = useState([]);
+  const theme = useTheme();
+  const [activeStep, setActiveStep] = React.useState(0);
+  const maxSteps = favs.length;
 
   const fetchData = async () => {
     try {
       setLoading(true);
       const data = await getUserDataService({ token });
-      setPrevValue(data);
+      setValue(data);
     } catch (error) {
       setError(error.message);
     } finally {
@@ -25,76 +35,85 @@ function Profile() {
     }
   }
 
-  useEffect(() => {
-    fetchData();
-  }, [])
-
-  const handleForm = async (e) => {
-    e.preventDefault();
-
+  const fetchFavs = async () => {
     try {
-      setLoading(true);
-
-      const data = new FormData();
-
-      if (name) data.append("name", name);
-      if (avatarUser) data.append("avatarUser", avatarUser);
-      if (pwd) data.append("pwd", pwd);
-      const userId = prevValue[0].id
-      await modifyUserService({ data, token, userId });
-
-      e.target.reset();
-      setAvatarUser(null);
-      setError(null);
+      const dataFav = await getFavsService({token});
+      SetFavs(dataFav)
     } catch (error) {
       setError(error.message);
-    } finally {
-      setLoading(false);
     }
+  }
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
-  return (
-    <section className="edit-profile-form">
-      <form onSubmit={handleForm} encType="multipart/form-data">
-      <fieldset className="image-field-edit-profile file-input-container-profile">
-          <label className="custom-file-upload-profile" htmlFor="avatarUser">{avatarUser ? ( // Mostrar la nueva imagen seleccionada (si existe)
-              <img className="profile-object-url-image"
-                src={URL.createObjectURL(avatarUser)}
-                alt="Preview"
-              />
-          ) : prevValue[0] && prevValue[0].avatar ? ( // Mostrar la imagen de perfil existente solo si existe
-              <img className="profile-object-url-image"
-                src={`http://localhost:5173/public/avatarUser/${prevValue[0].avatar}`}
-                alt="Preview"
-              />
-          ) : null}
-          </label>
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };    
 
-          <input className="input-image-profile"
-            type="file"
-            name="avatarUser"
-            id="avatarUser"
-            accept="image/*"
-            onChange={(e) => setAvatarUser(e.target.files[0])} // Actualizar el estado cuando se selecciona una imagen
-          />
-          <img src={editIcon} alt="edit picture icon" className="profile-edit-icon" />
-        </fieldset>
-      <fieldset className="field-profile-password">
-          <label htmlFor="pwd">Password</label>
-          <input required type="password" name="pwd" id="pwd" onChange={(e) => setPwd(e.target.value)} />
-        </fieldset>
-        <fieldset className="field-profile-name">
-          <label htmlFor="name">Name</label>
-          <input type="text" name="name" id="name" onChange={(e) => setName(e.target.value)} placeholder={prevValue[0] ? prevValue[0]["user_name"] : ""} />
-        </fieldset>
-        <div className="div-button">
-          <button className="button-edit-profile">Modify</button>
-        </div>
-        {error ? <p>{error}</p> : null}
-        {loading ? <p>Modify Profile...</p> : null}
-      </form>
+  useEffect(() => {
+    fetchData();
+    fetchFavs();
+  }, [])
+
+
+
+  return (
+    <section className="profile-section">
+        <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
+            <Paper
+                square
+                elevation={0}
+                sx={{
+                display: 'flex',
+                alignItems: 'center',
+                height: 50,
+                pl: 2,
+                bgcolor: 'background.default',
+                }}
+            >
+            <Typography>{favs[activeStep] ? favs[activeStep]["exercise_name"]: null}</Typography>
+            </Paper>
+            <Box sx={{ height: 255, maxWidth: 400, width: '100%', p: 2 }}
+            >
+                {favs[activeStep] ? 
+                <img src={`http://localhost:5173/public/exercisePhoto/${favs[activeStep]["photo"]}`} alt={favs[activeStep]["exercise_description"]} className='profile-box-image'/>: null}
+            </Box>
+            <MobileStepper
+                variant="dots"
+                steps={maxSteps}
+                position="static"
+                activeStep={activeStep}
+                nextButton={
+                <Button
+                    size="small"
+                    onClick={handleNext}
+                    disabled={activeStep === maxSteps - 1}
+                >
+                    Next
+                    {theme.direction === 'rtl' ? (
+                    <KeyboardArrowLeft />
+                    ) : (
+                    <KeyboardArrowRight />
+                    )}
+                </Button>
+                }
+                backButton={
+                <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+                    {theme.direction === 'rtl' ? (
+                    <KeyboardArrowRight />
+                    ) : (
+                    <KeyboardArrowLeft />
+                    )}
+                    Back
+            </Button>
+            }
+        />
+        </Box>
     </section>
   );
 }
 
-export default Profile;
+
+export default Profile

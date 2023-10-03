@@ -1,0 +1,104 @@
+.edit-profile-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+}
+
+.field-profile-password{
+    margin-bottom: 3em;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.field-profile-name{
+    margin-bottom: 3em;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.image-field-edit-profile{
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: row;
+    border: none;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2em;
+    justify-content: end;
+    position: relative;
+    text-align: center;
+}
+
+.file-input-container-profile{
+    justify-content: center;
+    
+}
+
+.file-input-container-profile input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+
+
+.custom-file-upload-profile {
+    padding: 0.5em;
+    cursor: pointer;
+    align-items: center;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    z-index: -1;
+    border-radius: 100%;
+  }
+
+.button-edit-profile{
+   background-color: black;
+   color: white; 
+   width: 14em;
+   height: 3em;
+   border: none;
+   border-radius: 0.5em;
+   margin-top: 1em;
+   margin-bottom: 2em;
+   align-items: center;
+}
+
+.input-image-profile {
+    border: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+
+  }
+
+.profile-object-url-image{
+    width: 8em;
+    height: 8em;
+    z-index: -1;
+    position: relative;
+    border-radius: 100%;
+  }
+
+.div-button{
+    display: flex;
+    justify-content: center;
+}
+
+.profile-edit-icon{
+    position: absolute;
+    width: 2em;
+    height: 2em;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+
+}

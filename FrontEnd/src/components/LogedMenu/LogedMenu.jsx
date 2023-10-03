@@ -56,6 +56,8 @@ function LogedMenu ({handleLogOut, toggleMenu}) {
           <li className="menu-item"><Link to={"/get-exercises"} onClick={toggleMenu}>Exercises</Link></li>
           <li className="menu-item"><Link to={"/favs"} onClick={toggleMenu}>Exercises Favs</Link></li>
           <li className="menu-item"><Link to={"/order-likes"} onClick={toggleMenu}>Top Rated</Link></li>
+          <li className="menu-item"><Link to={"/profile"} onClick={toggleMenu}>Profile</Link></li>
+
           <li className="menu-item">
           <Button
             id="basic-button"
@@ -75,7 +77,7 @@ function LogedMenu ({handleLogOut, toggleMenu}) {
               'aria-labelledby': 'basic-button',
             }}
           >
-            <MenuItem onClick={handleClose}><Link to={"/profile"} onClick={toggleMenu}>Edit Profile</Link></MenuItem>
+            <MenuItem onClick={handleClose}><Link to={"/edit-profile"} onClick={toggleMenu}>Edit Profile</Link></MenuItem>
             <MenuItem onClick={handleClose}><Link to={"/edit-email"} onClick={toggleMenu}>Edit Email</Link></MenuItem>
             <MenuItem onClick={handleClose}><Link to={"/edit-password"} onClick={toggleMenu}>Edit Password</Link></MenuItem>
           </Menu>

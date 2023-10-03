@@ -7,6 +7,7 @@ import HomePage from './pages/Users/HomePage/HomePage'
 import Register from './pages/Users/Register/Register'
 import RecoverPassword from './pages/Users/RecoverPassword/RecoverPassword'
 import Profile from './pages/Users/Profile/Profile'
+import EditProfile from './pages/Users/EditProfile/EditProfile'
 import PostExercise from './pages/Exercises/PostExercise/PostExercise'
 import PostTraining from './pages/Exercises//PostTraining/PostTraining'
 import GetExercises from './pages/Exercises/GetExercises/GetExercises'
@@ -62,9 +63,10 @@ function App() {
           <Route path='/admin-register' element={<AdminRegister/>}/>
           <Route path='/recover-password' element={<RecoverPassword/>}/>
           <Route path='/reset-password' element={<ResetPassword/>}/>
+          <Route path='/profile' element={<Profile/>}/>
           <Route path='/edit-password' element={<EditPassword/>}/>
           <Route path='/edit-email' element={<EditMail/>}/>
-          <Route path='/profile' element={<Profile/>}/>
+          <Route path='/edit-profile' element={<EditProfile/>}/>
           <Route path='/post-exercise' element={<PostExercise/>}/>
           <Route path='/post-training' element={<PostTraining/>}/>
           <Route path='/get-exercises' element={<GetExercises/>}/>

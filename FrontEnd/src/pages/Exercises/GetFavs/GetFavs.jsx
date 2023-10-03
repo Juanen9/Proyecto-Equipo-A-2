@@ -24,6 +24,16 @@ function GetFavs () {
         }
     }
 
+    const handleImage = async (id) => {
+        try {
+            navigate(`/get-exercises-extended/${id}`);
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    }
+
     useEffect(() => {
         fetchData();
     },[])
@@ -35,7 +45,7 @@ function GetFavs () {
                 {favs.map((e) => {
                     return <ul className="favs-card-container" key={e.id}> 
                         <li className="exercise-name-favs">{e["exercise_name"]}</li>
-                        <li className="exercise-fav-photo"><img src={`http://localhost:5173/public/exercisePhoto/${e["photo"]}`} alt={e["exercise_description"]}/></li>
+                        <li className="exercise-fav-photo"><img onClick={() => handleImage(e.id)} src={`http://localhost:5173/public/exercisePhoto/${e["photo"]}`} alt={e["exercise_description"]}/></li>
                         <li className="exercise-description-favs">{e["exercise_description"]}</li>
                     </ul>
                 })}
