@@ -17,7 +17,9 @@ const getLikes = async(req, res) => {
         const [like] = await connect.query(
             `
                 SELECT *
-                FROM likes WHERE id_user=?
+                FROM exercises e
+                INNER JOIN likes l
+                ON l.id_exercise=e.id AND l.id_user=?
             `,
             [idUser]
         );

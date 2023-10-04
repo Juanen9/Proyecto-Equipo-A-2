@@ -56,21 +56,21 @@ function EditProfile() {
   return (
     <section className="edit-profile-form">
       <form onSubmit={handleForm} encType="multipart/form-data">
-      <fieldset className="image-field-edit-profile file-input-container-profile">
-          <label className="custom-file-upload-profile" htmlFor="avatarUser">{avatarUser ? ( // Mostrar la nueva imagen seleccionada (si existe)
-              <img className="profile-object-url-image"
+      <fieldset className="image-field-edit-profile file-input-container-edit-profile">
+          <label className="custom-file-upload-edit-profile" htmlFor="avatarUser">{avatarUser ? ( // Mostrar la nueva imagen seleccionada (si existe)
+              <img className="edit-profile-object-url-image"
                 src={URL.createObjectURL(avatarUser)}
                 alt="Preview"
               />
           ) : prevValue[0] && prevValue[0].avatar ? ( // Mostrar la imagen de perfil existente solo si existe
-              <img className="profile-object-url-image"
+              <img className="edit-profile-object-url-image"
                 src={`http://localhost:5173/public/avatarUser/${prevValue[0].avatar}`}
                 alt="Preview"
               />
           ) : null}
           </label>
 
-          <input className="input-image-profile"
+          <input className="input-image-edit-profile"
             type="file"
             name="avatarUser"
             id="avatarUser"
@@ -79,13 +79,13 @@ function EditProfile() {
           />
           <img src={editIcon} alt="edit picture icon" className="profile-edit-icon" />
         </fieldset>
-      <fieldset className="field-profile-password">
-          <label htmlFor="pwd">Password</label>
-          <input required type="password" name="pwd" id="pwd" onChange={(e) => setPwd(e.target.value)} />
-        </fieldset>
-        <fieldset className="field-profile-name">
+        <fieldset className="field-edit-profile-name">
           <label htmlFor="name">Name</label>
           <input type="text" name="name" id="name" onChange={(e) => setName(e.target.value)} placeholder={prevValue[0] ? prevValue[0]["user_name"] : ""} />
+        </fieldset>
+        <fieldset className="field-edit-profile-password">
+          <label htmlFor="pwd">Password</label>
+          <input required type="password" name="pwd" id="pwd" onChange={(e) => setPwd(e.target.value)} />
         </fieldset>
         <div className="div-button">
           <button className="button-edit-profile">Modify</button>

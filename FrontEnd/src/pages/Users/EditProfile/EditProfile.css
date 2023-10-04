@@ -6,14 +6,14 @@
     margin-top: 1em;
 }
 
-.field-profile-password{
+.field-edit-profile-password{
     margin-bottom: 3em;
     display: flex;
     flex-direction: column;
     border: none;
 }
 
-.field-profile-name{
+.field-edit-profile-name{
     margin-bottom: 3em;
     display: flex;
     flex-direction: column;
@@ -33,12 +33,12 @@
     text-align: center;
 }
 
-.file-input-container-profile{
+.file-input-container-edit-profile{
     justify-content: center;
     
 }
 
-.file-input-container-profile input[type="file"] {
+.file-input-container-edit-profile input[type="file"] {
     position: absolute;
     top: 0;
     left: 0;
@@ -48,7 +48,7 @@
 
 
 
-.custom-file-upload-profile {
+.custom-file-upload-edit-profile {
     padding: 0.5em;
     cursor: pointer;
     align-items: center;
@@ -71,7 +71,7 @@
    align-items: center;
 }
 
-.input-image-profile {
+.input-image-edit-profile {
     border: none;
     padding: 0;
     margin: 0;
@@ -80,7 +80,7 @@
 
   }
 
-.profile-object-url-image{
+.edit-profile-object-url-image{
     width: 8em;
     height: 8em;
     z-index: -1;
