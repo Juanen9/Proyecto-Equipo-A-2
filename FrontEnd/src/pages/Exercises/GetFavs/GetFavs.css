@@ -12,6 +12,7 @@
     margin-bottom: 1em;
 }
 
+
 .favs-card-container{
     border: solid 1px  black;
     box-shadow: black 2px 2px 4px;
@@ -29,4 +30,20 @@
 
 .exercise-fav-photo img {
     max-width: 18em;
+}
+
+@media (min-width: 1024px){
+    .fav-list-container{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 6em;
+    }
+
+    .favs-card-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        text-align: center;
+    }
 }

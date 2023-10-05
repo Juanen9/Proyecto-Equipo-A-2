@@ -25,6 +25,7 @@ import EmailValidation from './pages/Users/EmailValidation/EmailValidation'
 import LogedPage from './pages/Users/LogedPage/LogedPage'
 import { AuthContext } from './context/AuthContext'
 import { getUserDataService } from './services'
+import GetLikes from './pages/Exercises/GetLikes/GetLikes'
 
 
 function App() {
@@ -73,6 +74,7 @@ function App() {
           <Route path='/get-exercises-extended/:idParam' element={<GetExercisesExtended/>}/>
           <Route path='/modify-exercise/:idParam' element={<ModifyExercise/>}/>
           <Route path='/favs' element={<GetFavs/>}/>
+          <Route path='/likes' element={<GetLikes/>}/>
           <Route path='/order-likes' element={<GetOrderLikes/>}/>
           <Route path='/user-validation/:regCode' element={<UserValidation/>}/>
           <Route path='/email-validation/:emailCode' element={<EmailValidation/>}/>
