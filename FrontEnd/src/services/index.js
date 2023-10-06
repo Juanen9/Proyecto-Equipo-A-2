@@ -105,6 +105,22 @@ export const getAllExercisesService = async ({token}) => {
       return json.data;
 }
 
+export const getTraining = async ({token}) => {
+    const response = await fetch("http://localhost:3001/training/list", {
+        headers: {
+            auth: token
+        }
+    });
+
+    const json = await response.json();
+
+    if (!response.ok) {
+        throw new Error(json.message);
+      }
+    
+      return json.data;
+}
+
 export const getAllExercisesExtendedService = async ({token, idParam}) => {
     const response = await fetch(`http://localhost:3001/exercise/list-extended/${idParam}`, {
         headers: {

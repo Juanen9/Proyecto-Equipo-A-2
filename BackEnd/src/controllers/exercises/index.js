@@ -9,6 +9,7 @@ const addLike = require("./addLike");
 const deleteLike = require("./deleteLike");
 const getOrderLikes = require("./getOrderLikes");
 const addFav = require('./addFav');
+const getTraining = require('./getTraining');
 const getFav = require('./getFav');
 const deleteFavs = require ('./deleteFavs');
 const getLikes = require('./getLikes');
@@ -19,6 +20,7 @@ module.exports = {
   modifyExercise,
   deleteExercise,
   getExercises,
+  getTraining,
   getExercisesExtend,
   exerciseFilter,
   addLike,

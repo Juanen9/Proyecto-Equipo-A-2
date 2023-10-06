@@ -12,6 +12,7 @@ const {
   getExercises,
   getExercisesExtend,
   exerciseFilter,
+  getTraining,
   addLike,
   deleteLike,
   getOrderLikes,
@@ -22,6 +23,7 @@ const {
 } = require("../controllers/exercises");
 
 router.get("/exercise/list", verifyToken, getExercises);
+router.get("/training/list", verifyToken, getTraining)
 router.get(
   "/exercise/list-extended/:idExercise",
   verifyToken,

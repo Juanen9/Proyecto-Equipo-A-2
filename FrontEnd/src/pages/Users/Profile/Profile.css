@@ -22,12 +22,7 @@
 
 .profile-name {
     font-weight: bold;
-    font-size: 2em;
-    background-image: linear-gradient(to bottom, black, white);
-    background-size: cover;
-    background-position: center center;
-    
-
+    font-size: 2em;    
 }
 
 
@@ -144,16 +139,21 @@
     
     .profile-section{
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-evenly;
         padding: 2em;
         height: 100vh !important;
     } 
 
-
     .profile-images-container{
         display: flex;
         flex-direction: row;
+        gap: 10em;
+        margin-bottom: 4em;
+    }
+
+    .css-ahj2mt-MuiTypography-root{
+        display: flex;
         gap: 2em;
     }
 }

@@ -33,7 +33,6 @@ function GetFavs () {
     const handleImage = async (id) => {
         try {
             navigate(`/get-exercises-extended/${id}`);
-            console.log(id)
         } catch (error) {
             setError(error.message);
         } finally {

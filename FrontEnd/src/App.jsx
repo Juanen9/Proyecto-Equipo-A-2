@@ -26,6 +26,7 @@ import LogedPage from './pages/Users/LogedPage/LogedPage'
 import { AuthContext } from './context/AuthContext'
 import { getUserDataService } from './services'
 import GetLikes from './pages/Exercises/GetLikes/GetLikes'
+import GetTraining from './pages/Exercises/GetTraining/GetTraining'
 
 
 function App() {
@@ -72,6 +73,7 @@ function App() {
           <Route path='/post-training' element={<PostTraining/>}/>
           <Route path='/get-exercises' element={<GetExercises/>}/>
           <Route path='/get-exercises-extended/:idParam' element={<GetExercisesExtended/>}/>
+          <Route path='/get-training' element={<GetTraining/>}/>
           <Route path='/modify-exercise/:idParam' element={<ModifyExercise/>}/>
           <Route path='/favs' element={<GetFavs/>}/>
           <Route path='/likes' element={<GetLikes/>}/>

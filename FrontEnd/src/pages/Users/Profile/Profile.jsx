@@ -16,6 +16,7 @@ import LikeIcon from '@mui/icons-material/FavoriteSharp';
 import IconButton from '@mui/material/IconButton';
 import FavIcon from '@mui/icons-material/StarPurple500Sharp';
 import vestuario from '../../../assets/vestuario.jpg'
+import brush from '../../../assets/brush.png'
 
 function Profile(){
   const { token } = useContext(AuthContext);
@@ -39,7 +40,12 @@ function Profile(){
     height: 'auto',
   };
   
-
+  const brushFondo = {
+    backgroundImage: `url(${brush})`,
+    backgroundSize: 'cover',
+    width: 'auto'
+  };
+  
   const fetchData = async () => {
     try {
       setLoading(true);
@@ -61,6 +67,7 @@ function Profile(){
       setError(error.message);
     }
   }
+  
   const fetchLikes = async () => {
     try {
       const dataLike = await getLikesService({token});
@@ -131,14 +138,15 @@ const handleLikeClick = async (id) => {
                 src={`http://localhost:5173/public/avatarUser/${value[0]["avatar"]}`}
                 alt="Preview"
               />
-              <p className='profile-name'>{value[0]["user_name"]}</p>
-              <p className='profile-email'>{value[0]["email"]}</p>
+              <p className='profile-name' style={brushFondo}>{value[0]["user_name"]}</p>
+              <p className='profile-email'style={brushFondo}>{value[0]["email"]}</p>
               </>:null}
               
 
       </div>
       <div className='profile-images-container'>
         <div className='profile-favs-images'>
+          
           <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
               <Paper
                   square
@@ -151,7 +159,10 @@ const handleLikeClick = async (id) => {
                   bgcolor: 'background.default',
                   }}
               >
-              <Typography>{favs[activeStepFav] ? favs[activeStepFav]["exercise_name"]: null}</Typography>
+              <Typography>{favs[activeStepFav] ? 
+              <>
+              <FavIcon/>{favs[activeStepFav]["exercise_name"]}
+              </> : null}</Typography>
               </Paper>
               <Box sx={{ height: 255, maxWidth: 400, width: '100%', p: 2 }}
               >
@@ -203,7 +214,10 @@ const handleLikeClick = async (id) => {
                   bgcolor: 'background.default',
                   }}
               >
-              <Typography>{likes[activeStepLike] ? likes[activeStepLike]["exercise_name"]: null}</Typography>
+              <Typography>{likes[activeStepLike] ? 
+              <>
+              <LikeIcon/>{likes[activeStepLike]["exercise_name"]}
+              </>: null}</Typography>
               </Paper>
               <Box sx={{ height: 255, maxWidth: 400, width: '100%', p: 2 }}
               >

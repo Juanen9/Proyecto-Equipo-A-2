@@ -54,7 +54,7 @@ function LogedMenu ({handleLogOut, toggleMenu}) {
     return(
         <ul>
           <li className="menu-item"><Link to={"/get-exercises"} onClick={toggleMenu}>Exercises</Link></li>
-          <li className="menu-item"><Link to={"/favs"} onClick={toggleMenu}>Exercises Favs</Link></li>
+          <li className="menu-item"><Link to={"/get-training"} onClick={toggleMenu}>Trainings</Link></li>
           <li className="menu-item"><Link to={"/order-likes"} onClick={toggleMenu}>Top Rated</Link></li>
           <li className="menu-item"><Link to={"/profile"} onClick={toggleMenu}>Profile</Link></li>
 
