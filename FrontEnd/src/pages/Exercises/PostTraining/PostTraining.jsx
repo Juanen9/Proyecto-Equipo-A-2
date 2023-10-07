@@ -35,7 +35,7 @@ useEffect(() => {
       setLoading(true);
 
       const exercisesArray = exerciseIds.map((id) => parseInt(id));
-      console.log(exercisesArray);
+
       await postTrainingService({
         name,
         description,

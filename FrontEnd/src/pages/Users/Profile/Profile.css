@@ -80,51 +80,6 @@
 }
 
 
-.css-ahj2mt-MuiTypography-root{
-    color: white !important;
-    font-family: 'Kanit', sans-serif !important;
-    background-color: black !important;
-    font-weight: bold !important;
-}
-
-.css-1jabshk{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0 !important;
-    background-color: black;
-}
-
-.css-rh92k-MuiPaper-root-MuiMobileStepper-root{
-    background-color: black !important;
-    background: black !important;
-    color: white !important;
-}
-
-.css-zjf1nq-MuiPaper-root{
-    color: white !important;
-    font-family: 'Kanit', sans-serif !important;
-    background-color: black !important;
-    font-weight: bold !important;
-}
-
-.css-1knaqv7-MuiButtonBase-root-MuiButton-root{
-    color: white !important;
-    font-family: 'Kanit', sans-serif !important;
-}
-.css-26w9jf-MuiMobileStepper-dot{
-    background-color: white !important;
-}
-.css-114p2tk-MuiMobileStepper-dot{
-    background-color: grey !important;
-}
-
-.css-1x1xx5k{
-    max-width: 20em !important;
-    min-width: 20em;
-}
-
 @media (min-width: 1024px) {
     .profile-favs-images{
         display: flex;
@@ -155,5 +110,9 @@
     .css-ahj2mt-MuiTypography-root{
         display: flex;
         gap: 2em;
+    }
+    .css-1x1xx5k{
+        max-width: 20em !important;
+        min-width: 20em;
     }
 }

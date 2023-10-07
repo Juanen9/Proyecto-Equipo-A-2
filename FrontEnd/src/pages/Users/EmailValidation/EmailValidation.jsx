@@ -75,9 +75,9 @@ function EmailValidation () {
         
 
     return (
-    <section className="section-validate">
-      {validate ? <p className="validate-message">{validate.message}</p> : null}
-      {error ? <p className="error-message">{error}</p> : null}
+    <section className="email-section-validate">
+      {validate ? <p className="email-validate-message">{validate.message}</p> : null}
+      {error ? <p className="email-error-message">{error}</p> : null}
       {showAnimation && validate ? (
         <div className="animation-container">
           <div id="lottie-animation"></div>

@@ -71,9 +71,9 @@ function UserValidation() {
   }, [showAnimation, animationInitialized, showErrorAnimation, animationInitializedError]);
 
   return (
-    <section className="section-validate">
-      {validate ? <p className="validate-message">{validate.message}</p> : null}
-      {error ? <p className="error-message">{error}</p> : null}
+    <section className="user-section-validate">
+      {validate ? <p className="user-validate-message">{validate.message}</p> : null}
+      {error ? <p className="user-error-message">{error}</p> : null}
       {showAnimation && validate ? (
         <div className="animation-container">
           <div id="lottie-animation"></div>

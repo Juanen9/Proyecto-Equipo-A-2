@@ -1,0 +1,102 @@
+.training-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+}
+
+.training-title{
+    font-size: 2em;
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+
+.training-list-container{
+    display: flex;
+    flex-direction: column;
+    gap: 5em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.training-card-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-weight: bold;
+    align-items: center;
+}
+
+.training-list-container li{
+    list-style: none;
+}
+
+.training-name{
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+.training-description{
+    font-style: italic;
+    font-weight: 500;
+    margin-top: 0.5em;
+}
+
+.css-ahj2mt-MuiTypography-root{
+    color: white !important;
+    font-family: 'Kanit', sans-serif !important;
+    background-color: black !important;
+    font-weight: bold !important;
+}
+
+.css-1jabshk{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 !important;
+    background-color: black;
+}
+
+.css-rh92k-MuiPaper-root-MuiMobileStepper-root{
+    background-color: black !important;
+    background: black !important;
+    color: white !important;
+}
+
+.css-zjf1nq-MuiPaper-root{
+    color: white !important;
+    font-family: 'Kanit', sans-serif !important;
+    background-color: black !important;
+    font-weight: bold !important;
+}
+
+.css-1knaqv7-MuiButtonBase-root-MuiButton-root{
+    color: white !important;
+    font-family: 'Kanit', sans-serif !important;
+}
+.css-26w9jf-MuiMobileStepper-dot{
+    background-color: white !important;
+}
+.css-114p2tk-MuiMobileStepper-dot{
+    background-color: grey !important;
+}
+
+.css-1x1xx5k{
+    max-width: 18.75em;
+}
+
+@media (min-width: 1024px) {
+    .training-list-container{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 1440px) {
+    .training-list-container{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}

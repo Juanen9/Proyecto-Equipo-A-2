@@ -129,7 +129,7 @@ const handleLikeClick = async (id) => {
     fetchLikes();
   }, [])
 
-
+console.log(favs)
 
   return (
     <section className="profile-section" style={divStyle}>
