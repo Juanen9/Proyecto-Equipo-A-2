@@ -115,23 +115,25 @@ function GetExercises() {
                     <input id="filter" name="filter" type="text" placeholder="Search exercise..." onChange={handleFilter}></input>
                 </fieldset>
             </form>
-            {loading ? (
-                <div id="lottie-container">
-                    {/* Este div contendrá la animación mientras carga */}
-                </div>
-            ) : (
-                filterExercises.length > 0 ? filterExercises.map((e) => (
-                    <ul key={e.id} className="exercise-card">
-                        <li><img onClick={() => handleImage(e.id)} src={`http://localhost:5173/public/exercisePhoto/${e["photo"]}`} alt={e["description"]} /></li>
-                        <div className="exercise-card-container">
-                            <li>{e["exercise_name"]}</li>
-                            <IconButton onClick={() => handleLike(e.id)} className={liked.includes(e.id) ? 'liked' : 'disliked'}>
-                                <LikeIcon/>
-                            </IconButton>
+            <div className="exercise-card-border ">
+                    {loading ? (
+                        <div id="lottie-container">
+                            {/* Este div contendrá la animación mientras carga */}
                         </div>
-                    </ul>
-                )) : <p>Exercises not found</p>
-            )}
+                    ) :  ( 
+                        filterExercises.length > 0 ? filterExercises.map((e) => (  
+                            <ul key={e.id} className="exercise-card">
+                                <li>{e["exercise_name"]}</li>
+                                <li><img onClick={() => handleImage(e.id)} src={`http://localhost:5173/public/exercisePhoto/${e["photo"]}`} alt={e["description"]} /></li>
+                                <li className="exercise-card-container">
+                                    <IconButton onClick={() => handleLike(e.id)} className={liked.includes(e.id) ? 'liked' : 'disliked'}>
+                                        <LikeIcon/>
+                                    </IconButton>
+                                </li>
+                            </ul>
+                        )) : <p>Exercises not found</p>
+                    )}
+                </div>
         </section>
     )
 }

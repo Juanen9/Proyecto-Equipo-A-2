@@ -24,18 +24,19 @@
 .exercise-card{
     display: flex;
     flex-direction: column;
-    list-style: none;
+    justify-content: space-around;
+    align-items: center;
     text-align: center;
-    border: solid black 1px;
+    border: solid 1px  black;
+    box-shadow: black 2px 2px 4px;
     margin-bottom: 2em;
-    border-radius: 0.4em;
+    list-style: none;
 }
 
 .exercise-card-container{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    margin-top: -2.9em;
+    justify-content: center;
     font-weight: bold;
     align-items: center;
 }
@@ -52,5 +53,35 @@
 
 .exercise-card img{
     width: 18em;
-    border-radius: 0.3em;
+}
+
+@media (min-width: 1024px) {
+
+    .exercise-card-border {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 5em;
+        justify-content: space-around;
+    }
+
+    #lottie-container{
+        grid-column: span 3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    
+    
+    .exercise-card{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        text-align: center;
+        border: solid 1px  black;
+        box-shadow: black 2px 2px 4px;
+        margin-bottom: 2em;
+        list-style: none;
+    }
 }

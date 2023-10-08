@@ -1,6 +1,9 @@
+
 import { useState } from "react";
 import { registerUserService } from "../../../services";
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
+import 'sweetalert2/src/sweetalert2.scss'
 import "./Register.css"
 
 function Register () {
@@ -12,6 +15,7 @@ function Register () {
     const [pwd, setPwd] = useState("");
     const [pwd2, setPwd2] = useState("");
     const [error, setError] = useState("");
+    const [alert, setAlert] = useState(false);
 
 
     const handleForm = async (e) => {
@@ -24,7 +28,16 @@ function Register () {
         
         try{
             await registerUserService({name, email, pwd, pwd2});
-            navigate('/login');
+            Swal.fire({
+                title: 'Email sent',
+                text: 'Check your email',
+                icon: 'info',
+                confirmButtonText: 'Accept',
+                willClose: () => {
+                  navigate('/login');
+                }
+              });
+              
         }catch(error){
             setError(error.message);
         }

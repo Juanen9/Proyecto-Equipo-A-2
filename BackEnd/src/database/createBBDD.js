@@ -38,6 +38,25 @@ const createBBDD = async () => {
             );
             `
     );
+
+    const [nameExists] = await connect.query(
+      `
+      SELECT user_name
+      FROM users
+      WHERE user_name = 'admin'
+      `
+    );
+    
+    if (nameExists.length === 0) {
+      await connect.query(
+        `
+        INSERT INTO users (user_name, email, password, role, active)
+        VALUES ('admin', 'admin@admin.com', SHA2('123456.Admin',512), 'admin', 1);
+        `
+      );
+    }
+    
+
     console.log('Tabla "users" creada.');
 
     await connect.query(

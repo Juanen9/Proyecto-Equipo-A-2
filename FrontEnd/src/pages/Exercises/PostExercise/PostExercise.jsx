@@ -4,7 +4,7 @@ import { postExerciseService } from "../../../services";
 import lottie from "lottie-web"; // Importa lottie-web
 import animationData from "../../../assets/animation_lmlvl2he.json";
 import "./PostExercise.css";
-import fotoEstandar from "../../../../public/exercisePhoto/fotoEstandar.png"
+import fotoSubida from "../../../../src/assets/fotoSubida.png";
 
 function PostExercise () {
 
@@ -87,7 +87,7 @@ function PostExercise () {
                   />
                 </figure>
               ) : <>
-                <img src={fotoEstandar} alt="Foto de subida de imágenes" className="post-exercise-upload-image"/>
+                <img src={fotoSubida} alt="Foto de subida de imágenes" className="post-exercise-upload-image"/>
                 </>}
                 </label>
               <input required

@@ -17,6 +17,8 @@ import IconButton from '@mui/material/IconButton';
 import FavIcon from '@mui/icons-material/StarPurple500Sharp';
 import vestuario from '../../../assets/vestuario.jpg'
 import brush from '../../../assets/brush.png'
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
 
 function Profile(){
   const { token } = useContext(AuthContext);
@@ -107,6 +109,35 @@ const handleLikeClick = async (id) => {
   }
 }
 
+function stringToColor(string) {
+  let hash = 0;
+  let i;
+
+  /* eslint-disable no-bitwise */
+  for (i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  let color = '#';
+
+  for (i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += `00${value.toString(16)}`.slice(-2);
+  }
+  /* eslint-enable no-bitwise */
+
+  return color;
+}
+
+function stringAvatar(name) {
+  return {
+    sx: {
+      bgcolor: stringToColor(name),
+    },
+    children: `${name.split(' ')[0][0]}`,
+  };
+}
+
   const handleNextFav = () => {
     setActiveStepFav((prevActiveStepFav) => prevActiveStepFav + 1);
   };
@@ -133,17 +164,24 @@ console.log(favs)
 
   return (
     <section className="profile-section" style={divStyle}>
-      <div className='profile-user-data'>
-        {value[0] ? <><img
-                src={`http://localhost:5173/public/avatarUser/${value[0]["avatar"]}`}
-                alt="Preview"
-              />
+        <div className='profile-user-data'>
+          {value[0] ? (
+            <>
+              {value[0]["avatar"] ? (
+                <img
+                  src={`http://localhost:5173/public/avatarUser/${value[0]["avatar"]}`}
+                  alt="Preview"
+                />
+              ) : (
+                <Stack direction="row" spacing={2} >
+                  <Avatar {...stringAvatar(value[0]["user_name"])} style={{ width: '160px', height: '160px', fontSize: '6em' }}/>
+                </Stack>
+              )}
               <p className='profile-name' style={brushFondo}>{value[0]["user_name"]}</p>
-              <p className='profile-email'style={brushFondo}>{value[0]["email"]}</p>
-              </>:null}
-              
-
-      </div>
+              <p className='profile-email' style={brushFondo}>{value[0]["email"]}</p>
+            </>
+          ) : null}
+        </div>
       <div className='profile-images-container'>
         <div className='profile-favs-images'>
           
