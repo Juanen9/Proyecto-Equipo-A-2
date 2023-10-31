@@ -5,9 +5,10 @@ import BackArrow from '@mui/icons-material/KeyboardBackspaceSharp';
 import IconButton from '@mui/material/IconButton';
 import Carousel from '../../../components/Carousel/Carousel';
 import "./GetTraining.css";
+import { useNavigate } from "react-router-dom";
 
 function GetTraining () {
-
+    const navigate = useNavigate();
     const {token} = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
@@ -21,6 +22,7 @@ function GetTraining () {
             setTraining(data)
         } catch (error) {
             setError(error.message);
+            navigate("/")
         }finally{
             setLoading(false);
         }

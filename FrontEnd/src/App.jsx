@@ -22,7 +22,6 @@ import EditPassword from './pages/Users/EditPassword/EditPassword'
 import EditMail from './pages/Users/EditEmail/EditEmail'
 import UserValidation from './pages/Users/UserValidation/UserValidation'
 import EmailValidation from './pages/Users/EmailValidation/EmailValidation'
-import LogedPage from './pages/Users/LogedPage/LogedPage'
 import { AuthContext } from './context/AuthContext'
 import { getUserDataService } from './services'
 import GetLikes from './pages/Exercises/GetLikes/GetLikes'
@@ -33,22 +32,6 @@ function App() {
   const [info, setInfo] = useState("");
   const {token} = useContext(AuthContext)
   const navigate = useNavigate()
-  const fetchData = async () => {
-    try {
-      const data = await getUserDataService({ token });
-      setInfo(data)
-      if(typeof(info) === `string`){
-        localStorage.removeItem("token")
-        navigate("/")
-      }
-    } catch (error) {
-
-    }
-  }
-
-    useEffect(()=>{
-     fetchData()
-      },[])
 
 
   return (
@@ -59,7 +42,6 @@ function App() {
       <main> 
         <Routes>
           <Route path='/' element={<HomePage/>}/>
-          <Route path='/loged' element={<LogedPage/>}/>
           <Route path='/register' element={<Register/>}/>
           <Route path='/login' element={<LogInUser/>}/>
           <Route path='/admin-register' element={<AdminRegister/>}/>
@@ -80,7 +62,7 @@ function App() {
           <Route path='/order-likes' element={<GetOrderLikes/>}/>
           <Route path='/user-validation/:regCode' element={<UserValidation/>}/>
           <Route path='/email-validation/:emailCode' element={<EmailValidation/>}/>
-          <Route path='/*' element={<p>Página no encontrada</p>}/>
+          <Route path='/*' element={<h2 className='notFound-message'>Página no encontrada</h2>}/>
         </Routes>
       </main> 
       <footer> 

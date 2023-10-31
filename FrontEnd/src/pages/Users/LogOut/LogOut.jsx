@@ -5,7 +5,6 @@ import { AuthContext } from "../../../context/AuthContext";
 function LogOut ({handleLogOut}) {
 
     const {token} = useContext(AuthContext);
-    
 
     return(
         <button className="button-logout" onClick={handleLogOut}>Log Out</button>

@@ -4,8 +4,10 @@ import { getUserDataService, modifyUserService } from "../../../services";
 import lottie from "lottie-web"; // Importa lottie-web
 import animationData from "../../../assets/animation_lmltug6s.json"; // Importa tu archivo de animación JSON
 import "./EditPassword.css";
+import { useNavigate } from "react-router-dom";
 
 function EditPassword() {
+  const navigate = useNavigate();
   const { token } = useContext(AuthContext);
   const [pwd, setPwd] = useState("");
   const [pwd2, setPwd2] = useState("");
@@ -44,6 +46,7 @@ function EditPassword() {
       setPrevValue(data);
     } catch (error) {
       setError(error.message);
+      navigate("/")
     } finally {
       setLoading(false);
     }

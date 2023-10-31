@@ -3,8 +3,10 @@ import { AuthContext } from "../../../context/AuthContext";
 import { getUserDataService, modifyUserService } from "../../../services";
 import "./EditProfile.css";
 import editIcon from "../../../assets/edit-icon.svg"
+import { useNavigate } from "react-router-dom";
 
 function EditProfile() {
+  const navigate = useNavigate();
   const { token } = useContext(AuthContext);
   const [pwd, setPwd] = useState("");
   const [name, setName] = useState("");
@@ -20,6 +22,7 @@ function EditProfile() {
       setPrevValue(data);
     } catch (error) {
       setError(error.message);
+      navigate("/")
     } finally {
       setLoading(false);
     }
@@ -55,6 +58,7 @@ function EditProfile() {
 
   return (
     <section className="edit-profile-form">
+      <h1 className="edit-password">Edit Profile</h1>
       <form onSubmit={handleForm} encType="multipart/form-data">
       <fieldset className="image-field-edit-profile file-input-container-edit-profile">
           <label className="custom-file-upload-edit-profile" htmlFor="avatarUser">{avatarUser ? ( // Mostrar la nueva imagen seleccionada (si existe)

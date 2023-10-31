@@ -44,13 +44,13 @@ function LogInUser() {
       try {
         const token = await logInUserService({ email, pwd });
         login(token);
-        navigate("/loged");
+        navigate("/");
       } catch (error) {
         setError(error.message);
       } finally {
         setLoading(false); // Detiene la animación de carga después de completar la operación
       }
-    }, 5000);
+    }, 2000);
   };
 
   return (
@@ -87,9 +87,9 @@ function LogInUser() {
             </fieldset>
             <fieldset className="last-field">
               <div className="div-links">
-                <Link to={'/recover-password'}>Forgot password</Link>
+                <Link to={'/recover-password'} className="subrayado-log">Forgot password</Link>
                 <p>or</p>
-                <Link to={'/register'}>Create an account</Link>
+                <Link to={'/register'} className="subrayado-log">Create an account</Link>
               </div>
               <div className="div-button-login">
                 <button className="button-login" type="submit">Login</button>

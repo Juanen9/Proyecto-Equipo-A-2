@@ -4,8 +4,10 @@ import { getUserDataService, modifyUserService } from "../../../services";
 import lottie from "lottie-web"; // Importa lottie-web
 import animationData from "../../../assets/animation_lmltug6s.json";
 import "./EditEmail.css";
+import { useNavigate } from "react-router-dom";
 
 function EditMail() {
+  const navigate = useNavigate();
   const { token } = useContext(AuthContext);
   const [pwd, setPwd] = useState("");
   const [email, setEmail] = useState("");
@@ -42,6 +44,7 @@ function EditMail() {
       setPrevValue(data);
     } catch (error) {
       setError(error.message);
+      navigate("/")
     } finally {
       setLoading(false);
     }

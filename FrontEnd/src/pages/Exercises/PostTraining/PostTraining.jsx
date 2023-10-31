@@ -5,8 +5,10 @@ import "./PostTraining.css";
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import { useNavigate } from "react-router-dom";
 
 function PostTraining() {
+  const navigate = useNavigate;
   const { token } = useContext(AuthContext);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -21,6 +23,7 @@ function PostTraining() {
         setExercises(data);
     } catch (error) {
         setError(error.message);
+        navigate("/")
     }
 }
 

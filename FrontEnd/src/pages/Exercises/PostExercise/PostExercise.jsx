@@ -5,14 +5,29 @@ import lottie from "lottie-web"; // Importa lottie-web
 import animationData from "../../../assets/animation_lmlvl2he.json";
 import "./PostExercise.css";
 import fotoSubida from "../../../../src/assets/fotoSubida.png";
+import { useNavigate } from "react-router-dom";
+import { checkTokenValidity } from "../../../services"
 
 function PostExercise () {
-
+    const navigate = useNavigate();
     const {token} = useContext(AuthContext);
     const [image, setImage] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
+
+    const checkToken = async () => {
+      if (token) {
+        const isValid = await checkTokenValidity({token});
+        if (!isValid) {
+          navigate("/");
+        }
+      };
+    };
+
+    useEffect(()=>{
+      checkToken()
+    },[]);
 
     useEffect(() => {
       if (loading) {
@@ -34,6 +49,8 @@ function PostExercise () {
       }
     }, [loading]);
 
+    
+
     const handleForm = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -43,8 +60,6 @@ function PostExercise () {
   
             const data = new FormData(e.target);
             await postExerciseService({data, token});
-
-
             e.target.reset();
             setImage(null);
             setError(null);
@@ -53,14 +68,14 @@ function PostExercise () {
             setError(error.message);
             setTimeout(() => {
               setError(null);
-            }, 5000);
+            }, 2000);
         }finally{
             setLoading(false);
             setTimeout(() => {
               setSuccessMessage("");
-            }, 3000);
+            }, 2000);
         }
-      }, 5000);
+      }, 2000);
     }
 
 

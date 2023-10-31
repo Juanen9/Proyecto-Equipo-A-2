@@ -6,7 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 import Menu from "./Menu/Menu";
 import { checkTokenValidity } from "../../services";
 
-function Header() {
+function Header({logged, setLogged}) {
   const [menuVisible, setMenuVisible] = useState(false);
   const {token} = useContext(AuthContext);
   const [log, setLog] = useState("");
@@ -31,7 +31,7 @@ function Header() {
 
   const handleLogOut = () => {
     localStorage.removeItem("token");
-    setLog("")
+    setLog("");
     navigate("/");
 }
 

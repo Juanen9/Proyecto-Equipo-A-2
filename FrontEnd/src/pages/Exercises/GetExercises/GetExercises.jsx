@@ -44,10 +44,11 @@ function GetExercises() {
             setExercises(data);
         } catch (error) {
             setError(error.message);
+            navigate("/")
         } finally {
             setLoading(false);
         }
-    }, 5000);
+    }, 2000);
     }
 
     useEffect(() => {
@@ -65,7 +66,7 @@ function GetExercises() {
         } finally {
             setLoading(false);
         }
-    }, 5000);
+    }, 2000);
     }
 
     useEffect(() => {

@@ -57,3 +57,7 @@ a {
     width: 20em;
 
 }
+
+.subrayado-log{
+    text-decoration: underline;
+}
