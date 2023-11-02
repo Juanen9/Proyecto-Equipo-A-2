@@ -2,6 +2,7 @@ const postExercise = require("./postExercise");
 const postTraining = require("./postTraining");
 const modifyExercise = require("./modifyExercise");
 const deleteExercise = require("./deleteExercises");
+const deleteTraining = require("./deleteTraining");
 const getExercises = require("./getExercises");
 const getExercisesExtend = require("./getExercisesExtend");
 const exerciseFilter = require("./exerciseFilter");
@@ -19,6 +20,7 @@ module.exports = {
   postTraining,
   modifyExercise,
   deleteExercise,
+  deleteTraining,
   getExercises,
   getTraining,
   getExercisesExtend,

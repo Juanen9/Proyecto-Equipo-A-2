@@ -261,6 +261,23 @@ export const deleteExerciseService = async ({token, id}) => {
     return json.data;
 }
 
+export const deleteTrainingService = async ({token, id}) => {
+    const response = await fetch(`http://localhost:3001/training/delete/${id}`, {
+        method: "DELETE",
+        headers: {
+            auth: token,
+        },
+    });
+
+    const json = await response.json();
+
+    if(!response.ok){
+        throw new Error(json.message)
+    }
+
+    return json.data;
+}
+
 export const addFavService = async ({token, id}) => {
     const response = await fetch(`http://localhost:3001/exercise/add-fav/${id}`, {
         method: "POST",

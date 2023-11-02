@@ -97,7 +97,7 @@ function ModifyExercise() {
               ) : null}
               </label>
 
-              <input className="input-image-profile"
+              <input className="custom-file-upload-profile"
                 type="file"
                 name="exercisePhoto"
                 id="exercisePhoto"

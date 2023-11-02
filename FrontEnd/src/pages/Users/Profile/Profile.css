@@ -78,20 +78,30 @@
     width: 2.5em;
     height: 2.5em;
 }
-
+.carousel-title{
+    color: white;
+}
 
 @media (min-width: 1024px) {
     .profile-favs-images{
         display: flex;
+        align-items: center;
+        flex-direction: column;
     }
     
     .profile-likes-images{
         display: flex;
+        align-items: center;
+        flex-direction: column;
     }
     .profile-icons-container{
         display: none;
     }
-    
+    .image-not-found-profile{
+        max-width: 100%;
+        max-height: 100%
+    }
+
     .profile-section{
         display: flex;
         flex-direction: column;

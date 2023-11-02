@@ -9,6 +9,7 @@ const {
   postTraining,
   modifyExercise,
   deleteExercise,
+  deleteTraining,
   getExercises,
   getExercisesExtend,
   exerciseFilter,
@@ -39,6 +40,7 @@ router.post("/exercise/add-like/:idExercise", verifyToken, addLike);
 router.post("/exercise/add-fav/:idExercise", verifyToken, addFav);
 router.put("/exercise/modify/:idExercise", verifyToken, modifyExercise);
 router.delete("/exercise/delete/:idExercise", verifyToken, deleteExercise);
+router.delete("/training/delete/:idTraining", verifyToken, deleteTraining);
 router.delete("/exercise/delete-like/:idExercise", verifyToken, deleteLike);
 router.delete("/exercise/delete-favs/:idExercise", verifyToken, deleteFavs);
 

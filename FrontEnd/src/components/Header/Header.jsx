@@ -8,7 +8,7 @@ import { checkTokenValidity } from "../../services";
 
 function Header({logged, setLogged}) {
   const [menuVisible, setMenuVisible] = useState(false);
-  const {token} = useContext(AuthContext);
+  const {token, logOut} = useContext(AuthContext);
   const [log, setLog] = useState("");
   const navigate = useNavigate();
 
@@ -30,9 +30,9 @@ function Header({logged, setLogged}) {
   };
 
   const handleLogOut = () => {
-    localStorage.removeItem("token");
-    setLog("");
-    navigate("/");
+    logOut();
+    setLog("")
+    navigate("/")
 }
 
   return (

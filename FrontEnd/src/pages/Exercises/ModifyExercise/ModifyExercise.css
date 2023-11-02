@@ -11,6 +11,10 @@
     margin-bottom: 1em;
 }
 
+.custom-file-upload-profile{
+  display: none;
+}
+
 .field-exercise-id{
     margin-bottom: 2em;
     display: flex;

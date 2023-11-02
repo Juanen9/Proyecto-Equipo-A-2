@@ -13,6 +13,7 @@ import PostTraining from './pages/Exercises//PostTraining/PostTraining'
 import GetExercises from './pages/Exercises/GetExercises/GetExercises'
 import GetExercisesExtended from './pages/Exercises/GetExercisesExtended/GetExercisesExtended'
 import ModifyExercise from './pages/Exercises/ModifyExercise/ModifyExercise'
+import ModifyTraning from './pages/Exercises/ModifyTraining/ModifyTraining'
 import GetFavs from './pages/Exercises/GetFavs/GetFavs'
 import GetOrderLikes from './pages/Exercises/GetOrderLikes/GetOrderLikes'
 import AdminRegister from './pages/Users/AdminRegister/AdminRegister'
@@ -57,6 +58,7 @@ function App() {
           <Route path='/get-exercises-extended/:idParam' element={<GetExercisesExtended/>}/>
           <Route path='/get-training' element={<GetTraining/>}/>
           <Route path='/modify-exercise/:idParam' element={<ModifyExercise/>}/>
+          <Route path='/modify-training/:idParam' element={<ModifyTraning/>}/>
           <Route path='/favs' element={<GetFavs/>}/>
           <Route path='/likes' element={<GetLikes/>}/>
           <Route path='/order-likes' element={<GetOrderLikes/>}/>

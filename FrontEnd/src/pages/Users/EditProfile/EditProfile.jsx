@@ -1,9 +1,12 @@
+import * as React from 'react';
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { getUserDataService, modifyUserService } from "../../../services";
 import "./EditProfile.css";
 import editIcon from "../../../assets/edit-icon.svg"
 import { useNavigate } from "react-router-dom";
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
 
 function EditProfile() {
   const navigate = useNavigate();
@@ -14,6 +17,8 @@ function EditProfile() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [prevValue, setPrevValue] = useState("");
+
+
 
   const fetchData = async () => {
     try {
@@ -56,6 +61,35 @@ function EditProfile() {
     }
   };
 
+  function stringToColor(string) {
+    let hash = 0;
+    let i;
+  
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+      hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+  
+    let color = '#';
+  
+    for (i = 0; i < 3; i += 1) {
+      const value = (hash >> (i * 8)) & 0xff;
+      color += `00${value.toString(16)}`.slice(-2);
+    }
+    /* eslint-enable no-bitwise */
+  
+    return color;
+  }
+  
+  function stringAvatar(name) {
+    return {
+      sx: {
+        bgcolor: stringToColor(name),
+      },
+      children: `${name.split(' ')[0][0]}`,
+    };
+  }
+
   return (
     <section className="edit-profile-form">
       <h1 className="edit-password">Edit Profile</h1>
@@ -71,7 +105,9 @@ function EditProfile() {
                 src={`http://localhost:5173/public/avatarUser/${prevValue[0].avatar}`}
                 alt="Preview"
               />
-          ) : null}
+          ) : <Stack direction="row" spacing={2} >
+              <Avatar {...stringAvatar(prevValue[0] ? prevValue[0]["user_name"] : "")} style={{ width: '160px', height: '160px', fontSize: '6em' }}/>
+              </Stack>}
           </label>
 
           <input className="input-image-edit-profile"

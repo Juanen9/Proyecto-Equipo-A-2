@@ -56,6 +56,16 @@ const deleteExercise = async (req, res) => {
       [idExercise]
     );
 
+    const [deleteFavExer] = await connect.query(
+      `
+                DELETE 
+                FROM favs 
+                WHERE id_exercise=?
+            `,
+      [idExercise]
+    );
+
+
     const [deleteExer] = await connect.query(
       `
                 DELETE 

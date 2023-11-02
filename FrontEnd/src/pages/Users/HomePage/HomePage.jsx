@@ -16,6 +16,8 @@ function HomePage () {
           if (isValid) {
             setLogged(true)
           };
+        }else{
+          setLogged(false);
         };
       } catch (error) {
         setLogged(false)
@@ -24,7 +26,7 @@ function HomePage () {
 
   useEffect(()=>{
     checkToken()
-  });
+  },[token]);
 
     return (
         <>
