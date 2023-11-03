@@ -18,7 +18,8 @@ const modifyExercise = async (req, res) => {
             `
     );
 
-    if(!exercise_name || !exercise_description || !typology || !muscle_group) return res.status(404).json({message: 'Es necesario introducir todos los campos para modificar los ejercicios.'});
+    if (!exercise_name || !exercise_description || !typology || !muscle_group) return res.status(404).json({message: 'Es necesario introducir todos los campos para modificar los ejercicios.'});
+    
 
     if (req.userInfo.role !== "admin")
       return res
@@ -40,22 +41,18 @@ const modifyExercise = async (req, res) => {
             `,
       [exercise_name, exercise_description, typology, muscle_group, idExercise]
     );
-
-    if (!req.files) return res.status(404).json({message: 'Es necesario introducir todos los campos para modificar los ejercicios.'});
-
-    const extensionImage = req.files.exercisePhoto.name.split(`.`)[1];
-    if (
-      extensionImage !== `png` &&
-      extensionImage !== `jpg` &&
-      extensionImage !== `jpeg` &&
-      extensionImage !== `gif`
-    ) {
-      return res.status(404).json({message: `Formato de imagen no válido`});
-    }
-
     
 
     if (req.files && req.files.exercisePhoto) {
+      const extensionImage = req.files.exercisePhoto.name.split(`.`)[1];
+      if (
+        extensionImage !== `png` &&
+        extensionImage !== `jpg` &&
+        extensionImage !== `jpeg` &&
+        extensionImage !== `gif`
+      ) {
+        return res.status(404).json({message: `Formato de imagen no válido`});
+      }
       const exercisePhoto = await savePhoto(
         req.files.exercisePhoto,
         "/exercisePhoto"
