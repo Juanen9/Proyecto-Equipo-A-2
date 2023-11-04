@@ -206,7 +206,7 @@ console.log(favs)
               <Box sx={{ height: 255, maxWidth: 400, width: '100%', p: 2 }}
               >
                   {favs[activeStepFav] ? 
-                  <img onClick={() => handleImage(favs[activeStepFav]["id_exercise"])} src={`http://localhost:5173/public/exercisePhoto/${favs[activeStepFav]["photo"]}`} alt={favs[activeStepFav]["exercise_description"]} className='profile-box-image'/>: <img src={`http://localhost:5173/public/exercisePhoto/NoItem.png`} className='image-not-found-profile'/>}
+                  <img onClick={() => handleImage(favs[activeStepFav]["id_exercise"])} src={`http://localhost:5173/public/exercisePhoto/${favs[activeStepFav]["photo"]}`} alt={favs[activeStepFav]["exercise_description"]} className='profile-box-image'/>: <img src={`http://localhost:5173/public/exercisePhoto/noFavs.png`} className='image-not-found-profile'/>}
               </Box>
               <MobileStepper
                   variant="dots"
@@ -262,7 +262,7 @@ console.log(favs)
               <Box sx={{ height: 255, maxWidth: 400, width: '100%', p: 2 }}
               >
                   {likes[activeStepLike] ? 
-                  <img onClick={() => handleImage(likes[activeStepLike]["id_exercise"])} src={`http://localhost:5173/public/exercisePhoto/${likes[activeStepLike]["photo"]}`} alt={likes[activeStepLike]["exercise_description"]} className='profile-box-image'/>: <img src={`http://localhost:5173/public/exercisePhoto/NoItem.png`} className='image-not-found-profile'/>}
+                  <img onClick={() => handleImage(likes[activeStepLike]["id_exercise"])} src={`http://localhost:5173/public/exercisePhoto/${likes[activeStepLike]["photo"]}`} alt={likes[activeStepLike]["exercise_description"]} className='profile-box-image'/>: <img src={`http://localhost:5173/public/exercisePhoto/noLikes.png`} className='image-not-found-profile'/>}
               </Box>
               <MobileStepper
                   variant="dots"

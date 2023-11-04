@@ -16,7 +16,7 @@
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.7);
     color: rgb(255, 255, 255);
-    margin-top: 2em;
+    margin-top: 4.5em;
     gap: 1.5em;
 }
 
@@ -64,7 +64,7 @@
 .profile-icon {
     display: flex;
     gap: 1em;
-    ;
+
 }
 
 .profile-icon span{
@@ -99,7 +99,7 @@
     }
     .image-not-found-profile{
         max-width: 100%;
-        max-height: 100%
+        max-height: 100%;
     }
 
     .profile-section{

@@ -22,6 +22,7 @@ const {
   deleteFavs,
   getLikes
 } = require("../controllers/exercises");
+const modifyTraining = require("../controllers/exercises/modifyTraining");
 
 router.get("/exercise/list", verifyToken, getExercises);
 router.get("/training/list", verifyToken, getTraining)
@@ -39,6 +40,7 @@ router.post("/exercise/add-exercise", verifyToken, postExercise);
 router.post("/exercise/add-like/:idExercise", verifyToken, addLike);
 router.post("/exercise/add-fav/:idExercise", verifyToken, addFav);
 router.put("/exercise/modify/:idExercise", verifyToken, modifyExercise);
+router.put("/training/modify/:idTraining", verifyToken, modifyTraining);
 router.delete("/exercise/delete/:idExercise", verifyToken, deleteExercise);
 router.delete("/training/delete/:idTraining", verifyToken, deleteTraining);
 router.delete("/exercise/delete-like/:idExercise", verifyToken, deleteLike);

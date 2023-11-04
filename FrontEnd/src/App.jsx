@@ -1,4 +1,3 @@
-import { useContext, useEffect, useState } from 'react'
 import './App.css'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
@@ -23,17 +22,11 @@ import EditPassword from './pages/Users/EditPassword/EditPassword'
 import EditMail from './pages/Users/EditEmail/EditEmail'
 import UserValidation from './pages/Users/UserValidation/UserValidation'
 import EmailValidation from './pages/Users/EmailValidation/EmailValidation'
-import { AuthContext } from './context/AuthContext'
-import { getUserDataService } from './services'
 import GetLikes from './pages/Exercises/GetLikes/GetLikes'
 import GetTraining from './pages/Exercises/GetTraining/GetTraining'
 
 
 function App() {
-  const [info, setInfo] = useState("");
-  const {token} = useContext(AuthContext)
-  const navigate = useNavigate()
-
 
   return (
     <>

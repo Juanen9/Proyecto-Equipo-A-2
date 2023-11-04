@@ -16,6 +16,7 @@ function PostTraining() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [exercises, setExercises] = useState([]);
+  const [successMessage, setSuccessMessage] = useState("");
 
   const fetchData = async () => {
     try {
@@ -34,6 +35,8 @@ useEffect(() => {
 
   const handleForm = async (e) => {
     e.preventDefault();
+
+    
     try {
       setLoading(true);
 
@@ -49,7 +52,10 @@ useEffect(() => {
       setDescription("");
       setExerciseIds([]);
       setError(null);
-  
+      setSuccessMessage("Entrenamiento añadido correctamente 👍");
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 2000)
     } catch (error) {
       setError(error.message);
     } finally {
@@ -71,6 +77,7 @@ useEffect(() => {
   return (
     <section className="login-form-post-training">
       <h1 className="add-new-training">Add new Training</h1>
+      {successMessage && <p>{successMessage}</p>}
       <form onSubmit={handleForm}>
         <fieldset className="name-field-post-training">
           <label htmlFor="name">Name</label>

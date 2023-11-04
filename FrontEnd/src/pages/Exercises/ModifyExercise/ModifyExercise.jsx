@@ -50,6 +50,8 @@ function ModifyExercise() {
     }
   };
 
+
+
   const handleForm = async (e) => {
     e.preventDefault();
 
@@ -58,12 +60,21 @@ function ModifyExercise() {
 
       const data = new FormData();
 
-      if (exerciseName) data.append("exercise_name", exerciseName);
-      if (exerciseDescription) data.append("exercise_description", exerciseDescription);
-      if (typology) data.append("typology", typology);
-      if (muscleGroup) data.append("muscle_group", muscleGroup);
-      if (exercisePhoto) data.append("exercisePhoto", exercisePhoto);
+      if (exerciseName) {data.append("exercise_name", exerciseName)}
+        else{data.append("exercise_name", exercises[0]["exercise_name"])};
 
+      if (exerciseDescription) {data.append("exercise_description",exerciseDescription)}
+        else{data.append("exercise_description", exercises[0]["exercise_description"])};
+
+      if (typology) {data.append("typology", typology)}
+        else{data.append("typology", exercises[0]["typology"])};
+
+      if (muscleGroup) {data.append("muscle_group", muscleGroup)}
+        else{data.append("muscle_group", exercises[0]["muscle_group"])};
+
+      if (exercisePhoto) {data.append("exercisePhoto", exercisePhoto)}      
+      
+        
       await modifyExerciseService({ data, token, idParam });
 
       e.target.reset();
@@ -110,7 +121,7 @@ function ModifyExercise() {
             <fieldset className="field-exercise-name-modify">
               <label htmlFor="exercise_name">Exercise Name</label>
               <input
-                placeholder={exercises && exercises.length > 0 ? exercises[0]["exercise_name"] : ""}
+                defaultValue={exercises && exercises.length > 0 ? exercises[0]["exercise_name"] : ""}
                 type="text"
                 name="exercise_name"
                 id="exercise_name"
@@ -120,7 +131,7 @@ function ModifyExercise() {
             <fieldset className="field-description-modify">
               <label htmlFor="exercise_description">Exercise Description</label>
               <textarea
-                placeholder={exercises && exercises.length > 0 ? exercises[0]["exercise_description"] : ""}
+                defaultValue={exercises && exercises.length > 0 ? exercises[0]["exercise_description"] : ""}
                 type="text"
                 name="exercise_description"
                 id="exercise_description"
@@ -130,7 +141,7 @@ function ModifyExercise() {
             <fieldset className="field-typology-modify">
               <label htmlFor="typology">Typology</label>
               <input
-                placeholder={exercises && exercises.length > 0 ? exercises[0].typology : ""}
+                defaultValue={exercises && exercises.length > 0 ? exercises[0].typology : ""}
                 type="text"
                 name="typology"
                 id="typology"
@@ -140,7 +151,7 @@ function ModifyExercise() {
             <fieldset className="field-muscle-group-modify">
               <label htmlFor="muscle_group">Muscle Group</label>
               <input
-                placeholder={exercises && exercises.length > 0 ? exercises[0]["muscle_group"] : ""}
+                defaultValue={exercises && exercises.length > 0 ? exercises[0]["muscle_group"] : ""}
                 type="text"
                 name="muscle_group"
                 id="muscle_group"

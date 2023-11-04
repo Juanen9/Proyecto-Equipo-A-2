@@ -33,8 +33,14 @@
 }
 
 .training-name{
+    display: flex;
     font-size: 1.5em;
     margin-bottom: 0.5em;
+    width: 100%;
+}
+
+.training-name p{
+    margin-left: auto;
 }
 
 .training-description{
@@ -86,6 +92,7 @@
 .css-1x1xx5k{
     max-width: 18.75em;
 }
+
 
 @media (min-width: 1024px) {
     .training-list-container{

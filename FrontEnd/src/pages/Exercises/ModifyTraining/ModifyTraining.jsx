@@ -3,7 +3,6 @@ import { AuthContext } from "../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
-
 import "./ModifyTraining.css";
 
 function ModifyTraining() {
@@ -18,7 +17,6 @@ function ModifyTraining() {
             setExercises(data);
         } catch (error) {
             setError(error.message);
-            navigate("/")
         } finally {
             setLoading(false);
         }
@@ -36,9 +34,9 @@ function ModifyTraining() {
             </form>
             <div className="exercise-card-border ">
 
-                            <ul key={e.id} className="exercise-card">
-                                <li>{e["exercise_name"]}</li>
-                                <li><img onClick={() => handleImage(e.id)} src={`http://localhost:5173/public/exercisePhoto/${e["photo"]}`} alt={e["description"]} /></li>
+                            <ul className="exercise-card">
+                                <li>{["exercise_name"]}</li>
+                                <li><img onClick={() => handleImage()} src={`http://localhost:5173/public/exercisePhoto/${["photo"]}`} alt={["description"]} /></li>
                                 <li className="exercise-card-container">
                                 <IconButton aria-label="delete">
                                     <DeleteIcon />
