@@ -210,6 +210,24 @@ export const modifyExerciseService = async ({data, token, idParam}) => {
     return json.data;
 }
 
+export const modifyTrainingService = async ({data, token, idParam}) => {
+    const response = await fetch(`http://localhost:3001/training/modify/${idParam}`, {
+        method: "PUT",
+        body: data,
+        headers: {
+            auth: token,
+        },
+    });
+
+    const json = await response.json();
+
+    if(!response.ok){
+        throw new Error(json.message)
+    }
+
+    return json.data;
+}
+
 export const addLikeService = async ({token, id}) => {
     const response = await fetch(`http://localhost:3001/exercise/add-like/${id}`, {
         method: "POST",

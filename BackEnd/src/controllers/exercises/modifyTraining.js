@@ -3,9 +3,11 @@ const getDB = require("../../database/db");
 // Permite a los usuario con rol "admin" modificar entrenamientos \\
 
 const modifyTraining = async (req, res) => {
+
   let connect;
   let exercisesArray = [];
   let exercisesArrayDos = [];
+
   try {
     connect = await getDB();
 
@@ -45,11 +47,12 @@ const modifyTraining = async (req, res) => {
       for (let i = 0; i < exercises.length; i++) {
         exercisesArray.push(exercises[i]["id_exercise"]);
     }
-    exercisesArrayDos = newExercisesArray;
+    
+    exercisesArrayDos = JSON.parse(newExercisesArray);
 
-    const exercisesDelete = exercisesArray.filter(element => !newExercisesArray.includes(element));
+    const exerciseDelete = exercisesArray.filter(element => !newExercisesArray.includes(element));
  
-    const exercisesAdd = exercisesArrayDos.filter(element => !exercisesArray.includes(element));
+    const exercisesAdd = exercisesArrayDos.filter(element => !exercisesArray.includes(element))
 
 
     const [update] = await connect.query(
@@ -60,6 +63,35 @@ const modifyTraining = async (req, res) => {
             `,
       [training_name, training_description, idTraining]
     );
+
+  if(exercisesAdd.length > 0){
+
+    for (const exerciseId of exercisesAdd ){
+
+      const [updateAddExercises] = await connect.query(
+        `
+        INSERT INTO training_exercise(id_training, id_exercise)
+        VALUES(?,?)
+              `,
+        [idTraining, exerciseId]
+      );
+    }
+  }
+
+
+  if(exerciseDelete.length > 0 ){
+    for (const exerciseId of exerciseDelete ){
+
+      const [updateDeleteExercises] = await connect.query(
+        `
+        DELETE 
+        FROM training_exercise 
+        WHERE id_training=? AND id_exercise=?
+              `,
+        [idTraining, exerciseId]
+      );
+    }
+  }
     
     connect.release();
     res.status(200).json({message: exercisesAdd});
