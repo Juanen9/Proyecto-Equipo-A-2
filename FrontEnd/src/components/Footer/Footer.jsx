@@ -13,11 +13,11 @@ function Footer () {
             </div>
 
             <div className="media-links">            
-                <a className="social-media"><img src={twitter}></img></a>
-                <a className="social-media"><img src={facebook}></img></a>
-                <a className="social-media"><img src={youtube}></img></a>
-                <a className="social-media"><img src={instagram}></img></a>
-                <a className="social-media"><img src={tiktok}></img></a>
+                <a className="social-media" href="https://www.twitter.com" target="_blank"><img src={twitter} alt="Twitter" /></a>
+                <a className="social-media" href="https://www.facebook.com" target="_blank"><img src={facebook} alt="facebook" ></img></a>
+                <a className="social-media" href="https://www.youtube.com" target="_blank"><img src={youtube} alt="youtube" ></img></a>
+                <a className="social-media" href="https://www.instagram.com" target="_blank"><img src={instagram} alt="instagram" ></img></a>
+                <a className="social-media" href="https://www.tiktok.com" target="_blank"><img src={tiktok} alt="tiktok" ></img></a>
             </div>
 
         </section>    

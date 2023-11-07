@@ -1,0 +1,49 @@
+.modifytraining-back-button{
+    display: flex;
+    width: 100%; 
+}
+
+.modifytraining-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+}
+
+.modifytraining-description{
+    font-size: 1.2em;
+    text-align: center;
+    font-weight: 300;
+
+}
+
+.modifytraining-name-field{
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    border: none;
+
+}
+
+.modifytraining-name{
+    font-size: 1.5em;
+    text-align: center;
+}
+.modifytraining-add{
+    border: none;
+    margin-bottom: 1.2em;
+}
+.modifytraining-button-container{
+    margin-bottom: 4em;
+}
+
+@media (min-width: 1024px){
+
+    .modifytraining-list-container{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 5em;
+        justify-content: space-around;
+    }
+}

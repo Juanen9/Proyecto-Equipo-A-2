@@ -31,9 +31,10 @@
     box-shadow: black 2px 2px 4px;
     margin-bottom: 2em;
     list-style: none;
+    border-radius: 0.3em;
 }
 
-.exercise-card-container{
+.exercise-card-button{
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -42,7 +43,7 @@
 }
 
 
-.exercise-card-container li:first-child{
+.exercise-card-button li:first-child{
     color: white;
     background-color: black;
     border-radius: 0 0.4em 0 0.3em;
@@ -70,19 +71,5 @@
         justify-content: center;
         align-items: center;
     }
-    
-    
-    
-    .exercise-card{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        text-align: center;
-        border: solid 1px  black;
-        box-shadow: black 2px 2px 4px;
-        margin-bottom: 2em;
-        list-style: none;
-        border-radius: 0.3em;
-    }
+
 }

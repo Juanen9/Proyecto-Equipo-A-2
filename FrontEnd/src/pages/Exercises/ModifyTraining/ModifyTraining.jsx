@@ -27,6 +27,8 @@ function ModifyTraining() {
     const [newExercisesArray, setnewExercisesArray] = useState([]);
     const [exercises, setExercises] = useState([]);
     const [addedExercise, setAddedExercise] = React.useState('');
+    const [successMessage, setSuccessMessage] = useState("");
+
 
     const fetchData = async () => {
         try {
@@ -54,9 +56,10 @@ function ModifyTraining() {
 
     const handleForm = async (e) => {
         e.preventDefault();
-    
+        setLoading(true);
+
+        setTimeout(async () => {
         try {
-          setLoading(true);
     
           const data = new FormData();
     
@@ -71,12 +74,19 @@ function ModifyTraining() {
           await modifyTrainingService ({ data, token, idParam });
     
           e.target.reset();
-          navigate(`/get-exercises-extended/${idParam}`);
-        } catch (error) {
+          setSuccessMessage("Entrenamiento modificado correctamente 👍");
+          setTimeout(() => {
+            setSuccessMessage("");
+          }, 2000)
+      } catch (error) {
           setError(error.message);
-        } finally {
+          setTimeout(() => {
+            setError(null);
+          }, 2000);
+      }finally{
           setLoading(false);
-        }
+      }
+    }, 2000);
       };
 
       const handleAddExercise = (event) => {
@@ -105,20 +115,15 @@ function ModifyTraining() {
 
 
     return (
-        <section className="training-section">
-            <h1 className="training-title">Training List</h1>
-            <form onSubmit={handleForm}>
-            <div className="exercise-extended-container-back-button">
+            <form className='modifytraining-form' onSubmit={handleForm}>
+            <div className="modifytraining-back-button">
                     <IconButton onClick={handleReturn} className="exercise-extended-back-button">
                         <BackArrow/>
                     </IconButton>
                 </div> 
-            <div className="training-list-container">
-                          <ul className="training-card-container" key={training.id}>
-                            <li className="training-name">
-                                <fieldset className="field-muscle-group-modify">
-                                    <label htmlFor="training_name">Training Name</label>
-                                    <input
+                    <div >
+                                <fieldset className="modifytraining-name-field">
+                                    <input className='modifytraining-name'
                                         defaultValue={training["training_name"]}
                                         type="text"
                                         name="training_name"
@@ -126,14 +131,15 @@ function ModifyTraining() {
                                         onChange={(e) => setTrainingName(e.target.value)}
                                     />
                                 </fieldset>
-                            </li>
+                            </div>
+                    <div className="modifytraining-list-container">
                             {exercises.length > 0 ? exercises.map((e) => {
                             if (newExercisesArray.includes(e.id)) {
                                 return (
                                 <ul key={e.id} className="exercise-card">
                                     <li>{e["exercise_name"]}</li>
                                     <li><img onClick={() => handleImage(e.id)} src={`http://localhost:5173/public/exercisePhoto/${e["photo"]}`} alt={e["description"]} /></li>
-                                    <li className="exercise-card-container">
+                                    <li className="exercise-card-button">
                                     <IconButton onClick={()=>handleDeleteExercise(e.id)} sx={{ml:"auto"}} aria-label="delete">
                                 <DeleteIcon  />
                                 </IconButton>
@@ -144,19 +150,20 @@ function ModifyTraining() {
                                 return null;
                             }
                             }) : <p>Exercises not found</p>}
-                            <li className="training-description">
-                                <fieldset className="field-muscle-group-modify">
-                                    <label htmlFor="training_description">Training Description</label>
-                                    <input
-                                        defaultValue={training["training_description"]}
-                                        type="text"
-                                        name="training_description"
-                                        id="training_description"
-                                        onChange={(e) => setTrainingDescription(e.target.value)}
-                                    />
-                                </fieldset>
-                            </li>
-                            <fieldset className="typology-field-post-exercise">              
+            </div>
+                            <div className="modifytraining-description-container">
+                                    <fieldset className="field-muscle-group-modify">
+                                        <input className="modifytraining-description"
+                                            defaultValue={training["training_description"]}
+                                            type="text"
+                                            name="training_description"
+                                            id="training_description"
+                                            onChange={(e) => setTrainingDescription(e.target.value)}
+                                        />
+                                    </fieldset>
+                            </div>
+                    <div className='modifytraining-button-container'>
+                            <fieldset className="modifytraining-add">              
                                 <Box sx={{ minWidth: 120 }}>
                                     <FormControl fullWidth>
                                         <InputLabel id="simple-select-label">Add Exercise...</InputLabel>
@@ -176,15 +183,13 @@ function ModifyTraining() {
                                     </FormControl>
                                 </Box>
                             </fieldset>
-                            <div className="modify-exercise-column-button">
-                                <button className="button-modify-exercise">Modify</button>
                                 {error ? <p>{error}</p> : null}
                                 {loading ? <p>Modify Exercise...</p> : null}
-                                </div>
-                            </ul>
-            </div>
+                                {successMessage && <p>{successMessage}</p>}
+                                <button className="button-modify-exercise">Modify</button>
+                        </div>
+            
             </form>
-        </section>
     )
 }
 

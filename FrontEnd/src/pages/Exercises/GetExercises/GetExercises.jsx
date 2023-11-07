@@ -116,7 +116,7 @@ function GetExercises() {
                     <input id="filter" name="filter" type="text" placeholder="Search exercise..." onChange={handleFilter}></input>
                 </fieldset>
             </form>
-            <div className="exercise-card-border ">
+            <div className="exercise-card-border">
                     {loading ? (
                         <div id="lottie-container">
                             {/* Este div contendrá la animación mientras carga */}
@@ -126,7 +126,7 @@ function GetExercises() {
                             <ul key={e.id} className="exercise-card">
                                 <li>{e["exercise_name"]}</li>
                                 <li><img onClick={() => handleImage(e.id)} src={`http://localhost:5173/public/exercisePhoto/${e["photo"]}`} alt={e["description"]} /></li>
-                                <li className="exercise-card-container">
+                                <li className="exercise-card-button">
                                     <IconButton onClick={() => handleLike(e.id)} className={liked.includes(e.id) ? 'liked' : 'disliked'}>
                                         <LikeIcon/>
                                     </IconButton>
