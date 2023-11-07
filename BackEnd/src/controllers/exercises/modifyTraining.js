@@ -43,17 +43,16 @@ const modifyTraining = async (req, res) => {
               `,
         [idTraining]
       );
-
+      
       for (let i = 0; i < exercises.length; i++) {
         exercisesArray.push(exercises[i]["id_exercise"]);
     }
     
-    exercisesArrayDos = JSON.parse(newExercisesArray);
+    exercisesArrayDos = newExercisesArray.split(",").map((e)=>+e);
 
-    const exerciseDelete = exercisesArray.filter(element => !newExercisesArray.includes(element));
+    const exerciseDelete = exercisesArray.filter(element => !exercisesArrayDos.includes(element));
  
     const exercisesAdd = exercisesArrayDos.filter(element => !exercisesArray.includes(element))
-
 
     const [update] = await connect.query(
       `

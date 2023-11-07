@@ -31,9 +31,12 @@ function ModifyTraining() {
     const fetchData = async () => {
         try {
             const data = await getTraining({ token });
-            data.map((e)=>{if( e.id == idParam ){setTraining(e)
-            for (const exercisesId of e.exercise){
-                setnewExercisesArray(prevNewExercisesArray => [...prevNewExercisesArray, exercisesId.id])
+            data.map((e)=>{if( e.id == idParam ){
+                setTraining(e)
+                if (newExercisesArray.length === 0){
+                for (const exercisesId of e.exercise){
+                 newExercisesArray.push(exercisesId.id)
+                }
             }
             }})
             const data2 = await getAllExercisesService ({token});

@@ -37,7 +37,6 @@ const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  console.log(dataExercise.exercise);
 
 
   return (
