@@ -24,10 +24,6 @@ Este es un proyecto de una aplicación web para gimnasios creada con la finalida
 4. Puedes crear nuevos usuario administradores en el enlace: [http://localhost:5173/admin-register]
 5. Puedes usar el menú de navegación en la parte superior para moverte por la aplicación
 
-## Contacto
-
-Puedes contactarme en juanenpberenguel@gmail.com, berto.yanez.gomez@hackaboss.com, thelynx87@gmail.com
-
 ## Créditos
 
 - Este proyecto ha sido realizado gracias a Alberto Caamaño Figueroa,
