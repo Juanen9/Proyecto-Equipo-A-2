@@ -31,4 +31,4 @@ Puedes contactarme en juanenpberenguel@gmail.com, berto.yanez.gomez@hackaboss.co
 ## Créditos
 
 - Este proyecto ha sido realizado gracias a Alberto Caamaño Figueroa,
-  Adrián Paz FrescoAdrián Paz Fresco y Juan Enrique Padilla Berenguel.
+  Adrián Paz Fresco y Juan Enrique Padilla Berenguel.
